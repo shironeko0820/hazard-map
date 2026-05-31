@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import maplibregl, { type ExpressionSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useMapStore } from "@/lib/store";
 import { MOCK_PRICE_GEOJSON, MOCK_CRIME_GEOJSON, MOCK_HAZARD_GEOJSON, MOCK_AREA_SCORES } from "@/lib/mockData";
 import type { MapFeatureProperties } from "@/types";
+import CrimePointLayer from "./CrimePointLayer";
 
 const PRICE_COLORS: ExpressionSpecification = [
   "interpolate", ["linear"], ["get", "price_per_sqm"],
@@ -43,7 +44,8 @@ export default function MapView() {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const popup = useRef<maplibregl.Popup | null>(null);
-  const { activeLayer, setSelectedArea } = useMapStore();
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const { activeLayer, setSelectedArea, showCrimePoints } = useMapStore();
 
   const updateLayerVisibility = useCallback((layer: string) => {
     if (!map.current) return;
@@ -169,6 +171,7 @@ export default function MapView() {
       });
 
       updateLayerVisibility("price");
+      setMapLoaded(true);
 
       // ---- インタラクション: 価格サークル ----
       m.on("mouseenter", "price-circle", (e) => {
@@ -251,5 +254,12 @@ export default function MapView() {
     }
   }, [activeLayer, updateLayerVisibility]);
 
-  return <div ref={mapContainer} className="w-full h-full" />;
+  return (
+    <div className="w-full h-full relative">
+      <div ref={mapContainer} className="w-full h-full" />
+      {mapLoaded && map.current && (
+        <CrimePointLayer map={map.current} visible={showCrimePoints} />
+      )}
+    </div>
+  );
 }

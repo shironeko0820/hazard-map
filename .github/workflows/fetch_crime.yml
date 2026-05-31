@@ -1,0 +1,42 @@
+name: Fetch Tokyo Crime Data
+
+on:
+  workflow_dispatch:  # 手動実行
+  schedule:
+    - cron: '0 18 1 4 *'  # 毎年4月1日 JST 3:00 (UTC 18:00)
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r batch/requirements.txt
+
+      - name: Fetch crime data
+        run: python batch/fetch_crime.py
+
+      - name: Check output
+        run: |
+          echo "Generated file size:"
+          ls -lh public/crime_tokyo.geojson || echo "File not found"
+          echo "Feature count:"
+          python -c "import json; d=json.load(open('public/crime_tokyo.geojson')); print(f'{len(d[\"features\"]):,} features')" || true
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/crime_tokyo.geojson
+          git diff --staged --quiet || git commit -m "data: update Tokyo crime data $(date +'%Y-%m-%d')"
+          git push

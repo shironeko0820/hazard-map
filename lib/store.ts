@@ -8,6 +8,8 @@ interface MapStore {
   setSelectedArea: (area: AreaScore | null) => void;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
+  showCrimePoints: boolean;
+  toggleCrimePoints: () => void;
 }
 
 export const useMapStore = create<MapStore>((set) => ({
@@ -17,4 +19,6 @@ export const useMapStore = create<MapStore>((set) => ({
   setSelectedArea: (area) => set({ selectedArea: area }),
   searchQuery: "",
   setSearchQuery: (q) => set({ searchQuery: q }),
+  showCrimePoints: false,
+  toggleCrimePoints: () => set((s) => ({ showCrimePoints: !s.showCrimePoints })),
 }));
