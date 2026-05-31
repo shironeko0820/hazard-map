@@ -1,4 +1,5 @@
 import type { AreaScore } from "@/types";
+import type { FeatureCollection, Point, Polygon } from "geojson";
 
 // 東京主要区のモックデータ
 export const MOCK_AREA_SCORES: Record<string, AreaScore> = {
@@ -86,8 +87,8 @@ export const MOCK_AREA_SCORES: Record<string, AreaScore> = {
 };
 
 // モック地図データ（GeoJSON）- 不動産取引価格点群
-export const MOCK_PRICE_GEOJSON = {
-  type: "FeatureCollection" as const,
+export const MOCK_PRICE_GEOJSON: FeatureCollection<Point> = {
+  type: "FeatureCollection",
   features: [
     // 千代田区周辺
     { type: "Feature", geometry: { type: "Point", coordinates: [139.7532, 35.6940] }, properties: { price_per_sqm: 1250000, property_type: "中古マンション等", nearest_station: "大手町", walk_minutes: 3 } },
@@ -115,8 +116,8 @@ export const MOCK_PRICE_GEOJSON = {
 };
 
 // モック犯罪データ（GeoJSON）
-export const MOCK_CRIME_GEOJSON = {
-  type: "FeatureCollection" as const,
+export const MOCK_CRIME_GEOJSON: FeatureCollection<Point> = {
+  type: "FeatureCollection",
   features: [
     // 新宿（高密度）
     { type: "Feature", geometry: { type: "Point", coordinates: [139.7005, 35.6938] }, properties: { crime_type: "自転車盗", occurred_date: "2024-10-15" } },
@@ -145,8 +146,8 @@ export const MOCK_CRIME_GEOJSON = {
 };
 
 // モックハザードデータ（GeoJSON ポリゴン - 簡略化）
-export const MOCK_HAZARD_GEOJSON = {
-  type: "FeatureCollection" as const,
+export const MOCK_HAZARD_GEOJSON: FeatureCollection<Polygon> = {
+  type: "FeatureCollection",
   features: [
     // 江東区（高リスク - 濃青）
     {
