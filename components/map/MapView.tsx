@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import maplibregl from "maplibre-gl";
+import maplibregl, { type ExpressionSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useMapStore } from "@/lib/store";
 import { MOCK_PRICE_GEOJSON, MOCK_CRIME_GEOJSON, MOCK_HAZARD_GEOJSON, MOCK_AREA_SCORES } from "@/lib/mockData";
 import type { MapFeatureProperties } from "@/types";
 
-const PRICE_COLORS = [
+const PRICE_COLORS: ExpressionSpecification = [
   "interpolate", ["linear"], ["get", "price_per_sqm"],
   300000, "#313695",
   600000, "#4575b4",
@@ -20,7 +20,7 @@ const PRICE_COLORS = [
   1600000, "#a50026",
 ];
 
-const CRIME_COLORS = [
+const CRIME_COLORS: ExpressionSpecification = [
   "interpolate", ["linear"], ["heatmap-density"],
   0, "rgba(0,255,0,0)",
   0.2, "#7fff00",
@@ -29,7 +29,7 @@ const CRIME_COLORS = [
   1, "#ff0000",
 ];
 
-const FLOOD_FILL_COLOR = [
+const FLOOD_FILL_COLOR: ExpressionSpecification = [
   "interpolate", ["linear"], ["get", "flood_risk_level"],
   0, "#ffffff",
   1, "#aed6f1",
@@ -110,7 +110,7 @@ export default function MapView() {
         minzoom: 14,
         paint: {
           "circle-radius": 8,
-          "circle-color": PRICE_COLORS as maplibregl.ExpressionSpecification,
+          "circle-color": PRICE_COLORS,
           "circle-stroke-width": 1,
           "circle-stroke-color": "#fff",
           "circle-opacity": 0.9,
@@ -155,7 +155,7 @@ export default function MapView() {
         type: "fill",
         source: "hazard-source",
         paint: {
-          "fill-color": FLOOD_FILL_COLOR as maplibregl.ExpressionSpecification,
+          "fill-color": FLOOD_FILL_COLOR,
           "fill-opacity": 0.55,
         },
         layout: { visibility: "none" },
