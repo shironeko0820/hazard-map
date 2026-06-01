@@ -21,32 +21,43 @@ NPA_LINK_PAGE = "https://www.npa.go.jp/toukei/seianki/hanzaiopendatalink.html"
 
 # 警視庁サイトのベースURL
 KEISHICHO_BASE = "https://www.keishicho.metro.tokyo.lg.jp"
+KEISHICHO_DATA_BASE = f"{KEISHICHO_BASE}/about_mpd/jokyo_tokei/jokyo/hanzaihasseijyouhou.files"
 
-# フォールバック用の既知URLパターン（年度ごとに変わる場合あり）
+# 確認済みの正確なURL（2024年・2023年データ）
 FALLBACK_URLS = [
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/hanzaiopendata/hittakuri.csv",
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/hanzaiopendata/syajyo_nerai.csv",
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/hanzaiopendata/buhin_nerai.csv",
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/hanzaiopendata/jihan_nerai.csv",
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/hanzaiopendata/jidosha_to.csv",
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/hanzaiopendata/ootobai_to.csv",
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/hanzaiopendata/jitensha_to.csv",
-    # 別パターン
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/himanzai/hittakuri.csv",
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/himanzai/syajyo_nerai.csv",
-    f"{KEISHICHO_BASE}/about_mpd/stats/data/himanzai/jitensha_to.csv",
+    # 2024年データ
+    f"{KEISHICHO_DATA_BASE}/tokyo_2024hittakuri.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2024syazyounerai.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2024buhinnerai.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2024zidouhanbaikinerai.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2024zidousyatou.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2024ootobaitou.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2024zitensyatou.csv",
+    # 2023年データ（2024が取得できない場合のバックアップ）
+    f"{KEISHICHO_DATA_BASE}/tokyo_2023hittakuri.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2023syazyounerai.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2023buhinnerai.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2023zidouhanbaikinerai.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2023zidousyatou.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2023ootobaitou.csv",
+    f"{KEISHICHO_DATA_BASE}/tokyo_2023zitensyatou.csv",
 ]
 
 # 手口キーワードからラベルへのマッピング
 TYPE_MAP = {
     "hittakuri": "ひったくり",
+    "syazyounerai": "車上ねらい",
     "syajyo": "車上ねらい",
+    "buhinnerai": "部品ねらい",
     "buhin": "部品ねらい",
+    "zidouhanbaikinerai": "自販機ねらい",
     "jihan": "自販機ねらい",
+    "zidousyatou": "自動車盗",
     "jidosha": "自動車盗",
+    "ootobaitou": "オートバイ盗",
     "ootobai": "オートバイ盗",
+    "zitensyatou": "自転車盗",
     "jitensha": "自転車盗",
-    "himanzai": "非侵入窃盗",
 }
 
 LAT_COLS = ["緯度", "lat", "latitude", "Latitude", "Y", "Y座標", "緯度（世界測地系）"]
