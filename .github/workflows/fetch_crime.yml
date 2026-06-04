@@ -29,14 +29,14 @@ jobs:
       - name: Check output
         run: |
           echo "Generated file size:"
-          ls -lh public/crime_tokyo.geojson || echo "File not found"
+          ls -lh public/crime_all.geojson || echo "File not found"
           echo "Feature count:"
-          python -c "import json; d=json.load(open('public/crime_tokyo.geojson')); print(f'{len(d[\"features\"]):,} features')" || true
+          python -c "import json; d=json.load(open('public/crime_all.geojson')); print(f'{len(d[\"features\"]):,} features'); [print(f'  {k}: {v:,}') for k,v in d.get('metadata',{}).get('by_prefecture',{}).items()]" || true
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/crime_tokyo.geojson
-          git diff --staged --quiet || git commit -m "data: update Tokyo crime data $(date +'%Y-%m-%d')"
+          git add public/crime_all.geojson
+          git diff --staged --quiet || git commit -m "data: update crime data $(date +'%Y-%m-%d')"
           git push
