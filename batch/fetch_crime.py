@@ -1,244 +1,189 @@
 """
 警視庁（東京都）犯罪オープンデータを取得してGeoJSONに変換するスクリプト
+座標なしデータは国土地理院APIでジオコーディング
 出力: public/crime_tokyo.geojson
-
-URL取得方法:
-  1. 警察庁オープンデータリンク集ページから警視庁のCSVリンクを動的に抽出
-  2. 失敗した場合は既知のURLパターンにフォールバック
 """
 
 import json
 import csv
 import io
 import os
-import re
+import time
+import random
 import requests
 from datetime import datetime
-from html.parser import HTMLParser
 
-# 警察庁 オープンデータリンク集ページ
-NPA_LINK_PAGE = "https://www.npa.go.jp/toukei/seianki/hanzaiopendatalink.html"
-
-# 警視庁サイトのベースURL
 KEISHICHO_BASE = "https://www.keishicho.metro.tokyo.lg.jp"
 KEISHICHO_DATA_BASE = f"{KEISHICHO_BASE}/about_mpd/jokyo_tokei/jokyo/hanzaihasseijyouhou.files"
 
-# 確認済みの正確なURL（2024年・2023年データ）
-FALLBACK_URLS = [
-    # 2024年データ
-    f"{KEISHICHO_DATA_BASE}/tokyo_2024hittakuri.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2024syazyounerai.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2024buhinnerai.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2024zidouhanbaikinerai.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2024zidousyatou.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2024ootobaitou.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2024zitensyatou.csv",
-    # 2023年データ（2024が取得できない場合のバックアップ）
-    f"{KEISHICHO_DATA_BASE}/tokyo_2023hittakuri.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2023syazyounerai.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2023buhinnerai.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2023zidouhanbaikinerai.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2023zidousyatou.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2023ootobaitou.csv",
-    f"{KEISHICHO_DATA_BASE}/tokyo_2023zitensyatou.csv",
+# 取得対象CSVと手口ラベル
+CRIME_FILES = [
+    ("tokyo_2024hittakuri.csv",          "ひったくり"),
+    ("tokyo_2024syazyounerai.csv",        "車上ねらい"),
+    ("tokyo_2024buhinnerai.csv",          "部品ねらい"),
+    ("tokyo_2024zidouhanbaikinerai.csv",  "自販機ねらい"),
+    ("tokyo_2024zidousyatou.csv",         "自動車盗"),
+    ("tokyo_2024ootobaitou.csv",          "オートバイ盗"),
+    ("tokyo_2024zitensyatou.csv",         "自転車盗"),
 ]
 
-# 手口キーワードからラベルへのマッピング
-TYPE_MAP = {
-    "hittakuri": "ひったくり",
-    "syazyounerai": "車上ねらい",
-    "syajyo": "車上ねらい",
-    "buhinnerai": "部品ねらい",
-    "buhin": "部品ねらい",
-    "zidouhanbaikinerai": "自販機ねらい",
-    "jihan": "自販機ねらい",
-    "zidousyatou": "自動車盗",
-    "jidosha": "自動車盗",
-    "ootobaitou": "オートバイ盗",
-    "ootobai": "オートバイ盗",
-    "zitensyatou": "自転車盗",
-    "jitensha": "自転車盗",
+# 国土地理院 ジオコーディングAPI
+GSI_GEOCODE_URL = "https://msearch.gsi.go.jp/address-search/AddressSearch"
+
+# 東京都主要区のセントロイド（ジオコーディング失敗時のフォールバック）
+CITY_CENTROIDS = {
+    "千代田区": (139.7535, 35.6940), "中央区": (139.7720, 35.6709),
+    "港区":     (139.7514, 35.6581), "新宿区": (139.7036, 35.6938),
+    "文京区":   (139.7522, 35.7081), "台東区": (139.7822, 35.7126),
+    "墨田区":   (139.8013, 35.7101), "江東区": (139.8171, 35.6722),
+    "品川区":   (139.7296, 35.6090), "目黒区": (139.6982, 35.6318),
+    "大田区":   (139.7160, 35.5615), "世田谷区":(139.6532, 35.6464),
+    "渋谷区":   (139.7016, 35.6580), "中野区": (139.6650, 35.7078),
+    "杉並区":   (139.6365, 35.6993), "豊島区": (139.7161, 35.7275),
+    "北区":     (139.7337, 35.7528), "荒川区": (139.7837, 35.7361),
+    "板橋区":   (139.7105, 35.7507), "練馬区": (139.6517, 35.7356),
+    "足立区":   (139.8045, 35.7759), "葛飾区": (139.8468, 35.7345),
+    "江戸川区": (139.8687, 35.7065),
 }
 
-LAT_COLS = ["緯度", "lat", "latitude", "Latitude", "Y", "Y座標", "緯度（世界測地系）"]
-LNG_COLS = ["経度", "lng", "longitude", "Longitude", "X", "X座標", "経度（世界測地系）"]
-DATE_COLS = ["発生年月日", "年月日", "date", "発生日"]
 
-
-class LinkExtractor(HTMLParser):
-    """HTMLからCSVリンクを抽出"""
-    def __init__(self):
-        super().__init__()
-        self.links = []
-
-    def handle_starttag(self, tag, attrs):
-        if tag == "a":
-            href = dict(attrs).get("href", "")
-            if href.endswith(".csv") and ("keishicho" in href or "tokyo" in href.lower()):
-                self.links.append(href)
-
-
-def find_col(headers, candidates):
-    for c in candidates:
-        if c in headers:
-            return c
-    # 部分一致も試みる
-    for c in candidates:
-        for h in headers:
-            if c in h or h in c:
-                return h
+def decode_csv(content_bytes):
+    for enc in ["utf-8-sig", "shift_jis", "cp932", "utf-8"]:
+        try:
+            return content_bytes.decode(enc)
+        except UnicodeDecodeError:
+            continue
     return None
 
 
-def guess_crime_type(url):
-    url_lower = url.lower()
-    for key, label in TYPE_MAP.items():
-        if key in url_lower:
-            return label
-    return "窃盗"
+def geocode_address(address: str, cache: dict) -> tuple[float, float] | None:
+    """国土地理院APIでジオコーディング（キャッシュ付き）"""
+    if address in cache:
+        return cache[address]
+
+    try:
+        resp = requests.get(
+            GSI_GEOCODE_URL,
+            params={"q": address},
+            timeout=10,
+            headers={"User-Agent": "SmileMap/1.0"}
+        )
+        if resp.status_code == 200:
+            data = resp.json()
+            if data and len(data) > 0:
+                coords = data[0]["geometry"]["coordinates"]
+                result = (float(coords[0]), float(coords[1]))  # (lng, lat)
+                cache[address] = result
+                time.sleep(0.15)  # APIに優しくする
+                return result
+    except Exception:
+        pass
+
+    cache[address] = None
+    return None
 
 
-def try_fetch_url(url):
-    """URLからCSVを取得。失敗したらNoneを返す"""
+def city_fallback(city: str) -> tuple[float, float] | None:
+    """市区町村セントロイドにわずかなジッターを加えて返す"""
+    coords = CITY_CENTROIDS.get(city)
+    if coords:
+        lng, lat = coords
+        # ±0.01度（約1km）のランダムジッター
+        lng += random.uniform(-0.01, 0.01)
+        lat += random.uniform(-0.01, 0.01)
+        return (lng, lat)
+    return None
+
+
+def process_csv(filename: str, crime_type: str, geocache: dict) -> list[dict]:
+    url = f"{KEISHICHO_DATA_BASE}/{filename}"
+    print(f"\n--- {crime_type}: {filename} ---")
+
     try:
         resp = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
-        if resp.status_code != 200:
-            return None, None
-        # エンコーディング判定
-        for enc in ["utf-8-sig", "shift_jis", "cp932", "utf-8"]:
-            try:
-                return resp.content.decode(enc), enc
-            except UnicodeDecodeError:
-                continue
-        return None, None
-    except requests.RequestException:
-        return None, None
-
-
-def parse_csv_to_features(content, crime_type):
-    """CSVコンテンツをGeoJSONフィーチャリストに変換"""
-    features = []
-    try:
-        reader = csv.DictReader(io.StringIO(content))
-        headers = list(reader.fieldnames or [])
-
-        lat_col = find_col(headers, LAT_COLS)
-        lng_col = find_col(headers, LNG_COLS)
-        date_col = find_col(headers, DATE_COLS)
-
-        if not lat_col or not lng_col:
-            print(f"    ⚠ 座標列なし (列: {headers[:8]})")
-            return []
-
-        count = skip = 0
-        for row in reader:
-            try:
-                lat_str = row[lat_col].strip()
-                lng_str = row[lng_col].strip()
-                if not lat_str or not lng_str:
-                    skip += 1
-                    continue
-                lat = float(lat_str)
-                lng = float(lng_str)
-                # 東京都の緯度経度範囲チェック（小笠原・伊豆諸島含む）
-                if not (20.0 <= lat <= 36.5 and 136.0 <= lng <= 143.0):
-                    skip += 1
-                    continue
-
-                props = {"crime_type": crime_type}
-                if date_col and row.get(date_col):
-                    props["date"] = row[date_col].strip()
-                for col in ["区市町村名", "市区町村名", "市区町村", "区市町村"]:
-                    if col in row and row[col].strip():
-                        props["city"] = row[col].strip()
-                        break
-
-                features.append({
-                    "type": "Feature",
-                    "geometry": {"type": "Point", "coordinates": [lng, lat]},
-                    "properties": props,
-                })
-                count += 1
-            except (ValueError, KeyError):
-                skip += 1
-
-        print(f"    ✓ {count}件取得, {skip}件スキップ")
-    except Exception as e:
-        print(f"    ✗ パースエラー: {e}")
-    return features
-
-
-def fetch_from_npa_page():
-    """警察庁リンク集ページから警視庁のCSV URLを動的取得"""
-    print("警察庁リンク集ページからURL取得中...")
-    try:
-        resp = requests.get(NPA_LINK_PAGE, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
         resp.raise_for_status()
-        for enc in ["utf-8", "shift_jis", "cp932"]:
-            try:
-                html = resp.content.decode(enc)
-                break
-            except UnicodeDecodeError:
-                continue
-        else:
-            return []
-
-        # 警視庁のCSVリンクを正規表現で抽出
-        pattern = r'https?://(?:www\.)?keishicho\.metro\.tokyo\.lg\.jp[^\s"\'<>]*\.csv'
-        urls = re.findall(pattern, html)
-        if not urls:
-            # 相対URLも試みる
-            parser = LinkExtractor()
-            parser.feed(html)
-            urls = [
-                (u if u.startswith("http") else KEISHICHO_BASE + u)
-                for u in parser.links
-            ]
-
-        print(f"  → {len(urls)}件のURLを発見")
-        return urls
-    except Exception as e:
-        print(f"  ✗ リンク集ページ取得失敗: {e}")
+    except requests.RequestException as e:
+        print(f"  ✗ 取得失敗: {e}")
         return []
+
+    content = decode_csv(resp.content)
+    if not content:
+        print("  ✗ デコード失敗")
+        return []
+
+    reader = csv.DictReader(io.StringIO(content))
+    rows = list(reader)
+    print(f"  読込: {len(rows)}行")
+
+    features = []
+    geocode_count = fallback_count = skip_count = 0
+
+    # ユニークな住所を先にジオコーディング（高速化）
+    unique_addresses = {}
+    for row in rows:
+        pref = row.get("都道府県（発生地）", "東京都").strip()
+        city = row.get("市区町村（発生地）", "").strip()
+        town = row.get("町丁目（発生地）", "").strip()
+        if city:
+            addr = f"{pref}{city}{town}"
+            unique_addresses[addr] = city
+
+    print(f"  ユニーク住所: {len(unique_addresses)}件をジオコーディング中...")
+    for addr in unique_addresses:
+        if addr not in geocache:
+            geocode_address(addr, geocache)
+
+    # フィーチャ生成
+    for row in rows:
+        pref = row.get("都道府県（発生地）", "東京都").strip()
+        city = row.get("市区町村（発生地）", "").strip()
+        town = row.get("町丁目（発生地）", "").strip()
+
+        if not city:
+            skip_count += 1
+            continue
+
+        addr = f"{pref}{city}{town}"
+        coords = geocache.get(addr)
+
+        if coords:
+            geocode_count += 1
+        else:
+            # 市区町村セントロイドにフォールバック
+            coords = city_fallback(city)
+            if coords:
+                fallback_count += 1
+            else:
+                skip_count += 1
+                continue
+
+        features.append({
+            "type": "Feature",
+            "geometry": {"type": "Point", "coordinates": [coords[0], coords[1]]},
+            "properties": {
+                "crime_type": crime_type,
+                "city": city,
+                "town": town,
+                "crime_name": row.get("罪名", "").strip(),
+            },
+        })
+
+    print(f"  ✓ ジオコーディング:{geocode_count} フォールバック:{fallback_count} スキップ:{skip_count}")
+    print(f"  → フィーチャ生成: {len(features)}件")
+    return features
 
 
 def main():
     print("=== 警視庁 犯罪オープンデータ取得開始 ===")
     print(f"実行日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
 
-    # Step 1: 警察庁リンク集ページからURL取得
-    csv_urls = fetch_from_npa_page()
-
-    # Step 2: フォールバックURLも追加
-    if not csv_urls:
-        print("フォールバックURLを使用します")
-        csv_urls = FALLBACK_URLS
-    else:
-        # フォールバックURLも追加して試行数を増やす
-        csv_urls = list(set(csv_urls + FALLBACK_URLS))
-
-    print(f"\n{len(csv_urls)}件のURLを試行します\n")
-
+    geocache: dict = {}
     all_features = []
-    tried = success = 0
 
-    for url in csv_urls:
-        tried += 1
-        crime_type = guess_crime_type(url)
-        print(f"[{tried}/{len(csv_urls)}] {crime_type}: {url}")
-
-        content, enc = try_fetch_url(url)
-        if content is None:
-            print(f"    ✗ 取得失敗")
-            continue
-
-        print(f"    エンコード: {enc}")
-        features = parse_csv_to_features(content, crime_type)
+    for filename, crime_type in CRIME_FILES:
+        features = process_csv(filename, crime_type, geocache)
         all_features.extend(features)
-        if features:
-            success += 1
 
-    # GeoJSON出力
     geojson = {
         "type": "FeatureCollection",
         "features": all_features,
@@ -257,14 +202,8 @@ def main():
         json.dump(geojson, f, ensure_ascii=False, separators=(",", ":"))
 
     print(f"\n=== 完了 ===")
-    print(f"試行: {tried}件 / 成功: {success}件")
     print(f"総取得件数: {len(all_features):,} 件")
     print(f"出力: {out_path}")
-
-    if len(all_features) == 0:
-        print("\n⚠ データが0件でした。")
-        print("警視庁の最新データURLを確認してください:")
-        print("https://www.keishicho.metro.tokyo.lg.jp/about_mpd/stats/data/")
 
 
 if __name__ == "__main__":
