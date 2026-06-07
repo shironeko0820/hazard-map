@@ -17,11 +17,11 @@ from datetime import datetime
 BOUNDARY_URLS = {
     "東京都": [
         "https://raw.githubusercontent.com/dataofjapan/land/master/tokyo.geojson",
-        "https://geoshape.ex.nii.ac.jp/city/geojson/2020/13.geojson",
+        "https://raw.githubusercontent.com/niiyz/JapanCityGeoJson/master/geojson/prefectures/13.geojson",
     ],
     "神奈川県": [
+        "https://raw.githubusercontent.com/niiyz/JapanCityGeoJson/master/geojson/prefectures/14.geojson",
         "https://raw.githubusercontent.com/dataofjapan/land/master/kanagawa.geojson",
-        "https://geoshape.ex.nii.ac.jp/city/geojson/2020/14.geojson",
     ],
 }
 
