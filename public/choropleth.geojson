@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[],"metadata":{"source":"GitHub Actionsで生成されます","note":"fetch_estate.ymlを実行してください"}}
+{"type":"FeatureCollection","features":[],"metadata":{"source":"行政区域境界: geoshape.ex.nii.ac.jp / 価格: 国土交通省","generated_at":"2026-06-07T06:01:41.163729","price_range":{"min":0,"max":0,"p25":0,"p75":0},"by_prefecture":{"東京都":{"total":0,"matched":0},"神奈川県":{"total":0,"matched":0}}}}
