@@ -98,11 +98,21 @@ export default function MapView() {
         source: "price-source",
         maxzoom: 14,
         paint: {
-          "heatmap-weight": ["interpolate", ["linear"], ["get", "price_per_sqm"], 300000, 0, 1600000, 1],
-          "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 10, 1, 14, 3],
-          "heatmap-color": CRIME_COLORS,
-          "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 10, 30, 14, 50],
-          "heatmap-opacity": 0.7,
+          // 全物件を均等にweight=1で表示（価格に関係なく分布を見せる）
+          "heatmap-weight": 1,
+          "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 8, 0.3, 11, 1, 14, 2],
+          "heatmap-color": [
+            "interpolate", ["linear"], ["heatmap-density"],
+            0,   "rgba(0,0,255,0)",
+            0.1, "#4575b4",
+            0.3, "#74add1",
+            0.5, "#fee090",
+            0.7, "#f46d43",
+            0.9, "#d73027",
+            1,   "#a50026",
+          ],
+          "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 8, 15, 11, 25, 14, 40],
+          "heatmap-opacity": 0.75,
         },
       });
       m.addLayer({
