@@ -14,15 +14,22 @@ from collections import defaultdict
 from datetime import datetime
 
 # 行政区域境界データ（dataofjapan/land: GitHub rawコンテンツ）
+# japan.geojson = 全国版（大きいが確実に存在する）
+JAPAN_GEOJSON_URL = "https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson"
+
 BOUNDARY_URLS = {
     "東京都": [
         "https://raw.githubusercontent.com/dataofjapan/land/master/tokyo.geojson",
-        "https://raw.githubusercontent.com/niiyz/JapanCityGeoJson/master/geojson/prefectures/13.geojson",
     ],
     "神奈川県": [
-        "https://raw.githubusercontent.com/niiyz/JapanCityGeoJson/master/geojson/prefectures/14.geojson",
-        "https://raw.githubusercontent.com/dataofjapan/land/master/kanagawa.geojson",
+        # 個別ファイルが存在しないため、全国版から神奈川のみフィルタ
+        "__japan_filter__",
     ],
+}
+
+# japan.geojsonで都道府県を絞り込むときの判定フィールド
+JAPAN_PREF_FILTER = {
+    "神奈川県": ["神奈川県", "Kanagawa"],
 }
 
 BASE_DIR = os.path.dirname(__file__)
@@ -30,10 +37,53 @@ ESTATE_PATH = os.path.join(BASE_DIR, "..", "public", "estate_all.geojson")
 OUTPUT_PATH = os.path.join(BASE_DIR, "..", "public", "choropleth.geojson")
 
 
+# japan.geojsonキャッシュ（複数都道府県で共有）
+_japan_geojson_cache: list[dict] | None = None
+
+
+def get_japan_geojson() -> list[dict]:
+    """全国GeoJSONを取得（キャッシュ付き）"""
+    global _japan_geojson_cache
+    if _japan_geojson_cache is not None:
+        return _japan_geojson_cache
+    print(f"  全国GeoJSON取得中: {JAPAN_GEOJSON_URL}")
+    try:
+        resp = requests.get(JAPAN_GEOJSON_URL, timeout=120, headers={"User-Agent": "SmileMap/1.0"})
+        print(f"  HTTP {resp.status_code}")
+        resp.raise_for_status()
+        data = resp.json()
+        _japan_geojson_cache = data.get("features", [])
+        print(f"  → 全国: {len(_japan_geojson_cache):,}ポリゴン取得")
+        return _japan_geojson_cache
+    except Exception as e:
+        print(f"  ✗ 全国GeoJSON取得失敗: {e}")
+        _japan_geojson_cache = []
+        return []
+
+
 def download_boundaries(pref_name: str) -> list[dict]:
-    """行政区域境界GeoJSONを取得（複数URLをフォールバック）"""
+    """行政区域境界GeoJSONを取得"""
     urls = BOUNDARY_URLS.get(pref_name, [])
     for url in urls:
+        # 全国版フィルタモード
+        if url == "__japan_filter__":
+            all_features = get_japan_geojson()
+            keywords = JAPAN_PREF_FILTER.get(pref_name, [pref_name])
+            filtered = []
+            for feat in all_features:
+                props = feat.get("properties", {})
+                for key, val in props.items():
+                    if isinstance(val, str) and any(kw in val for kw in keywords):
+                        filtered.append(feat)
+                        break
+            print(f"  {pref_name}フィルタ: {len(filtered)}ポリゴン")
+            if filtered:
+                sample_props = filtered[0].get("properties", {})
+                print(f"  プロパティキー: {list(sample_props.keys())[:8]}")
+                print(f"  サンプル値: {list(sample_props.values())[:8]}")
+            return filtered
+
+        # 通常URLダウンロード
         print(f"  境界データ取得中: {url}")
         try:
             resp = requests.get(url, timeout=60, headers={"User-Agent": "SmileMap/1.0"})
@@ -43,10 +93,9 @@ def download_boundaries(pref_name: str) -> list[dict]:
             data = resp.json()
             features = data.get("features", [])
             if not features:
-                print("  フィーチャ数0 → 次のURLを試します")
+                print("  フィーチャ数0 → 次を試します")
                 continue
             print(f"  → {len(features)}ポリゴン取得成功")
-            # プロパティキーを確認
             if features:
                 sample_props = features[0].get("properties", {})
                 print(f"  プロパティキー: {list(sample_props.keys())[:8]}")
@@ -54,7 +103,7 @@ def download_boundaries(pref_name: str) -> list[dict]:
             return features
         except Exception as e:
             print(f"  ✗ エラー: {e}")
-    print(f"  ✗ {pref_name}の境界データ取得失敗（全URLを試行済み）")
+    print(f"  ✗ {pref_name}の境界データ取得失敗")
     return []
 
 
