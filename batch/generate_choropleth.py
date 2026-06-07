@@ -1,10 +1,16 @@
 """
-区・市ごとの平均不動産価格をコロプレスマップ用GeoJSONとして生成
+全国コロプレスマップGeoJSON生成
 
 処理フロー:
-1. 行政区域境界GeoJSON（dataofjapan/land GitHub）を取得
-2. estate_all.geojsonから市区町村ごとの平均価格を集計
+1. price_by_municipality.json から市区町村別価格データを読込
+   （なければ estate_all.geojson から集計）
+2. dataofjapan/land の japan.geojson（全国境界）を取得
 3. 境界ポリゴンに価格データをマージして choropleth.geojson を出力
+
+マッチング戦略（N03_004: 市区町村名, N03_003: 郡・政令市名）:
+  1. pref|N03_004                  → 通常市区町村（例: 千代田区）
+  2. pref|N03_003+N03_004          → 政令市の区（例: 横浜市鶴見区）
+  3. pref|N03_003                  → 政令市全体フォールバック
 """
 
 import json
@@ -13,143 +19,37 @@ import requests
 from collections import defaultdict
 from datetime import datetime
 
-# 行政区域境界データ（dataofjapan/land: GitHub rawコンテンツ）
-# japan.geojson = 全国版（大きいが確実に存在する）
 JAPAN_GEOJSON_URL = "https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson"
 
-BOUNDARY_URLS = {
-    "東京都": [
-        "https://raw.githubusercontent.com/dataofjapan/land/master/tokyo.geojson",
-    ],
-    "神奈川県": [
-        # 個別ファイルが存在しないため、全国版から神奈川のみフィルタ
-        "__japan_filter__",
-    ],
-}
-
-# japan.geojsonで都道府県を絞り込むときの判定フィールド
-JAPAN_PREF_FILTER = {
-    "神奈川県": ["神奈川県", "Kanagawa"],
-}
-
 BASE_DIR = os.path.dirname(__file__)
-ESTATE_PATH = os.path.join(BASE_DIR, "..", "public", "estate_all.geojson")
-OUTPUT_PATH = os.path.join(BASE_DIR, "..", "public", "choropleth.geojson")
+PRICE_JSON_PATH  = os.path.join(BASE_DIR, "..", "public", "price_by_municipality.json")
+ESTATE_PATH      = os.path.join(BASE_DIR, "..", "public", "estate_all.geojson")
+OUTPUT_PATH      = os.path.join(BASE_DIR, "..", "public", "choropleth.geojson")
 
 
-# japan.geojsonキャッシュ（複数都道府県で共有）
-_japan_geojson_cache: list[dict] | None = None
+# ── 価格データ読込 ──────────────────────────────────────────────────────────
 
+def load_price_stats() -> dict[str, dict]:
+    """price_by_municipality.json または estate_all.geojson から価格統計を取得"""
 
-def get_japan_geojson() -> list[dict]:
-    """全国GeoJSONを取得（キャッシュ付き）"""
-    global _japan_geojson_cache
-    if _japan_geojson_cache is not None:
-        return _japan_geojson_cache
-    print(f"  全国GeoJSON取得中: {JAPAN_GEOJSON_URL}")
-    try:
-        resp = requests.get(JAPAN_GEOJSON_URL, timeout=120, headers={"User-Agent": "SmileMap/1.0"})
-        print(f"  HTTP {resp.status_code}")
-        resp.raise_for_status()
-        data = resp.json()
-        _japan_geojson_cache = data.get("features", [])
-        print(f"  → 全国: {len(_japan_geojson_cache):,}ポリゴン取得")
-        return _japan_geojson_cache
-    except Exception as e:
-        print(f"  ✗ 全国GeoJSON取得失敗: {e}")
-        _japan_geojson_cache = []
-        return []
+    # 優先: price_by_municipality.json（全国対応）
+    if os.path.exists(PRICE_JSON_PATH):
+        print(f"価格データ読込: {PRICE_JSON_PATH}")
+        with open(PRICE_JSON_PATH, encoding="utf-8") as f:
+            data = json.load(f)
+        print(f"  → {len(data):,}市区町村")
+        return data
 
-
-def download_boundaries(pref_name: str) -> list[dict]:
-    """行政区域境界GeoJSONを取得"""
-    urls = BOUNDARY_URLS.get(pref_name, [])
-    for url in urls:
-        # 全国版フィルタモード
-        if url == "__japan_filter__":
-            all_features = get_japan_geojson()
-            keywords = JAPAN_PREF_FILTER.get(pref_name, [pref_name])
-            filtered = []
-            for feat in all_features:
-                props = feat.get("properties", {})
-                for key, val in props.items():
-                    if isinstance(val, str) and any(kw in val for kw in keywords):
-                        filtered.append(feat)
-                        break
-            print(f"  {pref_name}フィルタ: {len(filtered)}ポリゴン")
-            if filtered:
-                sample_props = filtered[0].get("properties", {})
-                print(f"  プロパティキー: {list(sample_props.keys())[:8]}")
-                print(f"  サンプル値: {list(sample_props.values())[:8]}")
-            return filtered
-
-        # 通常URLダウンロード
-        print(f"  境界データ取得中: {url}")
-        try:
-            resp = requests.get(url, timeout=60, headers={"User-Agent": "SmileMap/1.0"})
-            print(f"  HTTP {resp.status_code}")
-            if resp.status_code != 200:
-                continue
-            data = resp.json()
-            features = data.get("features", [])
-            if not features:
-                print("  フィーチャ数0 → 次を試します")
-                continue
-            print(f"  → {len(features)}ポリゴン取得成功")
-            if features:
-                sample_props = features[0].get("properties", {})
-                print(f"  プロパティキー: {list(sample_props.keys())[:8]}")
-                print(f"  サンプル値: {list(sample_props.values())[:8]}")
-            return features
-        except Exception as e:
-            print(f"  ✗ エラー: {e}")
-    print(f"  ✗ {pref_name}の境界データ取得失敗")
-    return []
-
-
-def detect_muni_field(features: list[dict]) -> str:
-    """市区町村名フィールドを自動検出"""
-    if not features:
-        return ""
-    props = features[0].get("properties", {})
-    # 既知フィールド名の候補
-    candidates = ["N03_004", "nam_ja", "name_ja", "city", "city_ja", "name", "市区町村名"]
-    for key in candidates:
-        if key in props:
-            print(f"  市区町村フィールド自動検出: {key} = {props[key]}")
-            return key
-    # 日本語値を持つフィールドを探す
-    for key, val in props.items():
-        if isinstance(val, str) and any('　' <= c <= '鿿' for c in val):
-            print(f"  日本語フィールドを使用: {key} = {val}")
-            return key
-    print(f"  ✗ 市区町村フィールドが見つかりません。利用可能なキー: {list(props.keys())}")
-    return ""
-
-
-def detect_pref_field(features: list[dict]) -> str:
-    """都道府県名フィールドを自動検出"""
-    if not features:
-        return ""
-    props = features[0].get("properties", {})
-    candidates = ["N03_001", "pref_ja", "prefecture", "pref"]
-    for key in candidates:
-        if key in props:
-            return key
-    return ""
-
-
-def aggregate_prices(estate_path: str) -> dict[str, dict]:
-    """estate_all.geojsonから市区町村ごとの価格統計を集計"""
-    print("\n価格データ集計中...")
+    # フォールバック: estate_all.geojson から集計
+    print(f"estate_all.geojson から集計: {ESTATE_PATH}")
     stats: dict[str, list] = defaultdict(list)
     meta: dict[str, dict] = {}
 
     try:
-        with open(estate_path, encoding="utf-8") as f:
+        with open(ESTATE_PATH, encoding="utf-8") as f:
             data = json.load(f)
     except FileNotFoundError:
-        print(f"  ✗ {estate_path} が見つかりません")
+        print(f"  ✗ {ESTATE_PATH} が見つかりません")
         return {}
 
     for feature in data.get("features", []):
@@ -157,7 +57,6 @@ def aggregate_prices(estate_path: str) -> dict[str, dict]:
         pref = props.get("prefecture", "")
         muni = props.get("municipality", "")
         price_per_sqm = props.get("price_per_sqm", 0)
-
         if muni and price_per_sqm > 0:
             key = f"{pref}|{muni}"
             stats[key].append(price_per_sqm)
@@ -171,112 +70,174 @@ def aggregate_prices(estate_path: str) -> dict[str, dict]:
             "prefecture": m["prefecture"],
             "municipality": m["municipality"],
             "avg_price_per_sqm": int(sum(prices) / len(prices)),
-            "median_price_per_sqm": int(sorted_prices[len(prices) // 2]),
-            "max_price_per_sqm": max(prices),
-            "min_price_per_sqm": min(prices),
+            "median_price_per_sqm": sorted_prices[len(prices) // 2],
             "transaction_count": len(prices),
             "avg_price_per_tsubo": int(sum(prices) / len(prices) * 3.30579),
         }
 
-    print(f"  → {len(result)}市区町村の価格データを集計")
-
-    # サンプル表示
-    top5 = sorted(result.values(), key=lambda x: -x["avg_price_per_sqm"])[:5]
-    print("  高価格TOP5:")
-    for r in top5:
-        print(f"    {r['prefecture']}{r['municipality']}: {r['avg_price_per_sqm']:,}円/㎡ ({r['transaction_count']:,}件)")
-
+    print(f"  → {len(result):,}市区町村")
     return result
 
 
+# ── 境界データ取得 ──────────────────────────────────────────────────────────
+
+def download_japan_geojson() -> list[dict]:
+    """全国行政区域GeoJSONを取得"""
+    print(f"\n全国境界データ取得中: {JAPAN_GEOJSON_URL}")
+    try:
+        resp = requests.get(JAPAN_GEOJSON_URL, timeout=180, headers={"User-Agent": "SmileMap/1.0"})
+        resp.raise_for_status()
+        features = resp.json().get("features", [])
+        print(f"  → {len(features):,}ポリゴン取得成功")
+        if features:
+            sample = features[0].get("properties", {})
+            print(f"  プロパティキー: {list(sample.keys())[:10]}")
+        return features
+    except Exception as e:
+        print(f"  ✗ 取得失敗: {e}")
+        return []
+
+
+# ── マッチング ──────────────────────────────────────────────────────────────
+
+def build_lookup_keys(props: dict, pref_name: str) -> list[str]:
+    """GeoJSONフィーチャから可能なマッチングキーを生成（優先順）
+
+    japan.geojson のフィールド:
+      N03_001: 都道府県名
+      N03_003: 郡名 or 政令市名（例: 横浜市, 津久井郡）
+      N03_004: 市区町村名（例: 鶴見区, 相模原市）
+    """
+    n03_003 = (props.get("N03_003") or "").strip()
+    n03_004 = (props.get("N03_004") or "").strip()
+
+    keys = []
+    # 1. 区名のみ（東京23区・政令市の区）
+    if n03_004:
+        keys.append(f"{pref_name}|{n03_004}")
+    # 2. 政令市名+区名（例: 横浜市鶴見区）
+    if n03_003 and n03_004:
+        keys.append(f"{pref_name}|{n03_003}{n03_004}")
+    # 3. 政令市全体（区データがない場合のフォールバック）
+    if n03_003 and not n03_004:
+        keys.append(f"{pref_name}|{n03_003}")
+    return keys
+
+
+# ── コロプレス生成 ──────────────────────────────────────────────────────────
+
 def build_choropleth(
-    boundary_features: list[dict],
+    all_features: list[dict],
     price_stats: dict[str, dict],
-    pref_name: str,
-    muni_field: str,
-    pref_field: str,
 ) -> list[dict]:
-    """境界ポリゴンに価格データをマージ"""
+    """全国境界ポリゴンに価格データをマージ"""
     output_features = []
     matched = 0
-    unmatched_names = []
+    no_geom = 0
+    no_name = 0
+    unmatched_sample: list[str] = []
 
-    for feat in boundary_features:
-        props = feat.get("properties", {})
-        muni_name = props.get(muni_field, "")
-        feat_pref = props.get(pref_field, pref_name) if pref_field else pref_name
+    # 都道府県名フィールドの候補を自動検出
+    pref_field = None
+    if all_features:
+        sample_props = all_features[0].get("properties", {})
+        for candidate in ["N03_001", "pref_ja", "prefecture", "pref"]:
+            if candidate in sample_props:
+                pref_field = candidate
+                print(f"  都道府県フィールド: {pref_field}")
+                break
 
-        if not muni_name:
+    for feat in all_features:
+        geom = feat.get("geometry")
+        if not geom:
+            no_geom += 1
             continue
 
-        # マッチングキー（都道府県|市区町村）
-        key = f"{pref_name}|{muni_name}"
-        price_data = price_stats.get(key)
+        props = feat.get("properties", {})
+        pref_name = (props.get(pref_field, "") if pref_field else "").strip()
+        n03_004 = (props.get("N03_004") or "").strip()
+        n03_003 = (props.get("N03_003") or "").strip()
+
+        if not pref_name:
+            no_name += 1
+            continue
+
+        # マッチング
+        price_data = None
+        matched_key = None
+        for key in build_lookup_keys(props, pref_name):
+            if key in price_stats:
+                price_data = price_stats[key]
+                matched_key = key
+                break
+
+        # 表示用市区町村名（N03_003 + N03_004 or どちらか）
+        display_muni = (n03_003 + n03_004) if (n03_003 and n03_004) else (n03_004 or n03_003)
 
         if price_data:
             matched += 1
             new_props = {
                 "prefecture": pref_name,
-                "municipality": muni_name,
+                "municipality": display_muni,
                 **price_data,
             }
         else:
-            unmatched_names.append(muni_name)
+            if len(unmatched_sample) < 10:
+                unmatched_sample.append(f"{pref_name}|{display_muni}")
             new_props = {
                 "prefecture": pref_name,
-                "municipality": muni_name,
+                "municipality": display_muni,
                 "avg_price_per_sqm": 0,
                 "transaction_count": 0,
             }
 
         output_features.append({
             "type": "Feature",
-            "geometry": feat.get("geometry"),
+            "geometry": geom,
             "properties": new_props,
         })
 
-    print(f"  マッチ: {matched}件 / 未マッチ: {len(unmatched_names)}件")
-    if unmatched_names[:5]:
-        print(f"  未マッチ例: {unmatched_names[:5]}")
+    total = len(output_features)
+    print(f"  総ポリゴン: {total:,}, 価格マッチ: {matched:,}, ジオメトリなし: {no_geom}, 都道府県名なし: {no_name}")
+    print(f"  マッチ率: {matched/total*100:.1f}%" if total > 0 else "")
+    if unmatched_sample:
+        print(f"  未マッチ例: {unmatched_sample[:5]}")
+
     return output_features
 
 
+# ── メイン ──────────────────────────────────────────────────────────────────
+
 def main():
-    print("=== コロプレスマップGeoJSON生成 ===")
+    print("=== 全国コロプレスマップGeoJSON生成 ===")
     print(f"実行日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
-    price_stats = aggregate_prices(ESTATE_PATH)
+    # 価格データ読込
+    price_stats = load_price_stats()
     if not price_stats:
-        print("価格データがありません。estate_all.geojsonを先に生成してください。")
+        print("価格データがありません。fetch_price_national.py を先に実行してください。")
         return
 
-    all_features = []
-    summary = {}
+    # サンプル表示
+    top5 = sorted(price_stats.values(), key=lambda x: -x.get("avg_price_per_sqm", 0))[:5]
+    print("  高価格TOP5:")
+    for r in top5:
+        print(f"    {r['prefecture']}{r['municipality']}: {r['avg_price_per_sqm']:,}円/㎡ ({r['transaction_count']:,}件)")
 
-    for pref_name in ["東京都", "神奈川県"]:
-        print(f"\n=== {pref_name} ===")
-        boundaries = download_boundaries(pref_name)
-        if not boundaries:
-            summary[pref_name] = {"total": 0, "matched": 0}
-            continue
+    # 全国境界ダウンロード
+    all_features = download_japan_geojson()
+    if not all_features:
+        print("境界データの取得に失敗しました。")
+        return
 
-        muni_field = detect_muni_field(boundaries)
-        pref_field = detect_pref_field(boundaries)
-
-        if not muni_field:
-            print(f"  ✗ 市区町村フィールドが特定できないためスキップ")
-            summary[pref_name] = {"total": 0, "matched": 0}
-            continue
-
-        features = build_choropleth(boundaries, price_stats, pref_name, muni_field, pref_field)
-        all_features.extend(features)
-        matched = sum(1 for f in features if f["properties"].get("transaction_count", 0) > 0)
-        summary[pref_name] = {"total": len(features), "matched": matched}
+    # コロプレス生成
+    print("\nコロプレス生成中...")
+    output_features = build_choropleth(all_features, price_stats)
 
     # 価格範囲
     prices = [
         f["properties"]["avg_price_per_sqm"]
-        for f in all_features
+        for f in output_features
         if f["properties"].get("avg_price_per_sqm", 0) > 0
     ]
     price_range = {
@@ -288,12 +249,13 @@ def main():
 
     geojson = {
         "type": "FeatureCollection",
-        "features": all_features,
+        "features": output_features,
         "metadata": {
-            "source": "行政区域境界: dataofjapan/land / 価格: 国土交通省",
+            "source": "行政区域境界: dataofjapan/land / 価格: 国土交通省不動産情報ライブラリ",
             "generated_at": datetime.now().isoformat(),
+            "total_polygons": len(output_features),
+            "matched_polygons": sum(1 for f in output_features if f["properties"].get("transaction_count", 0) > 0),
             "price_range": price_range,
-            "by_prefecture": summary,
         },
     }
 
@@ -302,8 +264,9 @@ def main():
         json.dump(geojson, f, ensure_ascii=False, separators=(",", ":"))
 
     print(f"\n=== 完了 ===")
-    for pref, s in summary.items():
-        print(f"  {pref}: 境界{s['total']}件, 価格マッチ{s['matched']}件")
+    print(f"  総ポリゴン: {len(output_features):,}")
+    matched = geojson["metadata"]["matched_polygons"]
+    print(f"  価格マッチ: {matched:,}")
     if price_range["max"] > 0:
         print(f"  価格範囲: {price_range['min']:,} ~ {price_range['max']:,} 円/㎡")
     print(f"  出力: {OUTPUT_PATH}")

@@ -8,6 +8,7 @@ on:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    timeout-minutes: 120  # 最大2時間（全国47都道府県）
     permissions:
       contents: write
 
@@ -23,24 +24,25 @@ jobs:
       - name: Install dependencies
         run: pip install -r batch/requirements.txt
 
-      - name: Fetch estate data
-        run: python batch/fetch_estate.py
+      - name: Fetch national price data (no geocoding)
+        run: python batch/fetch_price_national.py
         env:
           MLIT_API_KEY: ${{ secrets.MLIT_API_KEY }}
 
-      - name: Generate choropleth GeoJSON
+      - name: Generate national choropleth GeoJSON
         run: python batch/generate_choropleth.py
 
       - name: Check output
         run: |
-          ls -lh public/estate_all.geojson public/choropleth.geojson || echo "File not found"
+          ls -lh public/price_by_municipality.json public/choropleth.geojson 2>/dev/null || echo "Some files not found"
           python -c "
-          import json
-          d = json.load(open('public/estate_all.geojson'))
-          print(f'estate_all 合計: {len(d[\"features\"]):,}件')
+          import json, os
+          if os.path.exists('public/price_by_municipality.json'):
+              d = json.load(open('public/price_by_municipality.json'))
+              print(f'price_by_municipality: {len(d):,}市区町村')
           c = json.load(open('public/choropleth.geojson'))
           matched = sum(1 for f in c['features'] if f['properties'].get('transaction_count',0) > 0)
-          print(f'choropleth 合計: {len(c[\"features\"]):,}ポリゴン, 価格マッチ: {matched}件')
+          print(f'choropleth 総ポリゴン: {len(c[\"features\"]):,}, 価格マッチ: {matched:,}')
           prices = [f['properties']['avg_price_per_sqm'] for f in c['features'] if f['properties'].get('avg_price_per_sqm',0) > 0]
           if prices: print(f'価格範囲: {min(prices):,} ~ {max(prices):,} 円/㎡')
           " || true
@@ -49,6 +51,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/estate_all.geojson public/choropleth.geojson
-          git diff --staged --quiet || git commit -m "data: update estate+choropleth data $(date +'%Y-%m-%d')"
+          git add public/price_by_municipality.json public/choropleth.geojson
+          git diff --staged --quiet || git commit -m "data: update national price choropleth $(date +'%Y-%m-%d')"
           git push
