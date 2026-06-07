@@ -7,7 +7,7 @@ import { geocodeAddress, fetchAreaScore } from "@/lib/api";
 export default function Header() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const { setSelectedArea, setSearchQuery } = useMapStore();
+  const { setSelectedArea, setSearchQuery, setMapCenter } = useMapStore();
 
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault();
@@ -17,6 +17,8 @@ export default function Header() {
     try {
       const result = await geocodeAddress(query);
       if (result) {
+        // 地図を該当座標へ移動
+        setMapCenter({ lat: result.lat, lng: result.lng, zoom: 13 });
         const area = await fetchAreaScore(result.cityCode);
         setSelectedArea(area);
       }

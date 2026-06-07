@@ -3,6 +3,12 @@ import type { LayerType, AreaScore } from "@/types";
 
 export type HazardType = "flood" | "landslide" | "tsunami";
 
+export interface MapCenter {
+  lat: number;
+  lng: number;
+  zoom?: number;
+}
+
 interface MapStore {
   activeLayer: LayerType;
   setActiveLayer: (layer: LayerType) => void;
@@ -14,6 +20,8 @@ interface MapStore {
   toggleCrimePoints: () => void;
   activeHazards: Set<HazardType>;
   toggleHazard: (h: HazardType) => void;
+  mapCenter: MapCenter | null;
+  setMapCenter: (center: MapCenter) => void;
 }
 
 export const useMapStore = create<MapStore>((set) => ({
@@ -32,4 +40,6 @@ export const useMapStore = create<MapStore>((set) => ({
       next.has(h) ? next.delete(h) : next.add(h);
       return { activeHazards: next };
     }),
+  mapCenter: null,
+  setMapCenter: (center) => set({ mapCenter: center }),
 }));

@@ -1,5 +1,5 @@
 import type { AreaScore } from "@/types";
-import { MOCK_AREA_SCORES, MOCK_PRICE_GEOJSON, MOCK_CRIME_GEOJSON, MOCK_HAZARD_GEOJSON } from "./mockData";
+import { MOCK_AREA_SCORES } from "./mockData";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
 
@@ -22,10 +22,6 @@ export async function fetchAreaScore(cityCode: string): Promise<AreaScore | null
   );
 }
 
-export async function fetchMapData(layer: "price" | "crime" | "hazard") {
-  const mocks = { price: MOCK_PRICE_GEOJSON, crime: MOCK_CRIME_GEOJSON, hazard: MOCK_HAZARD_GEOJSON };
-  return fetchOrMock(`${API_BASE}/api/map-data?layer=${layer}`, mocks[layer]);
-}
 
 export async function geocodeAddress(query: string): Promise<{ lat: number; lng: number; cityCode: string } | null> {
   try {

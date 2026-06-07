@@ -40,7 +40,7 @@ export default function MapView() {
   const map = useRef<maplibregl.Map | null>(null);
   const popup = useRef<maplibregl.Popup | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const { activeLayer, showCrimePoints, activeHazards } = useMapStore();
+  const { activeLayer, showCrimePoints, activeHazards, mapCenter } = useMapStore();
 
   const updateLayerVisibility = useCallback((
     layer: string,
@@ -248,6 +248,16 @@ export default function MapView() {
       updateLayerVisibility(activeLayer, activeHazards);
     }
   }, [activeLayer, activeHazards, updateLayerVisibility]);
+
+  // 検索結果の座標へ地図を移動
+  useEffect(() => {
+    if (!mapCenter || !map.current) return;
+    map.current.flyTo({
+      center: [mapCenter.lng, mapCenter.lat],
+      zoom: mapCenter.zoom ?? 13,
+      duration: 1200,
+    });
+  }, [mapCenter]);
 
   return (
     <div className="w-full h-full relative">
