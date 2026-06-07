@@ -49,5 +49,6 @@ function guessCityCodeFromCoords(lat: number, lng: number): string {
   if (lat > 35.64 && lng > 139.68 && lat < 35.67) return "13113"; // 渋谷区
   if (lat > 35.68 && lng > 139.68 && lat < 35.72) return "13104"; // 新宿区
   if (lat > 35.63 && lng > 139.69 && lat < 35.65) return "13112"; // 目黒区
-  return "13101";
+  // 未知エリア（東京23区外など）はコードなし → fetchAreaScore が null を返す
+  return "";
 }

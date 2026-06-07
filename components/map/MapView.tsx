@@ -52,7 +52,9 @@ export default function MapView() {
     const allLayers = [
       "price-heatmap", "price-circle",
       "crime-heatmap", "crime-circle",
-      "hazard-flood", "hazard-landslide", "hazard-tsunami",
+      "hazard-flood",
+      "hazard-landslide", "hazard-landslide-steep", "hazard-landslide-slide",
+      "hazard-tsunami",
     ];
 
     allLayers.forEach((id) => {
@@ -62,7 +64,10 @@ export default function MapView() {
       if (layer === "crime" && (id === "crime-heatmap" || id === "crime-circle")) visible = true;
       if (layer === "hazard") {
         if (id === "hazard-flood" && hazards.has("flood")) visible = true;
-        if (id === "hazard-landslide" && hazards.has("landslide")) visible = true;
+        if (
+          (id === "hazard-landslide" || id === "hazard-landslide-steep" || id === "hazard-landslide-slide")
+          && hazards.has("landslide")
+        ) visible = true;
         if (id === "hazard-tsunami" && hazards.has("tsunami")) visible = true;
       }
       m.setLayoutProperty(id, "visibility", visible ? "visible" : "none");
@@ -167,6 +172,38 @@ export default function MapView() {
         id: "hazard-landslide",
         type: "raster",
         source: "hazard-landslide-source",
+        paint: { "raster-opacity": 0.7 },
+        layout: { visibility: "none" },
+      });
+
+      // 土砂災害警戒区域（急傾斜地の崩壊）
+      m.addSource("hazard-landslide-steep-source", {
+        type: "raster",
+        tiles: ["https://disaportaldata.gsi.go.jp/raster/05_kyukeisyachihoukai_data/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        attribution: "国土交通省 ハザードマップポータルサイト",
+        minzoom: 2, maxzoom: 17,
+      });
+      m.addLayer({
+        id: "hazard-landslide-steep",
+        type: "raster",
+        source: "hazard-landslide-steep-source",
+        paint: { "raster-opacity": 0.7 },
+        layout: { visibility: "none" },
+      });
+
+      // 土砂災害警戒区域（地すべり）
+      m.addSource("hazard-landslide-slide-source", {
+        type: "raster",
+        tiles: ["https://disaportaldata.gsi.go.jp/raster/05_jisuberi_data/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        attribution: "国土交通省 ハザードマップポータルサイト",
+        minzoom: 2, maxzoom: 17,
+      });
+      m.addLayer({
+        id: "hazard-landslide-slide",
+        type: "raster",
+        source: "hazard-landslide-slide-source",
         paint: { "raster-opacity": 0.7 },
         layout: { visibility: "none" },
       });
