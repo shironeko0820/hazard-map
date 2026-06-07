@@ -90,43 +90,38 @@ export default function MapView() {
     popup.current = new maplibregl.Popup({ closeButton: false, closeOnClick: false });
 
     m.on("load", () => {
-      // ---- 価格レイヤー ----
-      m.addSource("price-source", { type: "geojson", data: "/estate_all.geojson" });
+      // ---- 価格レイヤー（コロプレス: 区ごとの平均㎡単価で色分け）----
+      m.addSource("price-source", { type: "geojson", data: "/choropleth.geojson" });
       m.addLayer({
-        id: "price-heatmap",
-        type: "heatmap",
+        id: "price-heatmap",  // レイヤーIDはそのまま維持（visibility切り替えのため）
+        type: "fill",
         source: "price-source",
-        maxzoom: 14,
         paint: {
-          "heatmap-weight": 1,
-          // intensityを低くして低密度エリアも見えるようにする
-          "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 8, 0.05, 11, 0.2, 14, 0.5],
-          "heatmap-color": [
-            "interpolate", ["linear"], ["heatmap-density"],
-            0,    "rgba(0,0,255,0)",
-            0.01, "#4575b4",
-            0.1,  "#74add1",
-            0.3,  "#fee090",
-            0.6,  "#f46d43",
-            0.9,  "#d73027",
-            1,    "#a50026",
+          "fill-color": [
+            "interpolate", ["linear"],
+            ["get", "avg_price_per_sqm"],
+            0,       "#f0f0f0",  // データなし: グレー
+            100000,  "#313695",  // 低価格: 濃青
+            300000,  "#4575b4",
+            500000,  "#74add1",
+            700000,  "#abd9e9",
+            900000,  "#fee090",  // 中価格: 黄
+            1100000, "#fdae61",
+            1300000, "#f46d43",
+            1500000, "#d73027",
+            2000000, "#a50026",  // 高価格: 濃赤
           ],
-          // 半径を大きくして広域をカバー
-          "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 8, 40, 11, 80, 14, 60],
-          "heatmap-opacity": 0.7,
+          "fill-opacity": 0.7,
         },
       });
       m.addLayer({
-        id: "price-circle",
-        type: "circle",
+        id: "price-circle",  // 区境界の輪郭線
+        type: "line",
         source: "price-source",
-        minzoom: 14,
         paint: {
-          "circle-radius": 8,
-          "circle-color": PRICE_COLORS,
-          "circle-stroke-width": 1,
-          "circle-stroke-color": "#fff",
-          "circle-opacity": 0.9,
+          "line-color": "#ffffff",
+          "line-width": 0.8,
+          "line-opacity": 0.6,
         },
       });
 
@@ -184,23 +179,26 @@ export default function MapView() {
       updateLayerVisibility("price");
       setMapLoaded(true);
 
-      // ---- インタラクション: 価格サークル ----
-      m.on("mouseenter", "price-circle", (e) => {
+      // ---- インタラクション: 価格コロプレス（区ホバー）----
+      m.on("mouseenter", "price-heatmap", (e) => {
         m.getCanvas().style.cursor = "pointer";
         const props = e.features?.[0]?.properties as MapFeatureProperties;
         if (!props || !e.lngLat) return;
+        const avgPrice = Number(props.avg_price_per_sqm ?? 0);
+        const tsubo = Math.round(avgPrice * 3.30579);
         popup.current!
           .setLngLat(e.lngLat)
           .setHTML(`
-            <div class="text-sm">
-              <p class="font-bold">${props.property_type ?? ""}</p>
-              <p>㎡単価: <strong>${Number(props.price_per_sqm ?? 0).toLocaleString()}円</strong></p>
-              <p>最寄り: ${props.nearest_station ?? ""}駅 徒歩${props.walk_minutes ?? "?"}分</p>
+            <div style="font-size:13px;line-height:1.6">
+              <p style="font-weight:bold;margin:0 0 4px">${props.prefecture ?? ""}${props.municipality ?? ""}</p>
+              <p style="margin:0">平均㎡単価: <strong>${avgPrice > 0 ? avgPrice.toLocaleString() + "円" : "データなし"}</strong></p>
+              ${avgPrice > 0 ? `<p style="margin:0">平均坪単価: <strong>${tsubo.toLocaleString()}円</strong></p>` : ""}
+              ${props.transaction_count ? `<p style="margin:0;color:#666">取引件数: ${Number(props.transaction_count).toLocaleString()}件</p>` : ""}
             </div>
           `)
           .addTo(m);
       });
-      m.on("mouseleave", "price-circle", () => {
+      m.on("mouseleave", "price-heatmap", () => {
         m.getCanvas().style.cursor = "";
         popup.current!.remove();
       });
