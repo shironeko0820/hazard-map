@@ -2,6 +2,10 @@
 国土交通省 不動産情報ライブラリAPI から取引価格データを取得してGeoJSONに変換
 対象: 東京都（13）・神奈川県（14）
 出力: public/estate_all.geojson
+
+API仕様: https://www.reinfolib.mlit.go.jp/help/apiManual/
+ヘッダー: Ocp-Apim-Subscription-Key
+APIレスポンスにPoint(緯度経度)が含まれるためジオコーディング不要
 """
 
 import json
@@ -13,9 +17,6 @@ from datetime import datetime
 # 国交省 不動産情報ライブラリAPI
 MLIT_API_URL = "https://www.reinfolib.mlit.go.jp/ex-api/external/XIT001"
 MLIT_API_KEY = os.environ.get("MLIT_API_KEY", "")
-
-# 国土地理院 ジオコーディングAPI
-GSI_GEOCODE_URL = "https://msearch.gsi.go.jp/address-search/AddressSearch"
 
 # 取得対象都道府県
 PREFECTURES = [
@@ -30,9 +31,6 @@ PERIODS = [
     {"year": 2024, "quarter": 2},
     {"year": 2024, "quarter": 1},
 ]
-
-# 物件種別フィルタ（空リストで全種別取得）
-PROPERTY_TYPES = []  # 例: ["中古マンション等", "宅地(土地)"]
 
 # 坪単価変換係数
 SQM_TO_TSUBO = 3.30579
@@ -49,64 +47,60 @@ def fetch_transactions(pref_code: str, year: int, quarter: int) -> list[dict]:
         "quarter": quarter,
         "area": pref_code,
     }
-    headers = {"apikey": MLIT_API_KEY}
+    # 正しいヘッダー名: Ocp-Apim-Subscription-Key
+    headers = {"Ocp-Apim-Subscription-Key": MLIT_API_KEY}
 
     try:
-        resp = requests.get(MLIT_API_URL, params=params, headers=headers, timeout=30)
+        resp = requests.get(MLIT_API_URL, params=params, headers=headers, timeout=60)
+        print(f"    HTTP {resp.status_code}")
         resp.raise_for_status()
         data = resp.json()
         items = data.get("data", [])
         print(f"    取得: {len(items)}件")
+        # デバッグ: 最初の1件のフィールドを表示
+        if items:
+            print(f"    フィールド例: {list(items[0].keys())[:10]}")
         return items
     except requests.HTTPError as e:
-        print(f"    ✗ HTTP {e.response.status_code}: {e}")
+        print(f"    ✗ HTTP {e.response.status_code}: {e.response.text[:200]}")
         return []
     except Exception as e:
         print(f"    ✗ エラー: {e}")
         return []
 
 
-geocache: dict = {}
-
-
-def geocode(address: str) -> tuple[float, float] | None:
-    """国土地理院APIでジオコーディング（キャッシュ付き）"""
-    if address in geocache:
-        return geocache[address]
-    try:
-        resp = requests.get(
-            GSI_GEOCODE_URL,
-            params={"q": address},
-            timeout=10,
-            headers={"User-Agent": "SmileMap/1.0"},
-        )
-        if resp.status_code == 200:
-            data = resp.json()
-            if data:
-                coords = data[0]["geometry"]["coordinates"]
-                result = (float(coords[0]), float(coords[1]))
-                geocache[address] = result
-                time.sleep(0.1)
-                return result
-    except Exception:
-        pass
-    geocache[address] = None
-    return None
-
-
 def item_to_feature(item: dict, pref_name: str) -> dict | None:
-    """APIレスポンスのアイテムをGeoJSONフィーチャに変換"""
-    # 住所を組み立てる
-    municipality = item.get("Municipality", "")
-    district = item.get("DistrictName", "")
-    address = f"{pref_name}{municipality}{district}"
+    """APIレスポンスのアイテムをGeoJSONフィーチャに変換
 
-    coords = geocode(address)
-    if not coords:
-        # 市区町村レベルでリトライ
-        address_city = f"{pref_name}{municipality}"
-        coords = geocode(address_city)
-    if not coords:
+    APIレスポンスのPoint列: "35.123456 139.123456" 形式（緯度 経度）
+    または個別の列 Latitude / Longitude
+    """
+    # 座標取得: Pointフィールド優先
+    lat, lng = None, None
+
+    point_str = item.get("Point", "")
+    if point_str and point_str.strip():
+        parts = point_str.strip().split()
+        if len(parts) == 2:
+            try:
+                lat = float(parts[0])
+                lng = float(parts[1])
+            except (ValueError, TypeError):
+                pass
+
+    # フォールバック: 個別フィールド
+    if lat is None:
+        try:
+            lat = float(item.get("Latitude") or item.get("latitude") or 0)
+            lng = float(item.get("Longitude") or item.get("longitude") or 0)
+        except (ValueError, TypeError):
+            pass
+
+    # 座標が無効な場合はスキップ
+    if not lat or not lng or lat == 0 or lng == 0:
+        return None
+    # 日本国外の座標はスキップ
+    if not (20 <= lat <= 50 and 120 <= lng <= 150):
         return None
 
     # 価格情報
@@ -123,9 +117,12 @@ def item_to_feature(item: dict, pref_name: str) -> dict | None:
     price_per_sqm = int(trade_price / area) if area > 0 else 0
     price_per_tsubo = int(price_per_sqm * SQM_TO_TSUBO)
 
+    municipality = item.get("Municipality", "")
+    district = item.get("DistrictName", "")
+
     return {
         "type": "Feature",
-        "geometry": {"type": "Point", "coordinates": [coords[0], coords[1]]},
+        "geometry": {"type": "Point", "coordinates": [lng, lat]},
         "properties": {
             "price": trade_price,
             "price_per_sqm": price_per_sqm,
@@ -146,10 +143,13 @@ def item_to_feature(item: dict, pref_name: str) -> dict | None:
 def main():
     print("=== 国交省 不動産取引価格データ取得開始 ===")
     print(f"実行日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"対象: {', '.join(p['name'] for p in PREFECTURES)}\n")
+    print(f"対象: {', '.join(p['name'] for p in PREFECTURES)}")
+    print(f"APIキー設定: {'あり' if MLIT_API_KEY else 'なし'}\n")
 
     all_features = []
     summary = {}
+    coords_found = 0
+    coords_missing = 0
 
     for pref in PREFECTURES:
         pref_code = pref["code"]
@@ -166,12 +166,17 @@ def main():
                 feature = item_to_feature(item, pref_name)
                 if feature:
                     pref_features.append(feature)
+                    coords_found += 1
+                else:
+                    coords_missing += 1
 
-            time.sleep(1)  # APIに優しくする
+            time.sleep(0.5)
 
         all_features.extend(pref_features)
         summary[pref_name] = len(pref_features)
         print(f"  → {pref_name} 小計: {len(pref_features):,}件")
+
+    print(f"\n座標あり: {coords_found:,}件 / 座標なし(除外): {coords_missing:,}件")
 
     # GeoJSON出力
     geojson = {

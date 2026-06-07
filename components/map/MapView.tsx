@@ -91,7 +91,7 @@ export default function MapView() {
 
     m.on("load", () => {
       // ---- 価格レイヤー ----
-      m.addSource("price-source", { type: "geojson", data: MOCK_PRICE_GEOJSON });
+      m.addSource("price-source", { type: "geojson", data: "/estate_all.geojson" });
       m.addLayer({
         id: "price-heatmap",
         type: "heatmap",
