@@ -163,7 +163,7 @@ export default function MapView() {
       // 土砂災害警戒区域（土石流）
       m.addSource("hazard-landslide-source", {
         type: "raster",
-        tiles: ["https://disaportaldata.gsi.go.jp/raster/05_dosekiryukeiryu_data/{z}/{x}/{y}.png"],
+        tiles: ["https://disaportaldata.gsi.go.jp/raster/05_dosekiryukeikaikuiki/{z}/{x}/{y}.png"],
         tileSize: 256,
         attribution: "国土交通省 ハザードマップポータルサイト",
         minzoom: 2, maxzoom: 17,
@@ -179,7 +179,7 @@ export default function MapView() {
       // 土砂災害警戒区域（急傾斜地の崩壊）
       m.addSource("hazard-landslide-steep-source", {
         type: "raster",
-        tiles: ["https://disaportaldata.gsi.go.jp/raster/05_kyukeisyachihoukai_data/{z}/{x}/{y}.png"],
+        tiles: ["https://disaportaldata.gsi.go.jp/raster/05_kyukeishakeikaikuiki/{z}/{x}/{y}.png"],
         tileSize: 256,
         attribution: "国土交通省 ハザードマップポータルサイト",
         minzoom: 2, maxzoom: 17,
@@ -195,7 +195,7 @@ export default function MapView() {
       // 土砂災害警戒区域（地すべり）
       m.addSource("hazard-landslide-slide-source", {
         type: "raster",
-        tiles: ["https://disaportaldata.gsi.go.jp/raster/05_jisuberi_data/{z}/{x}/{y}.png"],
+        tiles: ["https://disaportaldata.gsi.go.jp/raster/05_jisuberikeikaikuiki/{z}/{x}/{y}.png"],
         tileSize: 256,
         attribution: "国土交通省 ハザードマップポータルサイト",
         minzoom: 2, maxzoom: 17,
