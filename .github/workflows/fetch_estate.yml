@@ -29,8 +29,25 @@ jobs:
         env:
           MLIT_API_KEY: ${{ secrets.MLIT_API_KEY }}
 
+      - name: Download Japan boundary GeoJSON
+        run: |
+          echo "Downloading japan.geojson (~50MB)..."
+          curl -L --retry 3 --retry-delay 10 --max-time 300 \
+            -o /tmp/japan_boundary.geojson \
+            https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson
+          echo "Downloaded: $(wc -c < /tmp/japan_boundary.geojson) bytes"
+          echo "Features sample:"
+          python3 -c "
+          import json
+          d = json.load(open('/tmp/japan_boundary.geojson'))
+          print(f'  ポリゴン数: {len(d[\"features\"]):,}')
+          print(f'  プロパティ: {list(d[\"features\"][0][\"properties\"].keys())[:8]}')
+          " || true
+
       - name: Generate national choropleth GeoJSON
         run: python batch/generate_choropleth.py
+        env:
+          JAPAN_GEOJSON_LOCAL: /tmp/japan_boundary.geojson
 
       - name: Check output
         run: |

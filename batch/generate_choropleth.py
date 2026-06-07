@@ -20,6 +20,8 @@ from collections import defaultdict
 from datetime import datetime
 
 JAPAN_GEOJSON_URL = "https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson"
+# ワークフローからローカルパスを指定できる（大容量ファイル対策）
+JAPAN_GEOJSON_LOCAL = os.environ.get("JAPAN_GEOJSON_LOCAL", "")
 
 BASE_DIR = os.path.dirname(__file__)
 PRICE_JSON_PATH  = os.path.join(BASE_DIR, "..", "public", "price_by_municipality.json")
@@ -82,10 +84,26 @@ def load_price_stats() -> dict[str, dict]:
 # ── 境界データ取得 ──────────────────────────────────────────────────────────
 
 def download_japan_geojson() -> list[dict]:
-    """全国行政区域GeoJSONを取得"""
+    """全国行政区域GeoJSONを取得（ローカルファイル優先）"""
+    # ローカルファイル優先（ワークフローで事前にダウンロード済みの場合）
+    if JAPAN_GEOJSON_LOCAL and os.path.exists(JAPAN_GEOJSON_LOCAL):
+        print(f"\nローカルファイルから読込: {JAPAN_GEOJSON_LOCAL}")
+        try:
+            with open(JAPAN_GEOJSON_LOCAL, encoding="utf-8") as f:
+                data = json.load(f)
+            features = data.get("features", [])
+            print(f"  → {len(features):,}ポリゴン読込成功")
+            if features:
+                sample = features[0].get("properties", {})
+                print(f"  プロパティキー: {list(sample.keys())[:10]}")
+            return features
+        except Exception as e:
+            print(f"  ローカル読込失敗、URLからダウンロード: {e}")
+
+    # URLからダウンロード（フォールバック）
     print(f"\n全国境界データ取得中: {JAPAN_GEOJSON_URL}")
     try:
-        resp = requests.get(JAPAN_GEOJSON_URL, timeout=180, headers={"User-Agent": "SmileMap/1.0"})
+        resp = requests.get(JAPAN_GEOJSON_URL, timeout=300, headers={"User-Agent": "SmileMap/1.0"})
         resp.raise_for_status()
         features = resp.json().get("features", [])
         print(f"  → {len(features):,}ポリゴン取得成功")
