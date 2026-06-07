@@ -224,7 +224,7 @@ export default function MapView() {
         layout: { visibility: "none" },
       });
 
-      updateLayerVisibility("price", new Set(["flood"]));
+      // mapLoaded を true にすることで上の useEffect が activeLayer で正しく実行される
       setMapLoaded(true);
 
       // ---- インタラクション: 価格コロプレス（区ホバー）----
@@ -280,11 +280,11 @@ export default function MapView() {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // mapLoaded を依存配列に追加：地図ロード完了後に必ず実行させる
   useEffect(() => {
-    if (map.current?.isStyleLoaded()) {
-      updateLayerVisibility(activeLayer, activeHazards);
-    }
-  }, [activeLayer, activeHazards, updateLayerVisibility]);
+    if (!mapLoaded || !map.current) return;
+    updateLayerVisibility(activeLayer, activeHazards);
+  }, [mapLoaded, activeLayer, activeHazards, updateLayerVisibility]);
 
   // 検索結果の座標へ地図を移動
   useEffect(() => {
