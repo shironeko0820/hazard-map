@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import maplibregl, { type ExpressionSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useMapStore } from "@/lib/store";
-import { MOCK_PRICE_GEOJSON, MOCK_CRIME_GEOJSON, MOCK_HAZARD_GEOJSON, MOCK_AREA_SCORES } from "@/lib/mockData";
+import { MOCK_CRIME_GEOJSON, MOCK_HAZARD_GEOJSON, MOCK_AREA_SCORES } from "@/lib/mockData";
 import type { MapFeatureProperties } from "@/types";
 import CrimePointLayer from "./CrimePointLayer";
 
