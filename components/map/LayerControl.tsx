@@ -2,6 +2,7 @@
 
 import { useMapStore } from "@/lib/store";
 import type { LayerType } from "@/types";
+import type { HazardType } from "@/lib/store";
 
 const LAYERS: { id: LayerType; label: string; icon: string }[] = [
   { id: "price", label: "価格", icon: "💴" },
@@ -9,11 +10,22 @@ const LAYERS: { id: LayerType; label: string; icon: string }[] = [
   { id: "hazard", label: "災害", icon: "🌊" },
 ];
 
+const HAZARD_TYPES: { id: HazardType; label: string; color: string }[] = [
+  { id: "flood",     label: "洪水",   color: "bg-blue-500" },
+  { id: "landslide", label: "土砂災害", color: "bg-orange-500" },
+  { id: "tsunami",   label: "津波",   color: "bg-purple-500" },
+];
+
 export default function LayerControl() {
-  const { activeLayer, setActiveLayer, showCrimePoints, toggleCrimePoints } = useMapStore();
+  const {
+    activeLayer, setActiveLayer,
+    showCrimePoints, toggleCrimePoints,
+    activeHazards, toggleHazard,
+  } = useMapStore();
 
   return (
     <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+
       {/* 犯罪地点表示ボタン */}
       <button
         onClick={toggleCrimePoints}
@@ -27,7 +39,26 @@ export default function LayerControl() {
         <span>犯罪地点を{showCrimePoints ? "非表示" : "表示"}</span>
       </button>
 
-      {/* レイヤー切替 */}
+      {/* 災害サブトグル（災害タブ選択時のみ表示）*/}
+      {activeLayer === "hazard" && (
+        <div className="flex bg-white rounded-full shadow-lg border border-gray-200 overflow-hidden">
+          {HAZARD_TYPES.map((h) => (
+            <button
+              key={h.id}
+              onClick={() => toggleHazard(h.id)}
+              className={`flex items-center gap-1.5 px-4 py-2 text-xs font-medium transition-colors ${
+                activeHazards.has(h.id)
+                  ? `${h.color} text-white`
+                  : "text-gray-500 hover:bg-gray-50"
+              }`}
+            >
+              <span>{h.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* メインレイヤー切替 */}
       <div className="flex bg-white rounded-full shadow-lg border border-gray-200 overflow-hidden">
         {LAYERS.map((layer) => (
           <button

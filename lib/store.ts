@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import type { LayerType, AreaScore } from "@/types";
 
+export type HazardType = "flood" | "landslide" | "tsunami";
+
 interface MapStore {
   activeLayer: LayerType;
   setActiveLayer: (layer: LayerType) => void;
@@ -10,6 +12,8 @@ interface MapStore {
   setSearchQuery: (q: string) => void;
   showCrimePoints: boolean;
   toggleCrimePoints: () => void;
+  activeHazards: Set<HazardType>;
+  toggleHazard: (h: HazardType) => void;
 }
 
 export const useMapStore = create<MapStore>((set) => ({
@@ -21,4 +25,11 @@ export const useMapStore = create<MapStore>((set) => ({
   setSearchQuery: (q) => set({ searchQuery: q }),
   showCrimePoints: false,
   toggleCrimePoints: () => set((s) => ({ showCrimePoints: !s.showCrimePoints })),
+  activeHazards: new Set<HazardType>(["flood"]),
+  toggleHazard: (h) =>
+    set((s) => {
+      const next = new Set(s.activeHazards);
+      next.has(h) ? next.delete(h) : next.add(h);
+      return { activeHazards: next };
+    }),
 }));

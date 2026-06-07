@@ -4,8 +4,9 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import maplibregl, { type ExpressionSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useMapStore } from "@/lib/store";
-import { MOCK_CRIME_GEOJSON, MOCK_HAZARD_GEOJSON, MOCK_AREA_SCORES } from "@/lib/mockData";
+import { MOCK_CRIME_GEOJSON } from "@/lib/mockData";
 import type { MapFeatureProperties } from "@/types";
+import type { HazardType } from "@/lib/store";
 import CrimePointLayer from "./CrimePointLayer";
 
 // コロプレス（区ごと平均㎡単価）の色スケール: 青(低価格) → 赤(高価格)
@@ -33,47 +34,38 @@ const CRIME_COLORS: ExpressionSpecification = [
   1, "#ff0000",
 ];
 
-const FLOOD_FILL_COLOR: ExpressionSpecification = [
-  "interpolate", ["linear"], ["get", "flood_risk_level"],
-  0, "#ffffff",
-  1, "#aed6f1",
-  2, "#5dade2",
-  3, "#3498db",
-  4, "#1a5276",
-  5, "#0d2b4e",
-];
 
 export default function MapView() {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const popup = useRef<maplibregl.Popup | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const { activeLayer, setSelectedArea, showCrimePoints } = useMapStore();
+  const { activeLayer, showCrimePoints, activeHazards } = useMapStore();
 
-  const updateLayerVisibility = useCallback((layer: string) => {
+  const updateLayerVisibility = useCallback((
+    layer: string,
+    hazards: Set<string> = new Set(["flood"])
+  ) => {
     if (!map.current) return;
     const m = map.current;
 
     const allLayers = [
       "price-heatmap", "price-circle",
       "crime-heatmap", "crime-circle",
-      "hazard-fill", "hazard-stroke",
+      "hazard-flood", "hazard-landslide", "hazard-tsunami",
     ];
 
-    const visibleByLayer: Record<string, string[]> = {
-      price: ["price-heatmap", "price-circle"],
-      crime: ["crime-heatmap", "crime-circle"],
-      hazard: ["hazard-fill", "hazard-stroke"],
-    };
-
     allLayers.forEach((id) => {
-      if (m.getLayer(id)) {
-        m.setLayoutProperty(
-          id,
-          "visibility",
-          visibleByLayer[layer]?.includes(id) ? "visible" : "none"
-        );
+      if (!m.getLayer(id)) return;
+      let visible = false;
+      if (layer === "price" && (id === "price-heatmap" || id === "price-circle")) visible = true;
+      if (layer === "crime" && (id === "crime-heatmap" || id === "crime-circle")) visible = true;
+      if (layer === "hazard") {
+        if (id === "hazard-flood" && hazards.has("flood")) visible = true;
+        if (id === "hazard-landslide" && hazards.has("landslide")) visible = true;
+        if (id === "hazard-tsunami" && hazards.has("tsunami")) visible = true;
       }
+      m.setLayoutProperty(id, "visibility", visible ? "visible" : "none");
     });
   }, []);
 
@@ -146,27 +138,56 @@ export default function MapView() {
         layout: { visibility: "none" },
       });
 
-      // ---- ハザードレイヤー ----
-      m.addSource("hazard-source", { type: "geojson", data: MOCK_HAZARD_GEOJSON });
-      m.addLayer({
-        id: "hazard-fill",
-        type: "fill",
-        source: "hazard-source",
-        paint: {
-          "fill-color": FLOOD_FILL_COLOR,
-          "fill-opacity": 0.55,
-        },
-        layout: { visibility: "none" },
+      // ---- ハザードレイヤー（国土地理院 重ねるハザードマップ タイル）----
+      // 洪水浸水想定区域（想定最大規模）
+      m.addSource("hazard-flood-source", {
+        type: "raster",
+        tiles: ["https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_data/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        attribution: "国土交通省 ハザードマップポータルサイト",
+        minzoom: 2, maxzoom: 17,
       });
       m.addLayer({
-        id: "hazard-stroke",
-        type: "line",
-        source: "hazard-source",
-        paint: { "line-color": "#1a5276", "line-width": 1, "line-opacity": 0.6 },
+        id: "hazard-flood",
+        type: "raster",
+        source: "hazard-flood-source",
+        paint: { "raster-opacity": 0.7 },
         layout: { visibility: "none" },
       });
 
-      updateLayerVisibility("price");
+      // 土砂災害警戒区域（急傾斜地の崩壊）
+      m.addSource("hazard-landslide-source", {
+        type: "raster",
+        tiles: ["https://disaportaldata.gsi.go.jp/raster/05_kyukeisyachihoukai_data/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        attribution: "国土交通省 ハザードマップポータルサイト",
+        minzoom: 2, maxzoom: 17,
+      });
+      m.addLayer({
+        id: "hazard-landslide",
+        type: "raster",
+        source: "hazard-landslide-source",
+        paint: { "raster-opacity": 0.7 },
+        layout: { visibility: "none" },
+      });
+
+      // 津波浸水想定区域
+      m.addSource("hazard-tsunami-source", {
+        type: "raster",
+        tiles: ["https://disaportaldata.gsi.go.jp/raster/04_tsunami_newlegend_data/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        attribution: "国土交通省 ハザードマップポータルサイト",
+        minzoom: 2, maxzoom: 17,
+      });
+      m.addLayer({
+        id: "hazard-tsunami",
+        type: "raster",
+        source: "hazard-tsunami-source",
+        paint: { "raster-opacity": 0.7 },
+        layout: { visibility: "none" },
+      });
+
+      updateLayerVisibility("price", new Set(["flood"]));
       setMapLoaded(true);
 
       // ---- インタラクション: 価格コロプレス（区ホバー）----
@@ -213,32 +234,7 @@ export default function MapView() {
         popup.current!.remove();
       });
 
-      // ---- インタラクション: ハザードポリゴンクリック ----
-      m.on("click", "hazard-fill", (e) => {
-        const props = e.features?.[0]?.properties as MapFeatureProperties;
-        if (!props?.city_code) return;
-        const area = MOCK_AREA_SCORES[props.city_code];
-        if (area) setSelectedArea(area);
-      });
-      m.on("mouseenter", "hazard-fill", (e) => {
-        m.getCanvas().style.cursor = "pointer";
-        const props = e.features?.[0]?.properties as MapFeatureProperties;
-        if (!props || !e.lngLat) return;
-        popup.current!
-          .setLngLat(e.lngLat)
-          .setHTML(`
-            <div class="text-sm">
-              <p class="font-bold">${props.city_name ?? ""}</p>
-              <p>洪水リスク: Lv.${props.flood_risk_level ?? 0}</p>
-              <p>総合スコア: ${props.overall_score ?? "?"}</p>
-            </div>
-          `)
-          .addTo(m);
-      });
-      m.on("mouseleave", "hazard-fill", () => {
-        m.getCanvas().style.cursor = "";
-        popup.current!.remove();
-      });
+      // ハザードレイヤーはラスタータイルのため個別クリックなし
     });
 
     return () => {
@@ -249,9 +245,9 @@ export default function MapView() {
 
   useEffect(() => {
     if (map.current?.isStyleLoaded()) {
-      updateLayerVisibility(activeLayer);
+      updateLayerVisibility(activeLayer, activeHazards);
     }
-  }, [activeLayer, updateLayerVisibility]);
+  }, [activeLayer, activeHazards, updateLayerVisibility]);
 
   return (
     <div className="w-full h-full relative">
