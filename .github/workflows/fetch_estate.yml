@@ -1,0 +1,48 @@
+name: Fetch Estate Data
+
+on:
+  workflow_dispatch:  # 手動実行
+  schedule:
+    - cron: '0 17 15 3,6,9,12 *'  # 四半期ごと JST 2:00
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r batch/requirements.txt
+
+      - name: Fetch estate data
+        run: python batch/fetch_estate.py
+        env:
+          MLIT_API_KEY: ${{ secrets.MLIT_API_KEY }}
+
+      - name: Check output
+        run: |
+          ls -lh public/estate_all.geojson || echo "File not found"
+          python -c "
+          import json
+          d = json.load(open('public/estate_all.geojson'))
+          print(f'合計: {len(d[\"features\"]):,}件')
+          for k,v in d.get('metadata',{}).get('by_prefecture',{}).items():
+              print(f'  {k}: {v:,}件')
+          " || true
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/estate_all.geojson
+          git diff --staged --quiet || git commit -m "data: update estate data $(date +'%Y-%m-%d')"
+          git push
