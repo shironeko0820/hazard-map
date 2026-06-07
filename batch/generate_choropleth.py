@@ -144,6 +144,53 @@ def build_lookup_keys(props: dict, pref_name: str) -> list[str]:
 
 # ── コロプレス生成 ──────────────────────────────────────────────────────────
 
+def aggregate_by_prefecture(price_stats: dict[str, dict]) -> dict[str, dict]:
+    """市区町村価格データを都道府県別に集計（取引件数による重み付き平均）"""
+    from collections import defaultdict
+    pref_prices: dict[str, list[int]] = defaultdict(list)
+    pref_counts: dict[str, int] = defaultdict(int)
+
+    for data in price_stats.values():
+        pref = data.get("prefecture", "")
+        avg = data.get("avg_price_per_sqm", 0)
+        count = data.get("transaction_count", 0)
+        if pref and avg > 0 and count > 0:
+            # 取引件数で重み付け（最大200件でキャップ）
+            weight = min(count, 200)
+            pref_prices[pref].extend([avg] * weight)
+            pref_counts[pref] += count
+
+    result = {}
+    for pref, prices in pref_prices.items():
+        if prices:
+            avg = int(sum(prices) / len(prices))
+            result[pref] = {
+                "prefecture": pref,
+                "municipality": pref,
+                "avg_price_per_sqm": avg,
+                "transaction_count": pref_counts[pref],
+                "avg_price_per_tsubo": int(avg * 3.30579),
+            }
+
+    top5 = sorted(result.values(), key=lambda x: -x["avg_price_per_sqm"])[:5]
+    print("  都道府県別 高価格TOP5:")
+    for r in top5:
+        print(f"    {r['prefecture']}: {r['avg_price_per_sqm']:,}円/㎡ ({r['transaction_count']:,}件)")
+    return result
+
+
+def detect_geojson_level(features: list[dict]) -> str:
+    """GeoJSONが都道府県レベルか市区町村レベルかを判定"""
+    if not features:
+        return "unknown"
+    props = features[0].get("properties", {})
+    if "nam_ja" in props:
+        return "prefecture"   # dataofjapan/land japan.geojson
+    if "N03_004" in props or "N03_001" in props:
+        return "municipality"  # 国土数値情報 N03形式
+    return "unknown"
+
+
 def build_choropleth(
     all_features: list[dict],
     price_stats: dict[str, dict],
@@ -155,72 +202,83 @@ def build_choropleth(
     no_name = 0
     unmatched_sample: list[str] = []
 
-    # 都道府県名フィールドの候補を自動検出
-    pref_field = None
-    if all_features:
-        sample_props = all_features[0].get("properties", {})
-        for candidate in ["N03_001", "pref_ja", "prefecture", "pref"]:
-            if candidate in sample_props:
-                pref_field = candidate
-                print(f"  都道府県フィールド: {pref_field}")
-                break
+    level = detect_geojson_level(all_features)
+    print(f"  GeoJSONレベル: {level} ({len(all_features)}ポリゴン)")
 
-    for feat in all_features:
-        geom = feat.get("geometry")
-        if not geom:
-            no_geom += 1
-            continue
+    # 都道府県レベルの場合は価格を都道府県単位で集計
+    if level == "prefecture":
+        pref_stats = aggregate_by_prefecture(price_stats)
+        for feat in all_features:
+            geom = feat.get("geometry")
+            if not geom:
+                no_geom += 1
+                continue
+            props = feat.get("properties", {})
+            pref_name = (props.get("nam_ja") or "").strip()
+            if not pref_name:
+                no_name += 1
+                continue
 
-        props = feat.get("properties", {})
-        pref_name = (props.get(pref_field, "") if pref_field else "").strip()
-        n03_004 = (props.get("N03_004") or "").strip()
-        n03_003 = (props.get("N03_003") or "").strip()
+            price_data = pref_stats.get(pref_name)
+            if price_data:
+                matched += 1
+                new_props = {"prefecture": pref_name, "municipality": pref_name, **price_data}
+            else:
+                if len(unmatched_sample) < 5:
+                    unmatched_sample.append(pref_name)
+                new_props = {"prefecture": pref_name, "municipality": pref_name,
+                             "avg_price_per_sqm": 0, "transaction_count": 0}
 
-        if not pref_name:
-            no_name += 1
-            continue
+            output_features.append({"type": "Feature", "geometry": geom, "properties": new_props})
 
-        # マッチング
-        price_data = None
-        matched_key = None
-        for key in build_lookup_keys(props, pref_name):
-            if key in price_stats:
-                price_data = price_stats[key]
-                matched_key = key
-                break
+    else:
+        # 市区町村レベル（N03形式）
+        pref_field = None
+        if all_features:
+            sample_props = all_features[0].get("properties", {})
+            for candidate in ["N03_001", "pref_ja", "prefecture", "pref"]:
+                if candidate in sample_props:
+                    pref_field = candidate
+                    print(f"  都道府県フィールド: {pref_field}")
+                    break
 
-        # 表示用市区町村名（N03_003 + N03_004 or どちらか）
-        display_muni = (n03_003 + n03_004) if (n03_003 and n03_004) else (n03_004 or n03_003)
+        for feat in all_features:
+            geom = feat.get("geometry")
+            if not geom:
+                no_geom += 1
+                continue
+            props = feat.get("properties", {})
+            pref_name = (props.get(pref_field, "") if pref_field else "").strip()
+            n03_004 = (props.get("N03_004") or "").strip()
+            n03_003 = (props.get("N03_003") or "").strip()
+            if not pref_name:
+                no_name += 1
+                continue
 
-        if price_data:
-            matched += 1
-            new_props = {
-                "prefecture": pref_name,
-                "municipality": display_muni,
-                **price_data,
-            }
-        else:
-            if len(unmatched_sample) < 10:
-                unmatched_sample.append(f"{pref_name}|{display_muni}")
-            new_props = {
-                "prefecture": pref_name,
-                "municipality": display_muni,
-                "avg_price_per_sqm": 0,
-                "transaction_count": 0,
-            }
+            price_data = None
+            for key in build_lookup_keys(props, pref_name):
+                if key in price_stats:
+                    price_data = price_stats[key]
+                    break
 
-        output_features.append({
-            "type": "Feature",
-            "geometry": geom,
-            "properties": new_props,
-        })
+            display_muni = (n03_003 + n03_004) if (n03_003 and n03_004) else (n03_004 or n03_003)
+            if price_data:
+                matched += 1
+                new_props = {"prefecture": pref_name, "municipality": display_muni, **price_data}
+            else:
+                if len(unmatched_sample) < 5:
+                    unmatched_sample.append(f"{pref_name}|{display_muni}")
+                new_props = {"prefecture": pref_name, "municipality": display_muni,
+                             "avg_price_per_sqm": 0, "transaction_count": 0}
+
+            output_features.append({"type": "Feature", "geometry": geom, "properties": new_props})
 
     total = len(output_features)
-    print(f"  総ポリゴン: {total:,}, 価格マッチ: {matched:,}, ジオメトリなし: {no_geom}, 都道府県名なし: {no_name}")
-    print(f"  マッチ率: {matched/total*100:.1f}%" if total > 0 else "")
+    print(f"  総ポリゴン: {total:,}, 価格マッチ: {matched:,}, ジオメトリなし: {no_geom}, 名前なし: {no_name}")
+    if total > 0:
+        print(f"  マッチ率: {matched/total*100:.1f}%")
     if unmatched_sample:
-        print(f"  未マッチ例: {unmatched_sample[:5]}")
-
+        print(f"  未マッチ例: {unmatched_sample}")
     return output_features
 
 
