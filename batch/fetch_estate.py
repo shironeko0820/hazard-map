@@ -116,25 +116,27 @@ def geocode(address: str) -> tuple[float, float] | None:
 
 
 def get_coords(pref_name: str, municipality: str, district: str) -> tuple[float, float] | None:
-    """住所から座標を取得（詳細→市区町村→代表座標の順でフォールバック）"""
-    # 1. 都道府県+市区町村+地区名
+    """住所から座標を取得（詳細→市区町村→代表座標の順でフォールバック）
+    全レベルでジッターを加えて同一住所の重なりを防ぐ
+    """
+    def jitter(scale: float) -> float:
+        return random.uniform(-scale, scale)
+
+    # 1. 都道府県+市区町村+地区名（±200m相当のジッター）
     if district:
         coords = geocode(f"{pref_name}{municipality}{district}")
         if coords:
-            return coords
+            return (coords[0] + jitter(0.002), coords[1] + jitter(0.002))
 
-    # 2. 都道府県+市区町村
+    # 2. 都道府県+市区町村（±700m相当のジッター）
     coords = geocode(f"{pref_name}{municipality}")
     if coords:
-        # 同一市区町村内でランダムジッター（±0.008度 ≒ ±700m）
-        jitter = lambda: random.uniform(-0.008, 0.008)
-        return (coords[0] + jitter(), coords[1] + jitter())
+        return (coords[0] + jitter(0.008), coords[1] + jitter(0.008))
 
-    # 3. 代表座標辞書から検索
+    # 3. 代表座標辞書から検索（±1km相当のジッター）
     for key, centroid in CITY_CENTROIDS.items():
         if key in municipality:
-            jitter = lambda: random.uniform(-0.01, 0.01)
-            return (centroid[0] + jitter(), centroid[1] + jitter())
+            return (centroid[0] + jitter(0.01), centroid[1] + jitter(0.01))
 
     return None
 
