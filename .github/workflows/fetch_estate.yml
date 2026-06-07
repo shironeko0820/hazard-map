@@ -29,20 +29,25 @@ jobs:
         env:
           MLIT_API_KEY: ${{ secrets.MLIT_API_KEY }}
 
-      - name: Download Japan boundary GeoJSON
+      - name: Download Japan boundary GeoJSON (git clone + LFS)
         run: |
-          echo "Downloading japan.geojson (~50MB)..."
-          curl -L --retry 3 --retry-delay 10 --max-time 300 \
-            -o /tmp/japan_boundary.geojson \
-            https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson
-          echo "Downloaded: $(wc -c < /tmp/japan_boundary.geojson) bytes"
-          echo "Features sample:"
+          echo "=== japan.geojson をgit cloneで取得（LFS対応）==="
+          git clone --depth 1 \
+            https://github.com/dataofjapan/land.git \
+            /tmp/land-repo
+          SIZE=$(wc -c < /tmp/land-repo/japan.geojson)
+          echo "japan.geojson サイズ: $SIZE bytes"
           python3 -c "
-          import json
-          d = json.load(open('/tmp/japan_boundary.geojson'))
-          print(f'  ポリゴン数: {len(d[\"features\"]):,}')
-          print(f'  プロパティ: {list(d[\"features\"][0][\"properties\"].keys())[:8]}')
-          " || true
+          import json, sys
+          try:
+              d = json.load(open('/tmp/land-repo/japan.geojson'))
+              f = d.get('features', [])
+              print(f'OK: {len(f):,} ポリゴン')
+              if f: print(f'フィールド: {list(f[0][\"properties\"].keys())[:8]}')
+          except Exception as e:
+              print(f'ERROR: {e}'); sys.exit(1)
+          "
+          cp /tmp/land-repo/japan.geojson /tmp/japan_boundary.geojson
 
       - name: Generate national choropleth GeoJSON
         run: python batch/generate_choropleth.py
