@@ -8,17 +8,20 @@ import { MOCK_PRICE_GEOJSON, MOCK_CRIME_GEOJSON, MOCK_HAZARD_GEOJSON, MOCK_AREA_
 import type { MapFeatureProperties } from "@/types";
 import CrimePointLayer from "./CrimePointLayer";
 
-const PRICE_COLORS: ExpressionSpecification = [
-  "interpolate", ["linear"], ["get", "price_per_sqm"],
-  300000, "#313695",
-  600000, "#4575b4",
-  800000, "#74add1",
-  900000, "#abd9e9",
-  1000000, "#fee090",
+// コロプレス（区ごと平均㎡単価）の色スケール: 青(低価格) → 赤(高価格)
+const CHOROPLETH_COLORS: ExpressionSpecification = [
+  "interpolate", ["linear"],
+  ["get", "avg_price_per_sqm"],
+  0,       "#f0f0f0",
+  100000,  "#313695",
+  300000,  "#4575b4",
+  500000,  "#74add1",
+  700000,  "#abd9e9",
+  900000,  "#fee090",
   1100000, "#fdae61",
-  1200000, "#f46d43",
-  1400000, "#d73027",
-  1600000, "#a50026",
+  1300000, "#f46d43",
+  1500000, "#d73027",
+  2000000, "#a50026",
 ];
 
 const CRIME_COLORS: ExpressionSpecification = [
@@ -97,20 +100,7 @@ export default function MapView() {
         type: "fill",
         source: "price-source",
         paint: {
-          "fill-color": [
-            "interpolate", ["linear"],
-            ["get", "avg_price_per_sqm"],
-            0,       "#f0f0f0",  // データなし: グレー
-            100000,  "#313695",  // 低価格: 濃青
-            300000,  "#4575b4",
-            500000,  "#74add1",
-            700000,  "#abd9e9",
-            900000,  "#fee090",  // 中価格: 黄
-            1100000, "#fdae61",
-            1300000, "#f46d43",
-            1500000, "#d73027",
-            2000000, "#a50026",  // 高価格: 濃赤
-          ],
+          "fill-color": CHOROPLETH_COLORS,
           "fill-opacity": 0.7,
         },
       });

@@ -33,12 +33,19 @@ export interface AreaScore {
 }
 
 export interface MapFeatureProperties {
-  // price layer
+  // price layer (individual transactions)
   price_per_sqm?: number;
   property_type?: string;
   transaction_date?: string;
   nearest_station?: string;
   walk_minutes?: number;
+  // choropleth layer (ward/city averages)
+  avg_price_per_sqm?: number;
+  avg_price_per_tsubo?: number;
+  median_price_per_sqm?: number;
+  transaction_count?: number;
+  prefecture?: string;
+  municipality?: string;
   // crime layer
   crime_type?: string;
   occurred_date?: string;
