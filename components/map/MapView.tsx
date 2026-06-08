@@ -234,11 +234,13 @@ export default function MapView() {
         if (!props || !e.lngLat) return;
         const avgPrice = Number(props.avg_price_per_sqm ?? 0);
         const tsubo = Math.round(avgPrice * 3.30579);
+        const pref = props.prefecture ?? "";
+        const muni = (props.municipality && props.municipality !== props.prefecture) ? props.municipality : "";
         popup.current!
           .setLngLat(e.lngLat)
           .setHTML(`
             <div style="font-size:13px;line-height:1.6">
-              <p style="font-weight:bold;margin:0 0 4px">${props.prefecture ?? ""}${props.municipality ?? ""}</p>
+              <p style="font-weight:bold;margin:0 0 4px">${pref}${muni}</p>
               <p style="margin:0">平均㎡単価: <strong>${avgPrice > 0 ? avgPrice.toLocaleString() + "円" : "データなし"}</strong></p>
               ${avgPrice > 0 ? `<p style="margin:0">平均坪単価: <strong>${tsubo.toLocaleString()}円</strong></p>` : ""}
               ${props.transaction_count ? `<p style="margin:0;color:#666">取引件数: ${Number(props.transaction_count).toLocaleString()}件</p>` : ""}
