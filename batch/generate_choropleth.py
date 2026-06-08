@@ -179,13 +179,57 @@ def aggregate_by_prefecture(price_stats: dict[str, dict]) -> dict[str, dict]:
     return result
 
 
+# dataofjapan/land japan.geojson の nam（英語）→ 都道府県名（日本語）変換マップ
+NAM_TO_JA: dict[str, str] = {
+    "Hokkaido": "北海道", "Aomori": "青森県", "Iwate": "岩手県", "Miyagi": "宮城県",
+    "Akita": "秋田県", "Yamagata": "山形県", "Fukushima": "福島県", "Ibaraki": "茨城県",
+    "Tochigi": "栃木県", "Gunma": "群馬県", "Saitama": "埼玉県", "Chiba": "千葉県",
+    "Tokyo": "東京都", "Kanagawa": "神奈川県", "Niigata": "新潟県", "Toyama": "富山県",
+    "Ishikawa": "石川県", "Fukui": "福井県", "Yamanashi": "山梨県", "Nagano": "長野県",
+    "Gifu": "岐阜県", "Shizuoka": "静岡県", "Aichi": "愛知県", "Mie": "三重県",
+    "Shiga": "滋賀県", "Kyoto": "京都府", "Osaka": "大阪府", "Hyogo": "兵庫県",
+    "Nara": "奈良県", "Wakayama": "和歌山県", "Tottori": "鳥取県", "Shimane": "島根県",
+    "Okayama": "岡山県", "Hiroshima": "広島県", "Yamaguchi": "山口県", "Tokushima": "徳島県",
+    "Kagawa": "香川県", "Ehime": "愛媛県", "Kochi": "高知県", "Fukuoka": "福岡県",
+    "Saga": "佐賀県", "Nagasaki": "長崎県", "Kumamoto": "熊本県", "Oita": "大分県",
+    "Miyazaki": "宮崎県", "Kagoshima": "鹿児島県", "Okinawa": "沖縄県",
+    # 別表記パターン
+    "Tokyo-to": "東京都", "Osaka-fu": "大阪府", "Kyoto-fu": "京都府",
+    "Hokkai-do": "北海道",
+}
+
+
+def get_pref_name_ja(props: dict) -> str:
+    """フィーチャのプロパティから都道府県名（日本語）を取得。
+    nam_ja → nam の順で試み、namが英語の場合はマップで変換する。
+    """
+    # 1. nam_ja（日本語）を優先
+    nam_ja = (props.get("nam_ja") or "").strip()
+    if nam_ja:
+        return nam_ja
+
+    # 2. nam（英語）を日本語に変換
+    nam = (props.get("nam") or "").strip()
+    if nam:
+        # 完全一致
+        if nam in NAM_TO_JA:
+            return NAM_TO_JA[nam]
+        # 前方一致（"Tokyo" in "Tokyo-to" など）
+        for key, ja in NAM_TO_JA.items():
+            if nam.startswith(key) or key.startswith(nam):
+                return ja
+
+    return ""
+
+
 def detect_geojson_level(features: list[dict]) -> str:
     """GeoJSONが都道府県レベルか市区町村レベルかを判定"""
     if not features:
         return "unknown"
     props = features[0].get("properties", {})
-    if "nam_ja" in props:
-        return "prefecture"   # dataofjapan/land japan.geojson
+    # nam_ja または nam フィールドがあれば dataofjapan/land 形式（都道府県）
+    if "nam_ja" in props or "nam" in props:
+        return "prefecture"
     if "N03_004" in props or "N03_001" in props:
         return "municipality"  # 国土数値情報 N03形式
     return "unknown"
@@ -208,13 +252,17 @@ def build_choropleth(
     # 都道府県レベルの場合は価格を都道府県単位で集計
     if level == "prefecture":
         pref_stats = aggregate_by_prefecture(price_stats)
+        # デバッグ: 最初の3フィーチャのプロパティを出力
+        for i, f in enumerate(all_features[:3]):
+            p = f.get("properties", {})
+            print(f"  [debug feat{i}] nam={p.get('nam')!r}, nam_ja={p.get('nam_ja')!r}, id={p.get('id')!r}")
         for feat in all_features:
             geom = feat.get("geometry")
             if not geom:
                 no_geom += 1
                 continue
             props = feat.get("properties", {})
-            pref_name = (props.get("nam_ja") or "").strip()
+            pref_name = get_pref_name_ja(props)
             if not pref_name:
                 no_name += 1
                 continue
