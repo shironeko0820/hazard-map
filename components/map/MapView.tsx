@@ -111,8 +111,8 @@ export default function MapView() {
         },
       });
 
-      // ---- 犯罪レイヤー（全国モックデータ）----
-      m.addSource("crime-source", { type: "geojson", data: "/crime_mock.geojson" });
+      // ---- 犯罪レイヤー（東京: 警視庁実データ / 他: モック）----
+      m.addSource("crime-source", { type: "geojson", data: "/crime_japan.geojson" });
       m.addLayer({
         id: "crime-heatmap",
         type: "heatmap",
