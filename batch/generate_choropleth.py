@@ -19,7 +19,9 @@ import requests
 from collections import defaultdict
 from datetime import datetime
 
-JAPAN_GEOJSON_URL = "https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson"
+# 全国市区町村境界（N03形式: N03_001都道府県, N03_003政令市/郡, N03_004市区町村）
+# smartnews-smri/japan-topography s0001（簡略版, ~1.6MB）
+JAPAN_GEOJSON_URL = "https://raw.githubusercontent.com/smartnews-smri/japan-topography/main/data/municipality/geojson/s0001/N03-21_210101.json"
 # ワークフローからローカルパスを指定できる（大容量ファイル対策）
 JAPAN_GEOJSON_LOCAL = os.environ.get("JAPAN_GEOJSON_LOCAL", "")
 
