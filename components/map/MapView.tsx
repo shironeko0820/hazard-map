@@ -4,7 +4,6 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import maplibregl, { type ExpressionSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useMapStore } from "@/lib/store";
-import { MOCK_CRIME_GEOJSON } from "@/lib/mockData";
 import type { MapFeatureProperties } from "@/types";
 import type { HazardType } from "@/lib/store";
 import CrimePointLayer from "./CrimePointLayer";
@@ -112,8 +111,8 @@ export default function MapView() {
         },
       });
 
-      // ---- 犯罪レイヤー ----
-      m.addSource("crime-source", { type: "geojson", data: MOCK_CRIME_GEOJSON });
+      // ---- 犯罪レイヤー（全国モックデータ）----
+      m.addSource("crime-source", { type: "geojson", data: "/crime_mock.geojson" });
       m.addLayer({
         id: "crime-heatmap",
         type: "heatmap",
