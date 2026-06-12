@@ -24,7 +24,7 @@ export default function LayerControl() {
   } = useMapStore();
 
   return (
-    <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
       {/* ── デスクトップのみ: 犯罪地点ボタン ── */}
       <button
         onClick={toggleCrimePoints}
