@@ -57,10 +57,6 @@ export default function Header() {
         </nav>
       </div>
 
-      {/* ヘッダー下 AdSense プレースホルダー */}
-      <div className="bg-gray-100 border-t border-gray-200 flex items-center justify-center h-12 text-xs text-gray-400">
-        広告 728×90
-      </div>
     </header>
   );
 }
