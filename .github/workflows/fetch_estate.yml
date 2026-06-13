@@ -71,13 +71,21 @@ jobs:
           if prices: print(f'価格範囲: {min(prices):,} ~ {max(prices):,} 円/㎡')
           " || true
 
-      - name: Fetch Tokyo real crime data (警視庁CSV) + merge with mock
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate national crime mock data (警察庁R5年統計ベース 46都道府県)
+        run: node batch/gen_crime_national.js
+
+      - name: Fetch Tokyo real crime data (警視庁CSV) + merge with national mock
         run: node batch/fetch_tokyo_crime.js
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/price_by_municipality.json public/choropleth.geojson public/crime_japan.geojson
-          git diff --staged --quiet || git commit -m "data: update price choropleth + Tokyo crime data $(date +'%Y-%m-%d')"
+          git add public/price_by_municipality.json public/choropleth.geojson public/crime_japan.geojson public/crime_mock.geojson
+          git diff --staged --quiet || git commit -m "data: update price choropleth + nationwide crime data $(date +'%Y-%m-%d')"
           git push
