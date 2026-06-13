@@ -20,6 +20,8 @@ interface MapStore {
   toggleCrimePoints: () => void;
   showCrimeHeatmap: boolean;
   toggleCrimeHeatmap: () => void;
+  showCrimeChoropleth: boolean;
+  toggleCrimeChoropleth: () => void;
   activeHazards: Set<HazardType>;
   toggleHazard: (h: HazardType) => void;
   mapCenter: MapCenter | null;
@@ -37,6 +39,8 @@ export const useMapStore = create<MapStore>((set) => ({
   toggleCrimePoints: () => set((s) => ({ showCrimePoints: !s.showCrimePoints })),
   showCrimeHeatmap: true,
   toggleCrimeHeatmap: () => set((s) => ({ showCrimeHeatmap: !s.showCrimeHeatmap })),
+  showCrimeChoropleth: true,
+  toggleCrimeChoropleth: () => set((s) => ({ showCrimeChoropleth: !s.showCrimeChoropleth })),
   activeHazards: new Set<HazardType>(["flood"]),
   toggleHazard: (h) =>
     set((s) => {

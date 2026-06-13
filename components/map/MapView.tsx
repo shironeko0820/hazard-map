@@ -39,18 +39,20 @@ export default function MapView() {
   const map = useRef<maplibregl.Map | null>(null);
   const popup = useRef<maplibregl.Popup | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const { activeLayer, showCrimePoints, showCrimeHeatmap, activeHazards, mapCenter } = useMapStore();
+  const { activeLayer, showCrimePoints, showCrimeHeatmap, showCrimeChoropleth, activeHazards, mapCenter } = useMapStore();
 
   const updateLayerVisibility = useCallback((
     layer: string,
     hazards: Set<string> = new Set(["flood"]),
     crimeHeatmap: boolean = true,
+    crimeChoropleth: boolean = true,
   ) => {
     if (!map.current) return;
     const m = map.current;
 
     const allLayers = [
       "price-heatmap", "price-circle",
+      "crime-choropleth-fill", "crime-choropleth-line",
       "crime-heatmap", "crime-circle",
       "hazard-flood",
       "hazard-landslide", "hazard-landslide-steep", "hazard-landslide-slide",
@@ -62,6 +64,7 @@ export default function MapView() {
       let visible = false;
       if (layer === "price" && (id === "price-heatmap" || id === "price-circle")) visible = true;
       if (layer === "crime") {
+        if ((id === "crime-choropleth-fill" || id === "crime-choropleth-line") && crimeChoropleth) visible = true;
         if (id === "crime-heatmap" && crimeHeatmap) visible = true;
         if (id === "crime-circle") visible = true;
       }
@@ -113,6 +116,35 @@ export default function MapView() {
           "line-width": 0.8,
           "line-opacity": 0.6,
         },
+      });
+
+      // ---- 犯罪コロプレス（市区町村ごとの認知件数）----
+      m.addSource("crime-choropleth-source", { type: "geojson", data: "/crime_choropleth.geojson" });
+      m.addLayer({
+        id: "crime-choropleth-fill",
+        type: "fill",
+        source: "crime-choropleth-source",
+        paint: {
+          "fill-color": [
+            "interpolate", ["linear"], ["get", "crime_count"],
+            0,    "#f0f0f0",
+            500,  "#fde68a",
+            1000, "#fca5a5",
+            2000, "#f87171",
+            3500, "#ef4444",
+            5000, "#b91c1c",
+            7000, "#7f1d1d",
+          ],
+          "fill-opacity": ["case", [">", ["get", "crime_count"], 0], 0.7, 0.1],
+        },
+        layout: { visibility: "none" },
+      });
+      m.addLayer({
+        id: "crime-choropleth-line",
+        type: "line",
+        source: "crime-choropleth-source",
+        paint: { "line-color": "#ffffff", "line-width": 0.8, "line-opacity": 0.5 },
+        layout: { visibility: "none" },
       });
 
       // ---- 犯罪レイヤー（東京: 警視庁実データ / 他: モック）----
@@ -256,6 +288,32 @@ export default function MapView() {
         popup.current!.remove();
       });
 
+      // ---- インタラクション: 犯罪コロプレス（市区町村ホバー）----
+      m.on("mousemove", "crime-choropleth-fill", (e) => {
+        m.getCanvas().style.cursor = "pointer";
+        const props = e.features?.[0]?.properties as MapFeatureProperties;
+        if (!props || !e.lngLat) return;
+        const pref = props.prefecture ?? "";
+        const muni = (props.municipality && props.municipality !== props.prefecture) ? props.municipality : "";
+        const count = Number(props.crime_count ?? 0);
+        const rank = props.crime_rank ? Number(props.crime_rank) : null;
+        const total = Number(props.crime_total_ranked ?? 0);
+        popup.current!
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <div style="font-size:13px;line-height:1.7">
+              <p style="font-weight:bold;margin:0 0 4px">${pref}${muni}</p>
+              <p style="margin:0">認知件数: <strong>${count > 0 ? count.toLocaleString() + "件" : "データなし"}</strong></p>
+              ${rank ? `<p style="margin:0;color:#666">全国ランキング: <strong>${rank}位</strong> / ${total}市区町村中</p>` : ""}
+            </div>
+          `)
+          .addTo(m);
+      });
+      m.on("mouseleave", "crime-choropleth-fill", () => {
+        m.getCanvas().style.cursor = "";
+        popup.current!.remove();
+      });
+
       // ---- インタラクション: 犯罪サークル ----
       m.on("mouseenter", "crime-circle", (e) => {
         m.getCanvas().style.cursor = "pointer";
@@ -288,8 +346,8 @@ export default function MapView() {
   // mapLoaded を依存配列に追加：地図ロード完了後に必ず実行させる
   useEffect(() => {
     if (!mapLoaded || !map.current) return;
-    updateLayerVisibility(activeLayer, activeHazards, showCrimeHeatmap);
-  }, [mapLoaded, activeLayer, activeHazards, showCrimeHeatmap, updateLayerVisibility]);
+    updateLayerVisibility(activeLayer, activeHazards, showCrimeHeatmap, showCrimeChoropleth);
+  }, [mapLoaded, activeLayer, activeHazards, showCrimeHeatmap, showCrimeChoropleth, updateLayerVisibility]);
 
   // 検索結果の座標へ地図を移動
   useEffect(() => {
