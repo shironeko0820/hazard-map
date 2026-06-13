@@ -33,23 +33,23 @@ export default function LayerControl() {
             onClick={toggleCrimeHeatmap}
             className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full shadow-lg border transition-colors ${
               showCrimeHeatmap
-                ? "bg-red-600 text-white border-red-600"
-                : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
+                ? "bg-blue-600 text-white border-blue-600"
+                : "bg-white text-gray-400 border-gray-200 hover:bg-gray-50"
             }`}
           >
             <span>🔴</span>
-            <span>赤色エリアを{showCrimeHeatmap ? "非表示" : "表示"}</span>
+            <span>エリア表示</span>
           </button>
           <button
             onClick={toggleCrimePoints}
             className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full shadow-lg border transition-colors ${
               showCrimePoints
-                ? "bg-red-600 text-white border-red-600"
-                : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
+                ? "bg-blue-600 text-white border-blue-600"
+                : "bg-white text-gray-400 border-gray-200 hover:bg-gray-50"
             }`}
           >
             <span>📍</span>
-            <span>犯罪地点を{showCrimePoints ? "非表示" : "表示"}</span>
+            <span>地点表示</span>
           </button>
         </div>
       )}
@@ -97,8 +97,8 @@ export default function LayerControl() {
               onClick={toggleCrimeHeatmap}
               className={`md:hidden flex items-center gap-1 px-3 py-2 text-xs font-medium border-l border-gray-200 transition-colors ${
                 showCrimeHeatmap
-                  ? "bg-red-600 text-white"
-                  : "text-gray-600 hover:bg-gray-50"
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-400 hover:bg-gray-50"
               }`}
             >
               <span>🔴</span>
@@ -108,8 +108,8 @@ export default function LayerControl() {
               onClick={toggleCrimePoints}
               className={`md:hidden flex items-center gap-1 px-3 py-2 text-xs font-medium border-l border-gray-200 transition-colors ${
                 showCrimePoints
-                  ? "bg-red-600 text-white"
-                  : "text-gray-600 hover:bg-gray-50"
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-400 hover:bg-gray-50"
               }`}
             >
               <span>📍</span>
