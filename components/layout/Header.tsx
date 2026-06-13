@@ -32,7 +32,7 @@ export default function Header() {
       <div className="flex items-center gap-4 px-4 py-3">
         <div className="flex items-center gap-2 shrink-0">
           <span className="text-2xl">🗾</span>
-          <span className="font-bold text-lg text-blue-700">SmileMap</span>
+          <span className="font-bold text-lg text-blue-700">まちスコア</span>
         </div>
 
         <form onSubmit={handleSearch} className="flex-1 max-w-xl flex gap-2">

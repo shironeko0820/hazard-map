@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "使い方 | SmileMap",
-  description: "SmileMapの使い方ガイド",
+  title: "使い方 | まちスコア",
+  description: "まちスコアの使い方ガイド",
 };
 
 export default function AboutPage() {
@@ -10,12 +10,12 @@ export default function AboutPage() {
     <div className="max-w-2xl mx-auto px-4 py-10">
       <Link href="/" className="text-blue-600 text-sm hover:underline">← 地図に戻る</Link>
 
-      <h1 className="text-2xl font-bold text-gray-800 mt-4 mb-8">SmileMap 使い方ガイド</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mt-4 mb-8">まちスコア 使い方ガイド</h1>
 
       <section className="mb-8">
-        <h2 className="text-lg font-semibold text-gray-700 mb-3">SmileMapとは</h2>
+        <h2 className="text-lg font-semibold text-gray-700 mb-3">まちスコアとは</h2>
         <p className="text-gray-600 text-sm leading-relaxed">
-          SmileMapは、不動産価格・治安・ハザードリスクを地図上で一覧できる情報サービスです。
+          まちスコアは、不動産価格・治安・ハザードリスクを地図上で一覧できる情報サービスです。
           住まい探しや引越し先の比較検討にご活用ください。
         </p>
       </section>
