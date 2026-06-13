@@ -227,7 +227,7 @@ export default function MapView() {
       setMapLoaded(true);
 
       // ---- インタラクション: 価格コロプレス（区ホバー）----
-      m.on("mouseenter", "price-heatmap", (e) => {
+      m.on("mousemove", "price-heatmap", (e) => {
         m.getCanvas().style.cursor = "pointer";
         const props = e.features?.[0]?.properties as MapFeatureProperties;
         if (!props || !e.lngLat) return;
