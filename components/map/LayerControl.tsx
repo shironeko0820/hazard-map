@@ -73,7 +73,35 @@ export default function LayerControl() {
         </div>
       )}
 
-      {/* ── メインレイヤー + モバイル犯罪ボタン ── */}
+      {/* ── モバイルのみ: 治安サブトグル（メインタブ上段） ── */}
+      {activeLayer === "crime" && (
+        <div className="md:hidden flex bg-white rounded-full shadow-lg border border-gray-200 overflow-hidden">
+          <button
+            onClick={toggleCrimeHeatmap}
+            className={`flex items-center gap-1 px-4 py-1.5 text-xs font-medium transition-colors ${
+              showCrimeHeatmap
+                ? "bg-blue-600 text-white"
+                : "text-gray-400 hover:bg-gray-50"
+            }`}
+          >
+            <span>🔴</span>
+            <span>エリア表示</span>
+          </button>
+          <button
+            onClick={toggleCrimePoints}
+            className={`flex items-center gap-1 px-4 py-1.5 text-xs font-medium border-l border-gray-200 transition-colors ${
+              showCrimePoints
+                ? "bg-blue-600 text-white"
+                : "text-gray-400 hover:bg-gray-50"
+            }`}
+          >
+            <span>📍</span>
+            <span>地点表示</span>
+          </button>
+        </div>
+      )}
+
+      {/* ── メインレイヤータブ ── */}
       <div className="flex bg-white rounded-full shadow-lg border border-gray-200 overflow-hidden">
         {LAYERS.map((layer) => (
           <button
@@ -89,34 +117,6 @@ export default function LayerControl() {
             <span>{layer.label}</span>
           </button>
         ))}
-
-        {/* モバイルのみ: 赤色エリア＋犯罪地点ボタンをタブ内に統合 */}
-        {activeLayer === "crime" && (
-          <>
-            <button
-              onClick={toggleCrimeHeatmap}
-              className={`md:hidden flex items-center gap-1 px-3 py-2 text-xs font-medium border-l border-gray-200 transition-colors ${
-                showCrimeHeatmap
-                  ? "bg-blue-600 text-white"
-                  : "text-gray-400 hover:bg-gray-50"
-              }`}
-            >
-              <span>🔴</span>
-              <span>エリア</span>
-            </button>
-            <button
-              onClick={toggleCrimePoints}
-              className={`md:hidden flex items-center gap-1 px-3 py-2 text-xs font-medium border-l border-gray-200 transition-colors ${
-                showCrimePoints
-                  ? "bg-blue-600 text-white"
-                  : "text-gray-400 hover:bg-gray-50"
-              }`}
-            >
-              <span>📍</span>
-              <span>地点</span>
-            </button>
-          </>
-        )}
       </div>
     </div>
   );

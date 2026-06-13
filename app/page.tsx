@@ -8,9 +8,9 @@ const MapView = dynamic(() => import("@/components/map/MapView"), { ssr: false }
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen overflow-hidden max-w-full">
       <Header />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden min-w-0">
         {/* 地図エリア */}
         <div className="flex-1 relative">
           <MapView />
