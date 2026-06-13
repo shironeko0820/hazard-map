@@ -308,7 +308,7 @@ export default function MapView() {
                 ? `<p style="margin:0">認知件数: <strong>${count.toLocaleString()}件</strong></p>`
                 : `<p style="margin:0;color:#888">データなし</p>`
               }
-              ${rank ? `<p style="margin:0;color:#666">全国ランキング: <strong>${rank}位</strong> / ${total}市区中</p>` : ""}
+              ${rank ? `<p style="margin:0;color:#666">治安ワースト: <strong>${rank}位</strong> / ${total}市区中</p>` : ""}
               ${isGroup ? `<p style="margin:0;color:#aaa;font-size:11px">※市全体の数値</p>` : ""}
             </div>
           `)
