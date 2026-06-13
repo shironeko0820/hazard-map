@@ -43,58 +43,65 @@ choropleth.features.forEach((f, i) => {
 });
 
 // 各ポリゴンに crime_count を付与
+// 按分せず、マッチした都市の合計をそのまま使う（色・ランキング統一）
 const muniCrimeCounts = new Array(choropleth.features.length).fill(0);
-// source_city: マッチした元の都市名（市区町村名と異なる場合は按分推計）
-const muniSourceCity = new Array(choropleth.features.length).fill(null);
-const muniCityTotal = new Array(choropleth.features.length).fill(0);
-const muniCityDivision = new Array(choropleth.features.length).fill(1);
+const muniDisplayName = new Array(choropleth.features.length).fill(null); // ポップアップ表示名
+const muniIsGroup = new Array(choropleth.features.length).fill(false);    // 市→区の按分フラグ
 
 for (const [cityKey, indices] of Object.entries(prefixGroups)) {
   const total = cityTotals[cityKey] || 0;
   const cityName = cityKey.split('|')[1];
-  const share = Math.round(total / indices.length);
   for (const i of indices) {
-    muniCrimeCounts[i] = share;
-    muniSourceCity[i] = cityName;
-    muniCityTotal[i] = total;
-    muniCityDivision[i] = indices.length;
+    muniCrimeCounts[i] = total; // 按分しない：全ワード同じ値
+    const muni = choropleth.features[i].properties.municipality;
+    // 完全一致なら municipality 名そのまま、前方一致なら市名を表示
+    muniDisplayName[i] = (muni === cityName) ? muni : cityName;
+    muniIsGroup[i] = (muni !== cityName);
   }
 }
 
 // exactMatch はすでに prefixGroups に含まれる（完全一致も startsWith でヒットする）
 
-// ---- 3. 全国ランキング付与 ----
-// crime_count > 0 のものだけランキング
-const ranked = choropleth.features
-  .map((f, i) => ({ i, count: muniCrimeCounts[i] }))
-  .filter(x => x.count > 0)
-  .sort((a, b) => b.count - a.count);
+// ---- 3. 全国ランキング付与（都市単位で重複除去してランキング）----
+// 同じ都市名が複数区に紐づく場合は同一順位を付与
+const cityRankMap = {}; // displayName → rank
+const uniqueCities = [...new Set(
+  muniDisplayName.filter((n, i) => n && muniCrimeCounts[i] > 0)
+    .map((n, idx) => {
+      // prefecture + displayName でユニーク化
+      const pref = choropleth.features[muniDisplayName.indexOf(n)]?.properties?.prefecture ?? '';
+      return pref + '|' + n;
+    })
+)];
+// prefecture+displayName → max crime_count で並び替え
+const cityCountMap = {};
+muniDisplayName.forEach((name, i) => {
+  if (!name || muniCrimeCounts[i] === 0) return;
+  const pref = choropleth.features[i].properties.prefecture;
+  const key = pref + '|' + name;
+  cityCountMap[key] = Math.max(cityCountMap[key] || 0, muniCrimeCounts[i]);
+});
+const sortedCities = Object.entries(cityCountMap).sort((a, b) => b[1] - a[1]);
+sortedCities.forEach(([key], rank) => { cityRankMap[key] = rank + 1; });
 
-const rankMap = {};
-ranked.forEach(({ i }, rank) => { rankMap[i] = rank + 1; });
-
-const totalRanked = ranked.length;
-console.log(`ランキング対象: ${totalRanked} 市区町村`);
+const totalRanked = sortedCities.length;
+console.log(`ランキング対象: ${totalRanked} 市区（都市単位）`);
 
 // ---- 4. GeoJSON 生成 ----
 const features = choropleth.features.map((f, i) => {
   const count = muniCrimeCounts[i];
-  const rank = rankMap[i] ?? null;
-  const muni = f.properties.municipality;
-  const sourceCity = muniSourceCity[i];
-  // 完全一致（区・市単体）か按分推計かを判定
-  const isEstimate = sourceCity && sourceCity !== muni;
+  const displayName = muniDisplayName[i];
+  const pref = f.properties.prefecture;
+  const rank = displayName ? (cityRankMap[pref + '|' + displayName] ?? null) : null;
   return {
     ...f,
     properties: {
       ...f.properties,
       crime_count: count,
+      crime_display_name: displayName,   // ポップアップ表示用（市名 or 区名）
+      crime_is_group: muniIsGroup[i] || null, // trueなら市単位のグループ表示
       crime_rank: rank,
       crime_total_ranked: totalRanked,
-      crime_source_city: sourceCity,
-      crime_city_total: isEstimate ? muniCityTotal[i] : null,
-      crime_city_division: isEstimate ? muniCityDivision[i] : null,
-      crime_is_estimate: isEstimate ? true : null,
     },
   };
 });
@@ -115,9 +122,8 @@ fs.writeFileSync(outPath, JSON.stringify(out), 'utf8');
 const sizeKB = (fs.statSync(outPath).size / 1024).toFixed(1);
 
 // 上位10件を表示
-console.log('\n犯罪件数 TOP10:');
-ranked.slice(0, 10).forEach(({ i, count }, rank) => {
-  const p = choropleth.features[i].properties;
-  console.log(`  ${rank + 1}. ${p.prefecture} ${p.municipality}: ${count.toLocaleString()}件`);
+console.log('\n犯罪件数 TOP10（都市単位）:');
+sortedCities.slice(0, 10).forEach(([key, count], rank) => {
+  console.log(`  ${rank + 1}. ${key.replace('|', ' ')}: ${count.toLocaleString()}件`);
 });
 console.log(`\n出力: ${outPath} (${sizeKB} KB)`);
