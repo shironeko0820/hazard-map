@@ -39,11 +39,12 @@ export default function MapView() {
   const map = useRef<maplibregl.Map | null>(null);
   const popup = useRef<maplibregl.Popup | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const { activeLayer, showCrimePoints, activeHazards, mapCenter } = useMapStore();
+  const { activeLayer, showCrimePoints, showCrimeHeatmap, activeHazards, mapCenter } = useMapStore();
 
   const updateLayerVisibility = useCallback((
     layer: string,
-    hazards: Set<string> = new Set(["flood"])
+    hazards: Set<string> = new Set(["flood"]),
+    crimeHeatmap: boolean = true,
   ) => {
     if (!map.current) return;
     const m = map.current;
@@ -60,7 +61,10 @@ export default function MapView() {
       if (!m.getLayer(id)) return;
       let visible = false;
       if (layer === "price" && (id === "price-heatmap" || id === "price-circle")) visible = true;
-      if (layer === "crime" && (id === "crime-heatmap" || id === "crime-circle")) visible = true;
+      if (layer === "crime") {
+        if (id === "crime-heatmap" && crimeHeatmap) visible = true;
+        if (id === "crime-circle") visible = true;
+      }
       if (layer === "hazard") {
         if (id === "hazard-flood" && hazards.has("flood")) visible = true;
         if (
@@ -284,8 +288,8 @@ export default function MapView() {
   // mapLoaded を依存配列に追加：地図ロード完了後に必ず実行させる
   useEffect(() => {
     if (!mapLoaded || !map.current) return;
-    updateLayerVisibility(activeLayer, activeHazards);
-  }, [mapLoaded, activeLayer, activeHazards, updateLayerVisibility]);
+    updateLayerVisibility(activeLayer, activeHazards, showCrimeHeatmap);
+  }, [mapLoaded, activeLayer, activeHazards, showCrimeHeatmap, updateLayerVisibility]);
 
   // 検索結果の座標へ地図を移動
   useEffect(() => {

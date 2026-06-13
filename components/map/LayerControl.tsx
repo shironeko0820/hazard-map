@@ -20,23 +20,39 @@ export default function LayerControl() {
   const {
     activeLayer, setActiveLayer,
     showCrimePoints, toggleCrimePoints,
+    showCrimeHeatmap, toggleCrimeHeatmap,
     activeHazards, toggleHazard,
   } = useMapStore();
 
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
-      {/* ── デスクトップのみ: 犯罪地点ボタン ── */}
-      <button
-        onClick={toggleCrimePoints}
-        className={`hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full shadow-lg border transition-colors ${
-          showCrimePoints
-            ? "bg-red-600 text-white border-red-600"
-            : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
-        }`}
-      >
-        <span>📍</span>
-        <span>犯罪地点を{showCrimePoints ? "非表示" : "表示"}</span>
-      </button>
+      {/* ── デスクトップのみ: 赤色エリア＋犯罪地点ボタン ── */}
+      {activeLayer === "crime" && (
+        <div className="hidden md:flex items-center gap-2">
+          <button
+            onClick={toggleCrimeHeatmap}
+            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full shadow-lg border transition-colors ${
+              showCrimeHeatmap
+                ? "bg-red-600 text-white border-red-600"
+                : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
+            }`}
+          >
+            <span>🔴</span>
+            <span>赤色エリアを{showCrimeHeatmap ? "非表示" : "表示"}</span>
+          </button>
+          <button
+            onClick={toggleCrimePoints}
+            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full shadow-lg border transition-colors ${
+              showCrimePoints
+                ? "bg-red-600 text-white border-red-600"
+                : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
+            }`}
+          >
+            <span>📍</span>
+            <span>犯罪地点を{showCrimePoints ? "非表示" : "表示"}</span>
+          </button>
+        </div>
+      )}
 
       {/* ── 災害サブトグル ── */}
       {activeLayer === "hazard" && (
@@ -74,18 +90,33 @@ export default function LayerControl() {
           </button>
         ))}
 
-        {/* モバイルのみ: 犯罪地点ボタンをタブ内に統合 */}
-        <button
-          onClick={toggleCrimePoints}
-          className={`md:hidden flex items-center gap-1 px-3 py-2 text-xs font-medium border-l border-gray-200 transition-colors ${
-            showCrimePoints
-              ? "bg-red-600 text-white"
-              : "text-gray-600 hover:bg-gray-50"
-          }`}
-        >
-          <span>📍</span>
-          <span>地点</span>
-        </button>
+        {/* モバイルのみ: 赤色エリア＋犯罪地点ボタンをタブ内に統合 */}
+        {activeLayer === "crime" && (
+          <>
+            <button
+              onClick={toggleCrimeHeatmap}
+              className={`md:hidden flex items-center gap-1 px-3 py-2 text-xs font-medium border-l border-gray-200 transition-colors ${
+                showCrimeHeatmap
+                  ? "bg-red-600 text-white"
+                  : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              <span>🔴</span>
+              <span>エリア</span>
+            </button>
+            <button
+              onClick={toggleCrimePoints}
+              className={`md:hidden flex items-center gap-1 px-3 py-2 text-xs font-medium border-l border-gray-200 transition-colors ${
+                showCrimePoints
+                  ? "bg-red-600 text-white"
+                  : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              <span>📍</span>
+              <span>地点</span>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
