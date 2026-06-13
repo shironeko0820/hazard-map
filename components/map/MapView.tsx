@@ -298,12 +298,22 @@ export default function MapView() {
         const count = Number(props.crime_count ?? 0);
         const rank = props.crime_rank ? Number(props.crime_rank) : null;
         const total = Number(props.crime_total_ranked ?? 0);
+        const isEstimate = props.crime_is_estimate;
+        const cityTotal = props.crime_city_total ? Number(props.crime_city_total) : null;
+        const sourceCity = props.crime_source_city ?? "";
+        const division = props.crime_city_division ? Number(props.crime_city_division) : null;
         popup.current!
           .setLngLat(e.lngLat)
           .setHTML(`
             <div style="font-size:13px;line-height:1.7">
               <p style="font-weight:bold;margin:0 0 4px">${pref}${muni}</p>
-              <p style="margin:0">認知件数: <strong>${count > 0 ? count.toLocaleString() + "件" : "データなし"}</strong></p>
+              ${count > 0
+                ? isEstimate && cityTotal && division
+                  ? `<p style="margin:0">認知件数: <strong>${count.toLocaleString()}件</strong> <span style="color:#888;font-size:11px">（推計）</span></p>
+                     <p style="margin:0;color:#888;font-size:11px">${sourceCity}全体${cityTotal.toLocaleString()}件を${division}区域で按分</p>`
+                  : `<p style="margin:0">認知件数: <strong>${count.toLocaleString()}件</strong></p>`
+                : `<p style="margin:0;color:#888">データなし</p>`
+              }
               ${rank ? `<p style="margin:0;color:#666">全国ランキング: <strong>${rank}位</strong> / ${total}市区町村中</p>` : ""}
             </div>
           `)

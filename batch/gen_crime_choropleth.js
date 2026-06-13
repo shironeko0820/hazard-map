@@ -44,12 +44,20 @@ choropleth.features.forEach((f, i) => {
 
 // 各ポリゴンに crime_count を付与
 const muniCrimeCounts = new Array(choropleth.features.length).fill(0);
+// source_city: マッチした元の都市名（市区町村名と異なる場合は按分推計）
+const muniSourceCity = new Array(choropleth.features.length).fill(null);
+const muniCityTotal = new Array(choropleth.features.length).fill(0);
+const muniCityDivision = new Array(choropleth.features.length).fill(1);
 
 for (const [cityKey, indices] of Object.entries(prefixGroups)) {
   const total = cityTotals[cityKey] || 0;
+  const cityName = cityKey.split('|')[1];
   const share = Math.round(total / indices.length);
   for (const i of indices) {
     muniCrimeCounts[i] = share;
+    muniSourceCity[i] = cityName;
+    muniCityTotal[i] = total;
+    muniCityDivision[i] = indices.length;
   }
 }
 
@@ -72,6 +80,10 @@ console.log(`ランキング対象: ${totalRanked} 市区町村`);
 const features = choropleth.features.map((f, i) => {
   const count = muniCrimeCounts[i];
   const rank = rankMap[i] ?? null;
+  const muni = f.properties.municipality;
+  const sourceCity = muniSourceCity[i];
+  // 完全一致（区・市単体）か按分推計かを判定
+  const isEstimate = sourceCity && sourceCity !== muni;
   return {
     ...f,
     properties: {
@@ -79,6 +91,10 @@ const features = choropleth.features.map((f, i) => {
       crime_count: count,
       crime_rank: rank,
       crime_total_ranked: totalRanked,
+      crime_source_city: sourceCity,
+      crime_city_total: isEstimate ? muniCityTotal[i] : null,
+      crime_city_division: isEstimate ? muniCityDivision[i] : null,
+      crime_is_estimate: isEstimate ? true : null,
     },
   };
 });
