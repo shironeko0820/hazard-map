@@ -310,6 +310,7 @@ export default function MapView() {
               }
               ${rank ? `<p style="margin:0;color:#666">治安ワースト: <strong>${rank}位</strong> / ${total}市区中</p>` : ""}
               ${isGroup ? `<p style="margin:0;color:#aaa;font-size:11px">※市全体の数値</p>` : ""}
+              ${count > 0 && pref !== "東京都" ? `<p style="margin:0;color:#aaa;font-size:11px">※警察庁都道府県統計からの推計値</p>` : ""}
             </div>
           `)
           .addTo(m);
