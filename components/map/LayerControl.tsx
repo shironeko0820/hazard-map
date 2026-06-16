@@ -19,7 +19,6 @@ const HAZARD_TYPES: { id: HazardType; label: string; color: string }[] = [
 export default function LayerControl() {
   const {
     activeLayer, setActiveLayer,
-    showCrimePoints, toggleCrimePoints,
     showCrimeHeatmap, toggleCrimeHeatmap,
     showCrimeChoropleth, toggleCrimeChoropleth,
     activeHazards, toggleHazard,
@@ -51,17 +50,6 @@ export default function LayerControl() {
           >
             <span>🔴</span>
             <span>ヒートマップ</span>
-          </button>
-          <button
-            onClick={toggleCrimePoints}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full shadow-lg border transition-colors ${
-              showCrimePoints
-                ? "bg-blue-600 text-white border-blue-600"
-                : "bg-white text-gray-400 border-gray-200 hover:bg-gray-50"
-            }`}
-          >
-            <span>📍</span>
-            <span>地点表示</span>
           </button>
         </div>
       )}
@@ -109,17 +97,6 @@ export default function LayerControl() {
           >
             <span>🔴</span>
             <span>ヒートマップ</span>
-          </button>
-          <button
-            onClick={toggleCrimePoints}
-            className={`flex items-center gap-1 px-3 py-1.5 text-xs font-medium border-l border-gray-200 transition-colors ${
-              showCrimePoints
-                ? "bg-blue-600 text-white"
-                : "text-gray-400 hover:bg-gray-50"
-            }`}
-          >
-            <span>📍</span>
-            <span>地点</span>
           </button>
         </div>
       )}
