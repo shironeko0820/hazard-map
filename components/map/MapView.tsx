@@ -299,18 +299,36 @@ export default function MapView() {
         const rank = props.crime_rank ? Number(props.crime_rank) : null;
         const total = Number(props.crime_total_ranked ?? 0);
         const isGroup = props.crime_is_group;
+        const year = props.crime_year ?? "";
+        const isEstimate = count > 0 && !["東京都","大阪府","神奈川県","愛知県","千葉県"].includes(pref);
+
+        // 犯罪種別内訳（上位4件）
+        let typeRows = "";
+        try {
+          const types = props.crime_types ? JSON.parse(props.crime_types as string) : {};
+          const sorted = Object.entries(types as Record<string, number>)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 4);
+          if (sorted.length > 0) {
+            typeRows = sorted
+              .map(([t, c]) => `<p style="margin:0;color:#555;font-size:12px">${t}: ${(c as number).toLocaleString()}件</p>`)
+              .join("");
+          }
+        } catch { /* ignore */ }
+
         popup.current!
           .setLngLat(e.lngLat)
           .setHTML(`
             <div style="font-size:13px;line-height:1.7">
               <p style="font-weight:bold;margin:0 0 4px">${pref}${displayName}</p>
               ${count > 0
-                ? `<p style="margin:0">認知件数: <strong>${count.toLocaleString()}件</strong></p>`
+                ? `<p style="margin:0">認知件数合計: <strong>${count.toLocaleString()}件</strong>${year ? `<span style="color:#888;font-size:11px"> (${year})</span>` : ""}</p>`
                 : `<p style="margin:0;color:#888">データなし</p>`
               }
-              ${rank ? `<p style="margin:0;color:#666">治安ワースト: <strong>${rank}位</strong> / ${total}市区中</p>` : ""}
+              ${typeRows ? `<div style="margin:4px 0 2px;border-top:1px solid #eee;padding-top:4px">${typeRows}</div>` : ""}
+              ${rank ? `<p style="margin:2px 0 0;color:#666">治安ワースト: <strong>${rank}位</strong> / ${total}市区中</p>` : ""}
               ${isGroup ? `<p style="margin:0;color:#aaa;font-size:11px">※市全体の数値</p>` : ""}
-              ${count > 0 && !["東京都","大阪府","神奈川県","愛知県","千葉県"].includes(pref) ? `<p style="margin:0;color:#aaa;font-size:11px">※警察庁都道府県統計からの推計値</p>` : ""}
+              ${isEstimate ? `<p style="margin:0;color:#aaa;font-size:11px">※警察庁都道府県統計からの推計値</p>` : ""}
             </div>
           `)
           .addTo(m);
