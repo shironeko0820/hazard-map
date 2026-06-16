@@ -42,7 +42,7 @@ export default function CrimePointLayer({ map, visible }: Props) {
       // クラスタリング付きソース
       map.addSource(SOURCE_ID, {
         type: "geojson",
-        data: "/crime_all.geojson",
+        data: "/crime_japan.geojson",
         cluster: true,
         clusterMaxZoom: 14,
         clusterRadius: 50,
