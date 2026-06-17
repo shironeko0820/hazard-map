@@ -83,9 +83,14 @@ const PREFECTURES = [
     name: '静岡県',
     urlFn: (type) => {
       // 静岡はアンダースコア区切り＋syazyounerai→syazyonerai（uなし）
+      // 2024年ファイルが404の場合は2023年にフォールバック（呼び出し側で処理）
       const typeMap = { syazyounerai: 'syazyonerai' };
       const t = typeMap[type] ?? type;
       return `https://www.pref.shizuoka.jp/_res/projects/project_police/_page_/002/001/145/shizuoka_2024_${t}.csv`;
+    },
+    fallbackUrlFn: (type) => {
+      // 2023年URL（アンダースコアなし・syazyounerai表記）
+      return `https://www.pref.shizuoka.jp/_res/projects/project_police/_page_/002/001/145/shizuoka_2023${type}.csv`;
     },
   },
 ];
@@ -124,7 +129,15 @@ function fetchCSV(url) {
       const stream = res.headers['content-encoding'] === 'gzip'
         ? res.pipe(zlib.createGunzip()) : res;
       stream.on('data', c => chunks.push(c));
-      stream.on('end', () => resolve(Buffer.concat(chunks)));
+      stream.on('end', () => {
+        const buf = Buffer.concat(chunks);
+        // HTMLが返ってきた場合はCSVではないためエラー
+        const head = buf.slice(0, 15).toString('ascii').toLowerCase();
+        if (head.startsWith('<!doc') || head.startsWith('<html')) {
+          return reject(new Error(`HTMLが返却されました（CSVではない）: ${url}`));
+        }
+        resolve(buf);
+      });
       stream.on('error', reject);
     });
     req.on('error', reject);
@@ -132,11 +145,22 @@ function fetchCSV(url) {
   });
 }
 
-function decodeShiftJIS(buf) {
+/** UTF-8を先に試し、失敗したらShift-JISで読む */
+function detectAndDecode(buf) {
+  // UTF-8 BOMチェック
+  if (buf[0] === 0xEF && buf[1] === 0xBB && buf[2] === 0xBF) {
+    return buf.slice(3).toString('utf8');
+  }
+  // UTF-8として有効か試みる（fatalモード: 不正バイト列でThrow）
   try {
-    return new TextDecoder('shift-jis').decode(buf);
+    return new TextDecoder('utf-8', { fatal: true }).decode(buf);
   } catch {
-    return buf.toString('latin1');
+    // UTF-8無効 → Shift-JIS
+    try {
+      return new TextDecoder('shift-jis').decode(buf);
+    } catch {
+      return buf.toString('latin1');
+    }
   }
 }
 
@@ -152,7 +176,7 @@ function parseCSV(text) {
  * 列: 罪名(0), 手口(1), 管轄警察署(2), 管轄交番(3), 市区町村コード(4),
  *     都道府県(5), 市区町村(6), 町丁目(7), ...
  */
-function aggregateByMunicipality(rows, prefName) {
+function aggregateByMunicipality(rows) {
   const counts = {};
   let header = true;
   for (const row of rows) {
@@ -162,11 +186,8 @@ function aggregateByMunicipality(rows, prefName) {
       if (!/^\d/.test((row[4] || '').trim())) continue;
       header = false;
     }
-    const pref = (row[5] || '').trim();
     const muni = (row[6] || '').trim();
     if (!muni || muni === '市区町村') continue;
-    // 都道府県名が一致するかチェック（データ混入防止）
-    if (pref && !pref.includes(prefName.slice(0, 2))) continue;
     counts[muni] = (counts[muni] || 0) + 1;
   }
   return counts;
@@ -275,10 +296,22 @@ async function processPrefecture(prefDef, centroids) {
     const url = urlFn(crimeType);
     try {
       process.stdout.write(`  ${crimeType} ... `);
-      const buf = await fetchCSV(url);
-      const text = decodeShiftJIS(buf);
+      let buf;
+      try {
+        buf = await fetchCSV(url);
+      } catch (e) {
+        // フォールバックURLがあれば試みる（静岡2024→2023など）
+        if (prefDef.fallbackUrlFn) {
+          const fallbackUrl = prefDef.fallbackUrlFn(crimeType);
+          process.stdout.write(`[→フォールバック] `);
+          buf = await fetchCSV(fallbackUrl);
+        } else {
+          throw e;
+        }
+      }
+      const text = detectAndDecode(buf);
       const rows = parseCSV(text);
-      const counts = aggregateByMunicipality(rows, name);
+      const counts = aggregateByMunicipality(rows);
       const typeTotal = Object.values(counts).reduce((a, b) => a + b, 0);
       for (const [muni, cnt] of Object.entries(counts)) {
         muniCounts[muni] = (muniCounts[muni] || 0) + cnt;
