@@ -103,10 +103,10 @@ function decodeShiftJIS(buf) {
 }
 
 function parseCSV(text) {
-  return text.split(/\r?\n/).map(line => {
-    // 簡易CSVパーサー（ダブルクォート対応なし: 警察庁CSVは不要）
-    return line.split(',').map(v => v.trim().replace(/^"(.*)"$/, '$1'));
-  });
+  const lines = text.split(/\r?\n/);
+  // 1行目でタブ/カンマを自動判定
+  const delimiter = (lines[0] || '').includes('\t') ? '\t' : ',';
+  return lines.map(line => line.split(delimiter).map(v => v.trim().replace(/^"(.*)"$/, '$1')));
 }
 
 /**
