@@ -1,6 +1,6 @@
 /**
  * Phase 2: 警察庁犯罪オープンデータ CSVから実犯罪データを生成
- * 対象: 大阪府・神奈川県・愛知県・千葉県（各府県警 公開CSV）
+ * 対象: 大阪府・神奈川県・愛知県・千葉県・埼玉県・兵庫県・福岡県・静岡県
  *
  * 入力: public/choropleth.geojson (市区町村ポリゴン、重心座標算出用)
  *       public/crime_mock.geojson (既存モックデータ、Phase 2は上書き)
@@ -48,6 +48,44 @@ const PREFECTURES = [
         zitensyatou:          '000067003',
       };
       return `https://www.police.pref.chiba.jp/content/common/${IDS[type]}.csv`;
+    },
+  },
+  {
+    name: '埼玉県',
+    urlFn: (type) => `https://www.police.pref.saitama.lg.jp/documents/33251/saitama_2024${type}.csv`,
+  },
+  {
+    name: '兵庫県',
+    urlFn: (type) => {
+      // buhinnerai のみファイル名にタイポ（hyogp）
+      const prefix = type === 'buhinnerai' ? 'hyogp' : 'hyogo';
+      return `https://web.pref.hyogo.lg.jp/kk26/johoseisaku/documents/${prefix}_2024${type}.csv`;
+    },
+  },
+  {
+    name: '福岡県',
+    urlFn: (type) => {
+      // BODIK プラットフォーム経由（リソースIDが型ごとに異なる）
+      const RESOURCE_IDS = {
+        hittakuri:            'a3922e4a-5fd1-428d-bbb4-1ebe1a2c85f8',
+        syazyounerai:         '905967a8-6908-4bce-b1f9-c73dc7b6ce7d',
+        buhinnerai:           '0b7da485-d31c-4b40-8cb4-924a5017cb10',
+        zidouhanbaikinerai:   'd547241c-f81b-49a3-9363-df4d7452b852',
+        zidousyatou:          'c6efe39e-4d3d-42f7-9bb9-b37462142edb',
+        ootobaitou:           'b92c2b2f-502e-4618-999a-c5704768ad4e',
+        zitensyatou:          '3357a675-7deb-4955-9840-13a57d4b7c9d',
+      };
+      const rid = RESOURCE_IDS[type];
+      return `https://data.bodik.jp/dataset/c86326fe-655b-4eb0-a0fe-e29f163f31aa/resource/${rid}/download/fukuoka_2024${type}.csv`;
+    },
+  },
+  {
+    name: '静岡県',
+    urlFn: (type) => {
+      // 静岡はアンダースコア区切り＋syazyounerai→syazyonerai（uなし）
+      const typeMap = { syazyounerai: 'syazyonerai' };
+      const t = typeMap[type] ?? type;
+      return `https://www.pref.shizuoka.jp/_res/projects/project_police/_page_/002/001/145/shizuoka_2024_${t}.csv`;
     },
   },
 ];
