@@ -300,7 +300,8 @@ export default function MapView() {
         const total = Number(props.crime_total_ranked ?? 0);
         const isGroup = props.crime_is_group;
         const year = props.crime_year ?? "";
-        const isEstimate = count > 0 && !["東京都","大阪府","神奈川県","愛知県","千葉県","埼玉県","兵庫県","福岡県","静岡県"].includes(pref);
+        const isEstimate = count > 0 && !["東京都","大阪府","神奈川県","愛知県","千葉県","埼玉県","兵庫県","福岡県","静岡県",
+              "青森県","岩手県","宮城県","山形県","山梨県","長野県","奈良県","和歌山県","徳島県","長崎県","沖縄県"].includes(pref);
 
         // 犯罪種別内訳（上位4件）
         let typeRows = "";

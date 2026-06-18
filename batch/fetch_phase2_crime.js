@@ -93,6 +93,80 @@ const PREFECTURES = [
       return `https://www.pref.shizuoka.jp/_res/projects/project_police/_page_/002/001/145/shizuoka_2023${type}.csv`;
     },
   },
+
+  // ---- Phase 3: URL確認済み11県 ----
+  {
+    name: '青森県',
+    urlFn: (type) => {
+      // 車上ねらいのみ syajyounerai（jが余分）
+      const typeMap = { syazyounerai: 'syajyounerai' };
+      const t = typeMap[type] ?? type;
+      return `https://www.police.pref.aomori.jp/seianbu/seian_kikaku/hanyoku/csv/2024/aomori_2024${t}.csv`;
+    },
+  },
+  {
+    name: '岩手県',
+    urlFn: (type) =>
+      `https://www.pref.iwate.jp/_res/projects/project_kenkei/_page_/003/000/711/s_opendata_2024/iwate_2024${type}.csv`,
+  },
+  {
+    name: '宮城県',
+    urlFn: (type) => `https://www.police.pref.miyagi.jp/seian/csv/miyagi_2024${type}.csv`,
+  },
+  {
+    name: '山形県',
+    urlFn: (type) => `https://www.pref.yamagata.jp/documents/1566/yamagata_2024${type}.csv`,
+  },
+  {
+    name: '山梨県',
+    urlFn: (type) => {
+      // オートバイ盗のみ ootobaiou（tが欠落）
+      const typeMap = { ootobaitou: 'ootobaiou' };
+      const t = typeMap[type] ?? type;
+      return `https://www.pref.yamanashi.jp/documents/94920/yamanashi_2024${t}.csv`;
+    },
+  },
+  {
+    name: '長野県',
+    urlFn: (type) => {
+      // 車上ねらいのみ 20224（2が重複）
+      const typeMap = { syazyounerai: '20224syazyounerai' };
+      const t = typeMap[type] ?? `2024${type}`;
+      return `https://www.pref.nagano.lg.jp/police/toukei/hanzai/documents/nagano_${t}.csv`;
+    },
+  },
+  {
+    name: '奈良県',
+    urlFn: (type) =>
+      `https://www.police.pref.nara.jp/cmsfiles/contents/0000007/7168/nara_2024${type}.csv`,
+  },
+  {
+    name: '和歌山県',
+    urlFn: (type) =>
+      `https://www.police.pref.wakayama.lg.jp/04_toukei/hanzai/documents/r6/wakayama_2024${type}.csv`,
+  },
+  {
+    name: '徳島県',
+    urlFn: (type) =>
+      `https://www.police.pref.tokushima.jp/file/excel/28opendata/tokushima_2024${type}.csv`,
+  },
+  {
+    name: '長崎県',
+    urlFn: (type) =>
+      `https://www.police.pref.nagasaki.jp/police/wp-content/uploads/2025/06/nagasaki_2024${type}.csv`,
+  },
+  {
+    name: '沖縄県',
+    urlFn: (type) => {
+      // URLに手口番号プレフィックスが必要（R7_01_〜R7_07_）
+      const PREFIX = {
+        hittakuri: '01', syazyounerai: '02', buhinnerai: '03',
+        zidouhanbaikinerai: '04', zidousyatou: '05', ootobaitou: '06', zitensyatou: '07',
+      };
+      const n = PREFIX[type] ?? '01';
+      return `https://www.police.pref.okinawa.jp/docs/2025062400016/file_contents/R7_${n}_okinawa_2024${type}.csv`;
+    },
+  },
 ];
 
 // ---- ユーティリティ ----

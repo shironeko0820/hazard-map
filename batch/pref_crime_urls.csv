@@ -1,0 +1,47 @@
+都道府県,自転車盗URL（代表）,備考,ステータス
+北海道,https://www.harp.lg.jp/opendata/dataset/bunya/kurashi/,ポータル経由（個別URL未確認）,調査中
+青森県,https://www.police.pref.aomori.jp/seianbu/seian_kikaku/hanyoku/csv/2024/aomori_2024zitensyatou.csv,車上ねらいのみ syajyounerai（表記差異）,URL確認済
+岩手県,https://www.pref.iwate.jp/_res/projects/project_kenkei/_page_/003/000/711/s_opendata_2024/iwate_2024zitensyatou.csv,標準形式,URL確認済
+宮城県,https://www.police.pref.miyagi.jp/seian/csv/miyagi_2024zitensyatou.csv,標準形式,URL確認済
+秋田県,https://www.police.pref.akita.lg.jp/kenkei/statistics,ページURL（個別CSV未確認）,調査中
+山形県,https://www.pref.yamagata.jp/documents/1566/yamagata_2024zitensyatou.csv,標準形式,URL確認済
+福島県,http://www.police.pref.fukushima.jp/seianki/homepage/top_page/R04custom.crime_open_data.html,ページURL（個別CSV未確認）,調査中
+茨城県,https://www.ibaraki-opendata.jp/index.php,ポータル経由（個別URL未確認）,調査中
+栃木県,http://odcs.bodik.jp/090000/,BODIKポータル,BODIK
+群馬県,https://www.pref.gunma.jp/uploaded/attachment/667807.csv,連番ID方式（手口ごとに異なるID）,連番ID
+埼玉県,https://www.police.pref.saitama.lg.jp/documents/33251/saitama_2024zitensyatou.csv,標準形式,実装済
+千葉県,https://www.police.pref.chiba.jp/content/common/000067003.csv,連番ID方式（実装済）,実装済
+東京都,https://www.keishicho.metro.tokyo.lg.jp/about_mpd/jokyo_tokei/jokyo/ninchikensu.files/R7.csv,警視庁集計表（別フォーマット）,実装済
+神奈川県,https://www.police.pref.kanagawa.jp/assets/entry/kanagawa_2024zitensyatou.csv,標準形式,実装済
+新潟県,https://www.pref.niigata.lg.jp/uploaded/attachment/455868.csv,連番ID方式（hittakuri=455862〜zitensyatou=455868）,連番ID
+富山県,https://opendata.pref.toyama.jp/dataset/settou2024,ポータルURL（個別CSV未確認）,調査中
+石川県,https://www2.police.pref.ishikawa.lg.jp/security/security24/,ページURL（個別CSV未確認）,調査中
+福井県,https://www.pref.fukui.lg.jp/kenkei/doc/kenkei/naka2-naka1600.html,ページURL（個別CSV未確認）,調査中
+山梨県,https://www.pref.yamanashi.jp/documents/94920/yamanashi_2024zitensyatou.csv,オートバイ盗のみ ootobaiou（typo）,URL確認済
+長野県,https://www.pref.nagano.lg.jp/police/toukei/hanzai/documents/nagano_2024zitensyatou.csv,車上ねらいのみ nagano_20224（typo）,URL確認済
+静岡県,https://www.pref.shizuoka.jp/_res/projects/project_police/_page_/002/001/145/shizuoka_2024_zitensyatou.csv,2024年ファイル404→2023年フォールバック実装済,実装済
+愛知県,https://www.pref.aichi.jp/police/anzen/toukei/opendata/seian-s/images/aichi-2024zitensyatou.csv,標準形式,実装済
+三重県,http://www.police.pref.mie.jp/safety_info/op_data_index.html,ページURL（個別CSV未確認）,調査中
+滋賀県,https://www.pref.shiga.lg.jp/police/seikatu/seikatu/anmachi/306453.html,ページURL（個別CSV未確認）,調査中
+京都府,https://data.bodik.jp/organization/260002,BODIKポータル,BODIK
+大阪府,https://www.police.pref.osaka.lg.jp/material/files/group/2/osaka_2024zitensyatou.csv,タブ区切り,実装済
+兵庫県,https://web.pref.hyogo.lg.jp/kk26/johoseisaku/documents/hyogo_2024zitensyatou.csv,buhinneraiのみURLにtypo（hyogp）,実装済
+奈良県,https://www.police.pref.nara.jp/cmsfiles/contents/0000007/7168/nara_2024zitensyatou.csv,標準形式,URL確認済
+和歌山県,https://www.police.pref.wakayama.lg.jp/04_toukei/hanzai/documents/r6/wakayama_2024zitensyatou.csv,標準形式,URL確認済
+鳥取県,https://www.pref.tottori.lg.jp/286309.htm,ページURL（個別CSV未確認）,調査中
+島根県,https://shimane-opendata.jp/datasets/1055,ポータル経由（個別URL未確認）,調査中
+岡山県,https://www.okayama-opendata.jp/datasets?tag=防犯,ポータル経由（個別URL未確認）,調査中
+広島県,https://hiroshima-opendata.dataeye.jp/datasets?group=gr_0200,ポータル経由（個別URL未確認）,調査中
+山口県,https://yamaguchi-opendata.jp/,ポータル経由（個別URL未確認）,調査中
+徳島県,https://www.police.pref.tokushima.jp/file/excel/28opendata/tokushima_2024zitensyatou.csv,標準形式,URL確認済
+香川県,https://opendata.pref.kagawa.lg.jp/dataset/bunya/bosai/,ポータル経由（個別URL未確認）,調査中
+愛媛県,https://www.police.pref.ehime.jp/seiki/mokuji/fusegou.html,ページURL（個別CSV未確認）,調査中
+高知県,https://www.police.pref.kochi.lg.jp/docs/2023111400109/,ページURL（個別CSV未確認）,調査中
+福岡県,https://data.bodik.jp/dataset/c86326fe-655b-4eb0-a0fe-e29f163f31aa/resource/3357a675-7deb-4955-9840-13a57d4b7c9d/download/fukuoka_2024zitensyatou.csv,BODIKポータル,実装済
+佐賀県,https://data.bodik.jp/dataset/410004_hanzaijyouhou,BODIKポータル（個別URL未確認）,BODIK
+長崎県,https://www.police.pref.nagasaki.jp/police/wp-content/uploads/2025/06/nagasaki_2024zitensyatou.csv,標準形式,URL確認済
+熊本県,https://odcs.bodik.jp/430005/,BODIKポータル（個別URL未確認）,BODIK
+大分県,http://www.pref.oita.jp/site/keisatu/seianki-toukei123.html,ページURL（個別CSV未確認）,調査中
+宮崎県,https://data.bodik.jp/dataset/450006_1069,BODIKポータル（個別URL未確認）,BODIK
+鹿児島県,https://data.bodik.jp/dataset/460001_hanzaihassei_2024,BODIKポータル（個別URL未確認）,BODIK
+沖縄県,https://www.police.pref.okinawa.jp/docs/2025062400016/file_contents/R7_07_okinawa_2024zitensyatou.csv,番号プレフィックスあり（R7_01_〜R7_07_）,URL確認済
