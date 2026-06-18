@@ -8,12 +8,12 @@
 福島県,http://www.police.pref.fukushima.jp/seianki/homepage/top_page/R04custom.crime_open_data.html,ページURL（個別CSV未確認）,調査中
 茨城県,https://www.ibaraki-opendata.jp/index.php,ポータル経由（個別URL未確認）,調査中
 栃木県,http://odcs.bodik.jp/090000/,BODIKポータル,BODIK
-群馬県,https://www.pref.gunma.jp/uploaded/attachment/667807.csv,連番ID方式（手口ごとに異なるID）,連番ID
+群馬県,https://www.pref.gunma.jp/uploaded/attachment/667807.csv,連番ID方式（hittakuri=667807, syazyounerai=667793, buhinnerai=667506, zidouhanbaikinerai=667504, zidousyatou=667503, ootobaitou=667502, zitensyatou=667501）,実装済
 埼玉県,https://www.police.pref.saitama.lg.jp/documents/33251/saitama_2024zitensyatou.csv,標準形式,実装済
 千葉県,https://www.police.pref.chiba.jp/content/common/000067003.csv,連番ID方式（実装済）,実装済
 東京都,https://www.keishicho.metro.tokyo.lg.jp/about_mpd/jokyo_tokei/jokyo/ninchikensu.files/R7.csv,警視庁集計表（別フォーマット）,実装済
 神奈川県,https://www.police.pref.kanagawa.jp/assets/entry/kanagawa_2024zitensyatou.csv,標準形式,実装済
-新潟県,https://www.pref.niigata.lg.jp/uploaded/attachment/455868.csv,連番ID方式（hittakuri=455862〜zitensyatou=455868）,連番ID
+新潟県,https://www.pref.niigata.lg.jp/uploaded/attachment/455868.csv,連番ID方式（hittakuri=455862〜zitensyatou=455868）,実装済
 富山県,https://opendata.pref.toyama.jp/dataset/settou2024,ポータルURL（個別CSV未確認）,調査中
 石川県,https://www2.police.pref.ishikawa.lg.jp/security/security24/,ページURL（個別CSV未確認）,調査中
 福井県,https://www.pref.fukui.lg.jp/kenkei/doc/kenkei/naka2-naka1600.html,ページURL（個別CSV未確認）,調査中

@@ -167,6 +167,38 @@ const PREFECTURES = [
       return `https://www.police.pref.okinawa.jp/docs/2025062400016/file_contents/R7_${n}_okinawa_2024${type}.csv`;
     },
   },
+
+  // ---- Phase 4: 群馬・新潟（連番ID方式） ----
+  {
+    name: '群馬県',
+    urlFn: (type) => {
+      const IDS = {
+        hittakuri:          '667807',
+        syazyounerai:       '667793',
+        buhinnerai:         '667506',
+        zidouhanbaikinerai: '667504',
+        zidousyatou:        '667503',
+        ootobaitou:         '667502',
+        zitensyatou:        '667501',
+      };
+      return `https://www.pref.gunma.jp/uploaded/attachment/${IDS[type]}.csv`;
+    },
+  },
+  {
+    name: '新潟県',
+    urlFn: (type) => {
+      const IDS = {
+        hittakuri:          '455862',
+        syazyounerai:       '455863',
+        buhinnerai:         '455864',
+        zidouhanbaikinerai: '455865',
+        zidousyatou:        '455866',
+        ootobaitou:         '455867',
+        zitensyatou:        '455868',
+      };
+      return `https://www.pref.niigata.lg.jp/uploaded/attachment/${IDS[type]}.csv`;
+    },
+  },
 ];
 
 // ---- ユーティリティ ----
