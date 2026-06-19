@@ -168,7 +168,110 @@ const PREFECTURES = [
     },
   },
 
-  // ---- Phase 4: 群馬・新潟（連番ID方式） ----
+  // ---- Phase 4: 群馬・新潟（連番ID方式） + BODIK 6県 ----
+  {
+    name: '栃木県',
+    urlFn: (type) => {
+      // 犯罪種別ごとに別データセット（dataset UUID が異なる）
+      const URLS = {
+        hittakuri:          'https://data.bodik.jp/dataset/2bbcd73a-ac37-4a26-9a23-fcc72a5cfdd4/resource/73c74380-78c7-4ca6-a68c-2d0a0022dbee/download/d0110_2024_tochigi_2024hittakuri_07001.csv',
+        syazyounerai:       'https://data.bodik.jp/dataset/4467d71d-90dd-40d1-968b-589c019aa3a6/resource/0bbb38bb-223d-453e-b999-4e542b7c3fa1/download/d0110_2024_tochigi_2024syazyounerai_07002.csv',
+        buhinnerai:         'https://data.bodik.jp/dataset/4ae3fac3-e563-4680-b108-ca85040cf4dc/resource/acb39200-3a1d-433a-9e86-bba3d04cb1fe/download/d0110_2024_tochigi_2024buhinnerai_07003.csv',
+        zidouhanbaikinerai: 'https://data.bodik.jp/dataset/c4a01778-5bdd-4914-819a-7a38a9b6ed2c/resource/e5dfc6c5-c63a-4909-9753-cc957fc7abdd/download/d0110_2024_tochigi_2024zidouhanbaikinerai_07004.csv',
+        zidousyatou:        'https://data.bodik.jp/dataset/d54a0f04-4734-41a1-a4fe-23519b434340/resource/9de3c2f1-fa0a-4c7f-8bbe-3563128afb89/download/d0110_2024_tochigi_2024zidousyatou_07005.csv',
+        ootobaitou:         'https://data.bodik.jp/dataset/f62f46eb-9809-4611-ad37-9f05569f1264/resource/e9bc2467-69d9-43ac-9ff7-922b2d8863d4/download/d0110_2024_tochigi_2024ootobaitou_07006.csv',
+        zitensyatou:        'https://data.bodik.jp/dataset/93627019-71d4-4ce9-9473-342e6faa7ac3/resource/716a26c5-551b-415d-be85-643e83d71e32/download/d0110_2024_tochigi_2024zitensyatou_07007.csv',
+      };
+      return URLS[type];
+    },
+  },
+  {
+    name: '京都府',
+    urlFn: (type) => {
+      const RIDS = {
+        hittakuri:          'a0827686-62e9-4d24-be45-aab159fb78f6',
+        syazyounerai:       '34da31da-0b46-4c60-b65d-c04582a04533',
+        buhinnerai:         '0e48cfca-20bc-4816-a986-5a20e49725d9',
+        zidouhanbaikinerai: '88a0cfe0-3305-4ccb-8171-e945378ccbe3',
+        zidousyatou:        'ae6d0336-504c-48ce-a3ed-aeed03bb3623',
+        ootobaitou:         'f8e91ffc-d2ea-4c95-ae0e-e6e5e2b886b3',
+        zitensyatou:        '625c707a-e776-4911-9d84-89f6f68c5415',
+      };
+      return `https://data.bodik.jp/dataset/6a5f0b5c-667e-4a06-bbb8-6d191a5b1179/resource/${RIDS[type]}/download/kyoto_2024${type}.csv`;
+    },
+  },
+  {
+    name: '佐賀県',
+    urlFn: (type) => {
+      const RIDS = {
+        hittakuri:          '61de0a68-0f01-4841-8473-7bdbb1ac5a2e',
+        syazyounerai:       'cd1e7224-4c28-49a2-9e69-5d9cbdfab8dd',
+        buhinnerai:         '22bcdfdb-0918-4464-b28a-1df7508808a0',
+        zidouhanbaikinerai: '3cab17f2-137f-4f6f-8511-48fb67f0fa18',
+        zidousyatou:        'e2f955d1-181c-44ee-bf7b-392a0738b0b7',
+        ootobaitou:         '48283b13-e4d7-427c-b2be-a792e671be3f',
+        zitensyatou:        '966353ea-79e2-4485-9643-cbb16c08835a',
+      };
+      return `https://data.bodik.jp/dataset/cec6d1da-8160-4967-bb9a-98092aa827e6/resource/${RIDS[type]}/download/saga_2024${type}.csv`;
+    },
+  },
+  {
+    name: '熊本県',
+    urlFn: (type) => {
+      const RIDS = {
+        hittakuri:          '1de69f45-3e5e-40e7-b5c1-bf0c8851f0a4',
+        syazyounerai:       '724a858b-2696-419a-985a-3632ffda4c05',
+        buhinnerai:         '0846d1c2-62cb-44c6-bbfe-19fac64f40dd',
+        zidouhanbaikinerai: '6071b306-9118-414c-a991-b788b4ab673e',
+        zidousyatou:        'b982cde2-bc22-4b20-9985-cd688475fc72',
+        ootobaitou:         '42bb5ed4-ea4a-4678-afeb-3226ac7b4e6f',
+        zitensyatou:        '13aa1bf5-2737-4e37-8b39-22ab6ce2302e',
+      };
+      return `https://data.bodik.jp/dataset/a08a0692-1d8d-4de2-ae92-3a12caf53ba6/resource/${RIDS[type]}/download/kumamoto_2024${type}.csv`;
+    },
+  },
+  {
+    name: '宮崎県',
+    urlFn: (type) => {
+      const RIDS = {
+        hittakuri:          '01a13084-2ebc-4874-b736-0d1cacd27fa0',
+        syazyounerai:       'f867417a-e6af-4f36-8140-474c68f9cc15',
+        buhinnerai:         '38d10bd0-802c-4145-a470-d4c82204189a',
+        zidouhanbaikinerai: 'da76ffb8-f4c1-40ff-aa97-52b5dbe981f3',
+        zidousyatou:        'b7736020-6f5e-49d9-8625-1bf0be2d8fa7',
+        ootobaitou:         'dbc8dd3e-0220-4708-85b2-472818005b17',
+        zitensyatou:        '93f92c26-7d12-4e86-989b-77b73cfcbd94',
+      };
+      return `https://data.bodik.jp/dataset/a7c23d02-7ba8-4685-a09f-576a6cc7054f/resource/${RIDS[type]}/download/miyazaki_2024${type}.csv`;
+    },
+  },
+  {
+    name: '鹿児島県',
+    urlFn: (type) => {
+      // ファイル名が非標準（県名プレフィックスなし・異なるローマ字表記）
+      const FILES = {
+        hittakuri:          'hittakuri.csv',
+        syazyounerai:       'syajounerai.csv',
+        buhinnerai:         'buhinnnerai.csv',
+        zidouhanbaikinerai: 'jidouhannbaikinerai.csv',
+        zidousyatou:        'jidousyatou.csv',
+        ootobaitou:         'o-tobaitou.csv',
+        zitensyatou:        'jitennsyatou.csv',
+      };
+      const RIDS = {
+        hittakuri:          '4dc2ad6f-87d9-4462-8351-aed7ef7ce87d',
+        syazyounerai:       'd1595af4-045c-4f30-a3b9-9cf5208f3c92',
+        buhinnerai:         '31ed0893-0188-4b3a-8382-4f096d2904e2',
+        zidouhanbaikinerai: '80962404-8898-48e7-a8db-2a32f8bc02a8',
+        zidousyatou:        'a7aad9d9-aa71-43f1-8011-be85dba97063',
+        ootobaitou:         '08ed7034-db06-4690-9402-2e49df7d845d',
+        zitensyatou:        'da75606e-cf9c-42dc-9519-63cf08c06d18',
+      };
+      return `https://data.bodik.jp/dataset/d7bc06be-ac8b-4d4a-8108-9f25544276c0/resource/${RIDS[type]}/download/${FILES[type]}`;
+    },
+  },
+
+  // ---- Phase 4（続き）: 群馬・新潟（連番ID方式） ----
   {
     name: '群馬県',
     urlFn: (type) => {

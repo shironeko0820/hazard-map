@@ -7,7 +7,7 @@
 山形県,https://www.pref.yamagata.jp/documents/1566/yamagata_2024zitensyatou.csv,標準形式,URL確認済
 福島県,http://www.police.pref.fukushima.jp/seianki/homepage/top_page/R04custom.crime_open_data.html,ページURL（個別CSV未確認）,調査中
 茨城県,https://www.ibaraki-opendata.jp/index.php,ポータル経由（個別URL未確認）,調査中
-栃木県,http://odcs.bodik.jp/090000/,BODIKポータル,BODIK
+栃木県,http://odcs.bodik.jp/090000/,BODIKポータル（型別に別データセット・ファイル名 d0110_2024_tochigi_2024{type}_0700{n}.csv）,実装済
 群馬県,https://www.pref.gunma.jp/uploaded/attachment/667807.csv,連番ID方式（hittakuri=667807, syazyounerai=667793, buhinnerai=667506, zidouhanbaikinerai=667504, zidousyatou=667503, ootobaitou=667502, zitensyatou=667501）,実装済
 埼玉県,https://www.police.pref.saitama.lg.jp/documents/33251/saitama_2024zitensyatou.csv,標準形式,実装済
 千葉県,https://www.police.pref.chiba.jp/content/common/000067003.csv,連番ID方式（実装済）,実装済
@@ -23,7 +23,7 @@
 愛知県,https://www.pref.aichi.jp/police/anzen/toukei/opendata/seian-s/images/aichi-2024zitensyatou.csv,標準形式,実装済
 三重県,http://www.police.pref.mie.jp/safety_info/op_data_index.html,ページURL（個別CSV未確認）,調査中
 滋賀県,https://www.pref.shiga.lg.jp/police/seikatu/seikatu/anmachi/306453.html,ページURL（個別CSV未確認）,調査中
-京都府,https://data.bodik.jp/organization/260002,BODIKポータル,BODIK
+京都府,https://data.bodik.jp/dataset/6a5f0b5c-667e-4a06-bbb8-6d191a5b1179,BODIKポータル（dataset: 6a5f0b5c）,実装済
 大阪府,https://www.police.pref.osaka.lg.jp/material/files/group/2/osaka_2024zitensyatou.csv,タブ区切り,実装済
 兵庫県,https://web.pref.hyogo.lg.jp/kk26/johoseisaku/documents/hyogo_2024zitensyatou.csv,buhinneraiのみURLにtypo（hyogp）,実装済
 奈良県,https://www.police.pref.nara.jp/cmsfiles/contents/0000007/7168/nara_2024zitensyatou.csv,標準形式,URL確認済
@@ -38,10 +38,10 @@
 愛媛県,https://www.police.pref.ehime.jp/seiki/mokuji/fusegou.html,ページURL（個別CSV未確認）,調査中
 高知県,https://www.police.pref.kochi.lg.jp/docs/2023111400109/,ページURL（個別CSV未確認）,調査中
 福岡県,https://data.bodik.jp/dataset/c86326fe-655b-4eb0-a0fe-e29f163f31aa/resource/3357a675-7deb-4955-9840-13a57d4b7c9d/download/fukuoka_2024zitensyatou.csv,BODIKポータル,実装済
-佐賀県,https://data.bodik.jp/dataset/410004_hanzaijyouhou,BODIKポータル（個別URL未確認）,BODIK
+佐賀県,https://data.bodik.jp/dataset/cec6d1da-8160-4967-bb9a-98092aa827e6,BODIKポータル（dataset: cec6d1da）,実装済
 長崎県,https://www.police.pref.nagasaki.jp/police/wp-content/uploads/2025/06/nagasaki_2024zitensyatou.csv,標準形式,URL確認済
-熊本県,https://odcs.bodik.jp/430005/,BODIKポータル（個別URL未確認）,BODIK
+熊本県,https://data.bodik.jp/dataset/a08a0692-1d8d-4de2-ae92-3a12caf53ba6,BODIKポータル（dataset: a08a0692）,実装済
 大分県,http://www.pref.oita.jp/site/keisatu/seianki-toukei123.html,ページURL（個別CSV未確認）,調査中
-宮崎県,https://data.bodik.jp/dataset/450006_1069,BODIKポータル（個別URL未確認）,BODIK
-鹿児島県,https://data.bodik.jp/dataset/460001_hanzaihassei_2024,BODIKポータル（個別URL未確認）,BODIK
+宮崎県,https://data.bodik.jp/dataset/a7c23d02-7ba8-4685-a09f-576a6cc7054f,BODIKポータル（dataset: a7c23d02）,実装済
+鹿児島県,https://data.bodik.jp/dataset/d7bc06be-ac8b-4d4a-8108-9f25544276c0,BODIKポータル（dataset: d7bc06be、ファイル名非標準）,実装済
 沖縄県,https://www.police.pref.okinawa.jp/docs/2025062400016/file_contents/R7_07_okinawa_2024zitensyatou.csv,番号プレフィックスあり（R7_01_〜R7_07_）,URL確認済
