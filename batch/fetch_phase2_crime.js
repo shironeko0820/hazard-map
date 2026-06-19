@@ -271,6 +271,136 @@ const PREFECTURES = [
     },
   },
 
+  // ---- Phase 6: 調査中だった11県 ----
+  {
+    name: '北海道',
+    urlFn: (type) => {
+      const IDS = {
+        buhinnerai:         '8316',
+        hittakuri:          '8317',
+        ootobaitou:         '8318',
+        syazyounerai:       '8319',
+        zidouhanbaikinerai: '8320',
+        zidousyatou:        '8321',
+        zitensyatou:        '8322',
+      };
+      return `https://www.harp.lg.jp/opendata/dataset/2239/resource/${IDS[type]}/hokkaido_2024${type}.csv`;
+    },
+  },
+  {
+    name: '福島県',
+    urlFn: (type) =>
+      `https://www.police.pref.fukushima.jp/seianki/homepage/top_page/fukushima_2024${type}.csv`,
+  },
+  {
+    name: '石川県',
+    urlFn: (type) =>
+      `https://www.police.pref.ishikawa.jp/security/upload/seian/ishikawa_2024${type}.csv`,
+  },
+  {
+    name: '福井県',
+    urlFn: (type) => {
+      // zidouhanbaikinerai のみファイル名にプレフィックスなし
+      const file = type === 'zidouhanbaikinerai' ? `2024${type}.csv` : `fukui_2024${type}.csv`;
+      return `https://www.pref.fukui.lg.jp/kenkei/doc/kenkei/naka2-naka1600_d/fil/${file}`;
+    },
+  },
+  {
+    name: '三重県',
+    urlFn: (type) =>
+      `http://www.police.pref.mie.jp/safety_info/op_data/mie_2024${type}.csv`,
+  },
+  {
+    name: '滋賀県',
+    urlFn: (type) => {
+      // ファイルIDが連番（hittakuri=5548750〜zitensyatou=5548756）
+      const N = { hittakuri: 0, syazyounerai: 1, buhinnerai: 2, zidouhanbaikinerai: 3, zidousyatou: 4, ootobaitou: 5, zitensyatou: 6 };
+      return `https://www.police.pref.shiga.jp/file/attachment/${5548750 + N[type]}.csv`;
+    },
+  },
+  {
+    name: '鳥取県',
+    urlFn: (type) => {
+      // ローマ字表記が標準と異なる
+      const typeMap = {
+        syazyounerai:       'syajounerai',
+        zidouhanbaikinerai: 'jidouhannbaikinerai',
+        zidousyatou:        'jidousyatou',
+        ootobaitou:         'o-tobaitou',
+        zitensyatou:        'jitensyatou',
+      };
+      const t = typeMap[type] ?? type;
+      return `http://www.pref.tottori.lg.jp/secure/1180850/tottori_24${t}.csv`;
+    },
+  },
+  {
+    name: '島根県',
+    urlFn: (type) => {
+      // ひったくりデータなし（6種類のみ）
+      const IDS = {
+        hittakuri:          null,
+        syazyounerai:       '74822',
+        buhinnerai:         '74821',
+        zidouhanbaikinerai: '74820',
+        zidousyatou:        '74819',
+        ootobaitou:         '74818',
+        zitensyatou:        '74817',
+      };
+      return IDS[type] ? `https://shimane-opendata.jp/resource_download/${IDS[type]}` : null;
+    },
+  },
+  {
+    name: '岡山県',
+    urlFn: (type) => {
+      const IDS = {
+        zitensyatou:        '16225',
+        hittakuri:          '16226',
+        ootobaitou:         '16227',
+        syazyounerai:       '16228',
+        zidouhanbaikinerai: '16229',
+        zidousyatou:        '16230',
+        buhinnerai:         '16231',
+      };
+      return `https://okayama-pref.dataeye.jp/resource_download/${IDS[type]}`;
+    },
+  },
+  {
+    name: '山口県',
+    urlFn: (type) => {
+      // buhinnerai のみファイル名にtypo（yamagutchi）
+      const RIDS = {
+        hittakuri:          'c21302ba-69d9-4067-a2d8-e60bfb826be7',
+        syazyounerai:       'ac1bdcab-c655-44f1-b091-d62d7f9ba332',
+        buhinnerai:         '68699be0-4a93-41af-b3d4-6a35af3377bf',
+        zidouhanbaikinerai: '594c4ef6-0828-430c-9d5a-ad70305b4c57',
+        zidousyatou:        'd0035db1-179d-4781-af08-6af864a1e37f',
+        ootobaitou:         '9db1fdff-7457-4998-a938-f8d2d2d70c14',
+        zitensyatou:        '9634da58-64a2-4a7b-96c3-fed51c04d110',
+      };
+      const files = {
+        buhinnerai: 'yamagutchi_2024buhinnerai.csv', // typo in original filename
+      };
+      const fname = files[type] ?? `yamaguchi_2024${type}.csv`;
+      return `https://yamaguchi-opendata.jp/ckan/dataset/cc59d3cd-5153-428e-9ea9-3cc04511e565/resource/${RIDS[type]}/download/${fname}`;
+    },
+  },
+  {
+    name: '高知県',
+    urlFn: (type) => {
+      // 各犯罪種別で別々のdocsページID
+      const DOC_IDS = {
+        hittakuri:          '2025061200020',
+        syazyounerai:       '2025061200082',
+        buhinnerai:         '2025061200037',
+        zidouhanbaikinerai: '2025061200075',
+        zidousyatou:        '2025061200068',
+        ootobaitou:         '2025061200044',
+        zitensyatou:        '2025061200051',
+      };
+      return `https://www.police.pref.kochi.lg.jp/docs/${DOC_IDS[type]}/file_contents/kochi_2024${type}.csv`;
+    },
+  },
+
   // ---- Phase 4（続き）: 群馬・新潟（連番ID方式） ----
   {
     name: '群馬県',
