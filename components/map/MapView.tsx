@@ -30,6 +30,10 @@ export default function MapView() {
   const popup = useRef<maplibregl.Popup | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const { activeLayer, showCrimeChoropleth, activeHazards, mapCenter } = useMapStore();
+  const activeLayerRef = useRef(activeLayer);
+  const activeHazardsRef = useRef(activeHazards);
+  useEffect(() => { activeLayerRef.current = activeLayer; }, [activeLayer]);
+  useEffect(() => { activeHazardsRef.current = activeHazards; }, [activeHazards]);
 
   const updateLayerVisibility = useCallback((
     layer: string,
@@ -300,7 +304,52 @@ export default function MapView() {
         popup.current!.remove();
       });
 
-      // ハザードレイヤーはラスタータイルのため個別クリックなし
+      // ---- インタラクション: ハザードレイヤー クリック ----
+      m.on("click", async (e) => {
+        if (!activeLayerRef.current || activeLayerRef.current !== "hazard") return;
+        const { lng, lat } = e.lngLat;
+        const activeHaz = activeHazardsRef.current;
+        const types: string[] = [];
+        if (activeHaz.has("flood")) types.push("flood");
+        if (activeHaz.has("landslide")) types.push("landslide", "landslide-steep", "landslide-slide");
+        if (activeHaz.has("tsunami")) types.push("tsunami");
+        if (types.length === 0) return;
+
+        popup.current!
+          .setLngLat(e.lngLat)
+          .setHTML(`<div style="font-size:13px;padding:4px 2px">🔍 データ取得中...</div>`)
+          .addTo(m);
+
+        try {
+          const params = new URLSearchParams({ lat: String(lat), lng: String(lng), types: types.join(",") });
+          const res = await fetch(`/api/hazard-pixel?${params}`);
+          const data: Record<string, string | null> = await res.json();
+
+          const LABELS: Record<string, string> = {
+            flood: "🌊 洪水浸水深（想定最大規模）",
+            landslide: "⛰️ 土石流警戒区域",
+            "landslide-steep": "⛰️ 急傾斜地崩壊警戒区域",
+            "landslide-slide": "⛰️ 地すべり警戒区域",
+            tsunami: "🌊 津波浸水深",
+          };
+
+          const rows = Object.entries(data)
+            .filter(([, v]) => v !== null)
+            .map(([k, v]) => `<p style="margin:2px 0">${LABELS[k] ?? k}: <strong>${v}</strong></p>`)
+            .join("");
+
+          popup.current!
+            .setLngLat(e.lngLat)
+            .setHTML(
+              rows
+                ? `<div style="font-size:13px;line-height:1.7">${rows}<p style="margin:4px 0 0;color:#888;font-size:11px">出典: 国土交通省ハザードマップポータル</p></div>`
+                : `<div style="font-size:13px;color:#666">この地点はハザードエリア外です</div>`
+            )
+            .addTo(m);
+        } catch {
+          popup.current!.remove();
+        }
+      });
     });
 
     return () => {

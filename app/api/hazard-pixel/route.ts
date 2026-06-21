@@ -1,0 +1,139 @@
+import { NextRequest, NextResponse } from "next/server";
+import sharp from "sharp";
+
+const TILE_URLS: Record<string, string> = {
+  flood: "https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_data/{z}/{x}/{y}.png",
+  landslide: "https://disaportaldata.gsi.go.jp/raster/05_dosekiryukeikaikuiki/{z}/{x}/{y}.png",
+  "landslide-steep": "https://disaportaldata.gsi.go.jp/raster/05_kyukeishakeikaikuiki/{z}/{x}/{y}.png",
+  "landslide-slide": "https://disaportaldata.gsi.go.jp/raster/05_jisuberikeikaikuiki/{z}/{x}/{y}.png",
+  tsunami: "https://disaportaldata.gsi.go.jp/raster/04_tsunami_newlegend_data/{z}/{x}/{y}.png",
+};
+
+// 洪水浸水深の凡例色 (想定最大規模 L2)
+const FLOOD_LEGEND: Array<{ rgb: [number, number, number]; label: string }> = [
+  { rgb: [255, 247, 196], label: "0.5m未満" },
+  { rgb: [250, 213, 99],  label: "0.5〜1.0m未満" },
+  { rgb: [247, 171, 42],  label: "1.0〜2.0m未満" },
+  { rgb: [240, 107, 45],  label: "2.0〜3.0m未満" },
+  { rgb: [215, 66, 33],   label: "3.0〜4.0m未満" },
+  { rgb: [187, 37, 23],   label: "4.0〜5.0m未満" },
+  { rgb: [153, 0, 81],    label: "5.0〜10.0m未満" },
+  { rgb: [99, 0, 70],     label: "10.0〜20.0m未満" },
+  { rgb: [37, 0, 68],     label: "20.0m以上" },
+];
+
+// 津波浸水深の凡例色
+const TSUNAMI_LEGEND: Array<{ rgb: [number, number, number]; label: string }> = [
+  { rgb: [255, 247, 196], label: "0.5m未満" },
+  { rgb: [250, 213, 99],  label: "0.5〜1.0m未満" },
+  { rgb: [247, 171, 42],  label: "1.0〜2.0m未満" },
+  { rgb: [240, 107, 45],  label: "2.0〜3.0m未満" },
+  { rgb: [215, 66, 33],   label: "3.0〜4.0m未満" },
+  { rgb: [187, 37, 23],   label: "4.0〜5.0m未満" },
+  { rgb: [153, 0, 81],    label: "5.0〜10.0m未満" },
+  { rgb: [99, 0, 70],     label: "10.0〜20.0m未満" },
+  { rgb: [37, 0, 68],     label: "20.0m以上" },
+];
+
+// 土砂災害の凡例色
+const LANDSLIDE_LEGEND: Array<{ rgb: [number, number, number]; label: string }> = [
+  { rgb: [255, 217, 0],  label: "警戒区域" },
+  { rgb: [255, 0, 0],    label: "特別警戒区域" },
+];
+
+function getLegend(type: string) {
+  if (type === "flood") return FLOOD_LEGEND;
+  if (type === "tsunami") return TSUNAMI_LEGEND;
+  return LANDSLIDE_LEGEND;
+}
+
+function colorDist(a: [number, number, number], b: [number, number, number]) {
+  return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2;
+}
+
+function matchLegend(r: number, g: number, b: number, a: number, type: string): string | null {
+  if (a < 30) return null; // 透明 = ハザードなし
+  const legend = getLegend(type);
+  let best = legend[0];
+  let bestDist = Infinity;
+  for (const entry of legend) {
+    const d = colorDist([r, g, b], entry.rgb);
+    if (d < bestDist) { bestDist = d; best = entry; }
+  }
+  // 最近傍色が遠すぎる場合はハザードなしと判定
+  if (bestDist > 20000) return null;
+  return best.label;
+}
+
+function lngLatToTile(lng: number, lat: number, zoom: number) {
+  const n = 2 ** zoom;
+  const x = Math.floor(((lng + 180) / 360) * n);
+  const latRad = (lat * Math.PI) / 180;
+  const y = Math.floor(
+    ((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n
+  );
+  return { x, y };
+}
+
+function pixelInTile(lng: number, lat: number, zoom: number, tx: number, ty: number) {
+  const n = 2 ** zoom;
+  const px = Math.floor(((lng + 180) / 360) * n * 256 - tx * 256);
+  const latRad = (lat * Math.PI) / 180;
+  const py = Math.floor(
+    ((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n * 256 - ty * 256
+  );
+  return {
+    px: Math.max(0, Math.min(255, px)),
+    py: Math.max(0, Math.min(255, py)),
+  };
+}
+
+async function queryTile(type: string, lng: number, lat: number, zoom: number): Promise<string | null> {
+  const urlTemplate = TILE_URLS[type];
+  if (!urlTemplate) return null;
+
+  const { x, y } = lngLatToTile(lng, lat, zoom);
+  const { px, py } = pixelInTile(lng, lat, zoom, x, y);
+  const url = urlTemplate.replace("{z}", String(zoom)).replace("{x}", String(x)).replace("{y}", String(y));
+
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": "MachiScore/1.0" },
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+
+    const buf = Buffer.from(await res.arrayBuffer());
+    const { data } = await sharp(buf)
+      .raw()
+      .ensureAlpha()
+      .toBuffer({ resolveWithObject: true });
+
+    const idx = (py * 256 + px) * 4;
+    const r = data[idx], g = data[idx + 1], b = data[idx + 2], a = data[idx + 3];
+
+    return matchLegend(r, g, b, a, type);
+  } catch {
+    return null;
+  }
+}
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl;
+  const lat = parseFloat(searchParams.get("lat") ?? "");
+  const lng = parseFloat(searchParams.get("lng") ?? "");
+  const types = (searchParams.get("types") ?? "").split(",").filter(Boolean);
+
+  if (isNaN(lat) || isNaN(lng) || types.length === 0) {
+    return NextResponse.json({ error: "invalid params" }, { status: 400 });
+  }
+
+  const zoom = 14;
+  const results = await Promise.all(
+    types.map(async (type) => ({ type, label: await queryTile(type, lng, lat, zoom) }))
+  );
+
+  return NextResponse.json(
+    Object.fromEntries(results.map(({ type, label }) => [type, label]))
+  );
+}
