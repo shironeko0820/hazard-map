@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useCallback, useState } from "react";
-import maplibregl, { type ExpressionSpecification } from "maplibre-gl";
+import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useMapStore } from "@/lib/store";
 import type { MapFeatureProperties } from "@/types";
 import type { HazardType } from "@/lib/store";
-import CrimePointLayer from "./CrimePointLayer";
 
 // コロプレス（区ごと平均㎡単価）の色スケール: 青(低価格) → 赤(高価格)
 const CHOROPLETH_COLORS: ExpressionSpecification = [
@@ -24,27 +23,18 @@ const CHOROPLETH_COLORS: ExpressionSpecification = [
   2000000, "#a50026",
 ];
 
-const CRIME_COLORS: ExpressionSpecification = [
-  "interpolate", ["linear"], ["heatmap-density"],
-  0, "rgba(0,255,0,0)",
-  0.2, "#7fff00",
-  0.5, "#ffff00",
-  0.8, "#ff7f00",
-  1, "#ff0000",
-];
-
 
 export default function MapView() {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const popup = useRef<maplibregl.Popup | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const { activeLayer, showCrimePoints, showCrimeHeatmap, showCrimeChoropleth, activeHazards, mapCenter } = useMapStore();
+  const { activeLayer, showCrimeChoropleth, activeHazards, mapCenter } = useMapStore();
 
   const updateLayerVisibility = useCallback((
     layer: string,
     hazards: Set<string> = new Set(["flood"]),
-    crimeHeatmap: boolean = false,
+    _crimeHeatmap: boolean = false,
     crimeChoropleth: boolean = true,
   ) => {
     if (!map.current) return;
@@ -53,7 +43,6 @@ export default function MapView() {
     const allLayers = [
       "price-heatmap", "price-circle",
       "crime-choropleth-fill", "crime-choropleth-line",
-      "crime-heatmap", "crime-circle",
       "hazard-flood",
       "hazard-landslide", "hazard-landslide-steep", "hazard-landslide-slide",
       "hazard-tsunami",
@@ -65,8 +54,6 @@ export default function MapView() {
       if (layer === "price" && (id === "price-heatmap" || id === "price-circle")) visible = true;
       if (layer === "crime") {
         if ((id === "crime-choropleth-fill" || id === "crime-choropleth-line") && crimeChoropleth) visible = true;
-        if (id === "crime-heatmap" && crimeHeatmap) visible = true;
-        if (id === "crime-circle") visible = true;
       }
       if (layer === "hazard") {
         if (id === "hazard-flood" && hazards.has("flood")) visible = true;
@@ -147,36 +134,6 @@ export default function MapView() {
         layout: { visibility: "none" },
       });
 
-      // ---- 犯罪レイヤー（東京: 警視庁実データ / 他: モック）----
-      m.addSource("crime-source", { type: "geojson", data: "/crime_japan.geojson" });
-      m.addLayer({
-        id: "crime-heatmap",
-        type: "heatmap",
-        source: "crime-source",
-        maxzoom: 14,
-        paint: {
-          "heatmap-weight": 1,
-          "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 10, 1, 14, 3],
-          "heatmap-color": CRIME_COLORS,
-          "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 10, 40, 14, 60],
-          "heatmap-opacity": 0.75,
-        },
-        layout: { visibility: "none" },
-      });
-      m.addLayer({
-        id: "crime-circle",
-        type: "circle",
-        source: "crime-source",
-        minzoom: 14,
-        paint: {
-          "circle-radius": 7,
-          "circle-color": "#ff4444",
-          "circle-stroke-width": 1,
-          "circle-stroke-color": "#fff",
-          "circle-opacity": 0.85,
-        },
-        layout: { visibility: "none" },
-      });
 
       // ---- ハザードレイヤー（国土地理院 重ねるハザードマップ タイル）----
       // 洪水浸水想定区域（想定最大規模）
@@ -343,26 +300,6 @@ export default function MapView() {
         popup.current!.remove();
       });
 
-      // ---- インタラクション: 犯罪サークル ----
-      m.on("mouseenter", "crime-circle", (e) => {
-        m.getCanvas().style.cursor = "pointer";
-        const props = e.features?.[0]?.properties as MapFeatureProperties;
-        if (!props || !e.lngLat) return;
-        popup.current!
-          .setLngLat(e.lngLat)
-          .setHTML(`
-            <div class="text-sm">
-              <p class="font-bold">🚨 ${props.crime_type ?? ""}</p>
-              <p class="text-gray-600">${props.occurred_date ?? ""}</p>
-            </div>
-          `)
-          .addTo(m);
-      });
-      m.on("mouseleave", "crime-circle", () => {
-        m.getCanvas().style.cursor = "";
-        popup.current!.remove();
-      });
-
       // ハザードレイヤーはラスタータイルのため個別クリックなし
     });
 
@@ -375,8 +312,8 @@ export default function MapView() {
   // mapLoaded を依存配列に追加：地図ロード完了後に必ず実行させる
   useEffect(() => {
     if (!mapLoaded || !map.current) return;
-    updateLayerVisibility(activeLayer, activeHazards, showCrimeHeatmap, showCrimeChoropleth);
-  }, [mapLoaded, activeLayer, activeHazards, showCrimeHeatmap, showCrimeChoropleth, updateLayerVisibility]);
+    updateLayerVisibility(activeLayer, activeHazards, false, showCrimeChoropleth);
+  }, [mapLoaded, activeLayer, activeHazards, showCrimeChoropleth, updateLayerVisibility]);
 
   // 検索結果の座標へ地図を移動
   useEffect(() => {
@@ -391,9 +328,6 @@ export default function MapView() {
   return (
     <div className="w-full h-full relative">
       <div ref={mapContainer} className="w-full h-full" />
-      {mapLoaded && map.current && (
-        <CrimePointLayer map={map.current} visible={showCrimePoints} />
-      )}
     </div>
   );
 }

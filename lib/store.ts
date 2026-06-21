@@ -16,10 +16,6 @@ interface MapStore {
   setSelectedArea: (area: AreaScore | null) => void;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
-  showCrimePoints: boolean;
-  toggleCrimePoints: () => void;
-  showCrimeHeatmap: boolean;
-  toggleCrimeHeatmap: () => void;
   showCrimeChoropleth: boolean;
   toggleCrimeChoropleth: () => void;
   activeHazards: Set<HazardType>;
@@ -35,10 +31,6 @@ export const useMapStore = create<MapStore>((set) => ({
   setSelectedArea: (area) => set({ selectedArea: area }),
   searchQuery: "",
   setSearchQuery: (q) => set({ searchQuery: q }),
-  showCrimePoints: false,
-  toggleCrimePoints: () => set((s) => ({ showCrimePoints: !s.showCrimePoints })),
-  showCrimeHeatmap: true,
-  toggleCrimeHeatmap: () => set((s) => ({ showCrimeHeatmap: !s.showCrimeHeatmap })),
   showCrimeChoropleth: true,
   toggleCrimeChoropleth: () => set((s) => ({ showCrimeChoropleth: !s.showCrimeChoropleth })),
   activeHazards: new Set<HazardType>(["flood"]),
