@@ -304,8 +304,12 @@ export default function MapView() {
         popup.current!.remove();
       });
 
-      // ---- インタラクション: ハザードレイヤー クリック ----
-      m.on("click", async (e) => {
+      // ---- インタラクション: ハザードレイヤー ホバー（デバウンス200ms）----
+      let hazardDebounce: ReturnType<typeof setTimeout> | null = null;
+      m.on("mousemove", async (e) => {
+        if (activeLayerRef.current !== "hazard") return;
+        if (hazardDebounce) clearTimeout(hazardDebounce);
+        hazardDebounce = setTimeout(async () => {
         if (!activeLayerRef.current || activeLayerRef.current !== "hazard") return;
         const { lng, lat } = e.lngLat;
         const activeHaz = activeHazardsRef.current;
@@ -349,6 +353,11 @@ export default function MapView() {
         } catch {
           popup.current!.remove();
         }
+        }, 200);
+      });
+      m.on("mouseleave", () => {
+        if (hazardDebounce) clearTimeout(hazardDebounce);
+        if (activeLayerRef.current === "hazard") popup.current!.remove();
       });
     });
 
