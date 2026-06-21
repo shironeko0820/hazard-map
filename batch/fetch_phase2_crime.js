@@ -401,6 +401,28 @@ const PREFECTURES = [
     },
   },
 
+  // ---- Phase 7: 岐阜 ----
+  {
+    name: '岐阜県',
+    urlFn: (type) => {
+      // zitensyatou のみファイル名が zidensyatou（異なるローマ字）
+      const RIDS = {
+        hittakuri:          '0a6da554-8812-4da8-8fac-c95151ab741d',
+        syazyounerai:       'db3e7dae-1e20-462f-9a66-8b5992d1792b',
+        buhinnerai:         'eaacc9c0-22eb-40c8-b778-3b173c401c15',
+        zidouhanbaikinerai: '10200b9e-e263-42c0-afd5-9b9b065ef411',
+        zidousyatou:        'ad28ac6a-4c4b-45de-8e4b-18a82ef07ddb',
+        ootobaitou:         '20068f2f-4c66-4c0c-9582-a8c56aaf3563',
+        zitensyatou:        '7c8c1e64-270b-4888-b474-083f442d596f',
+      };
+      const files = {
+        zitensyatou: 'gifu_2024zidensyatou.csv', // typo in original filename
+      };
+      const fname = files[type] ?? `gifu_2024${type}.csv`;
+      return `https://gifu-opendata.pref.gifu.lg.jp/dataset/35db33b9-7e77-499e-b90d-f302fafb7aaa/resource/${RIDS[type]}/download/${fname}`;
+    },
+  },
+
   // ---- Phase 4（続き）: 群馬・新潟（連番ID方式） ----
   {
     name: '群馬県',
