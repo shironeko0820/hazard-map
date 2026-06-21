@@ -44,7 +44,7 @@ export default function MapView() {
   const updateLayerVisibility = useCallback((
     layer: string,
     hazards: Set<string> = new Set(["flood"]),
-    crimeHeatmap: boolean = true,
+    crimeHeatmap: boolean = false,
     crimeChoropleth: boolean = true,
   ) => {
     if (!map.current) return;
