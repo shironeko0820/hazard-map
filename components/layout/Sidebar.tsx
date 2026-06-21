@@ -5,13 +5,103 @@ import { useMapStore } from "@/lib/store";
 import ScoreCard from "@/components/ui/ScoreCard";
 import AffiliateLinks from "@/components/ui/AffiliateLinks";
 import AdUnit from "@/components/ui/AdUnit";
+import type { MonumentProperties } from "@/types";
+
+/** 伝承碑プロパティから表示用の値を取り出す（キー名が不確定なためフォールバック付き） */
+function getMonumentField(props: MonumentProperties, ...keys: string[]): string {
+  for (const k of keys) {
+    const v = props[k];
+    if (v != null && String(v).trim() !== "") return String(v);
+  }
+  return "";
+}
+
+function MonumentCard({ monument, onClose }: { monument: MonumentProperties; onClose: () => void }) {
+  const name        = getMonumentField(monument, "碑名", "name", "P0003", "stoneName");
+  const disaster    = getMonumentField(monument, "災害種別", "disasterType", "P0004", "disaster");
+  const year        = getMonumentField(monument, "建立年", "year", "P0005", "disasterYear");
+  const description = getMonumentField(monument, "伝承内容", "description", "P0006", "explanation", "content");
+  const address     = getMonumentField(monument, "所在地", "address", "P0007", "location");
+  const disasterName = getMonumentField(monument, "災害名", "disasterName");
+  const pref        = getMonumentField(monument, "pref", "prefecture", "P0001");
+  const city        = getMonumentField(monument, "city", "municipality", "P0002");
+
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <p className="text-xs text-amber-600 font-medium">📜 自然災害伝承碑</p>
+          <h2 className="text-base font-bold text-gray-800 mt-0.5">{name || "（碑名不明）"}</h2>
+          {(pref || city) && <p className="text-xs text-gray-500">{pref}{city}</p>}
+        </div>
+        <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl leading-none mt-0.5">×</button>
+      </div>
+
+      <div className="bg-amber-50 rounded-lg p-3 flex flex-col gap-1.5 text-sm">
+        {disasterName && (
+          <div className="flex gap-2">
+            <span className="text-gray-500 shrink-0">災害名</span>
+            <span className="font-medium text-gray-800">{disasterName}</span>
+          </div>
+        )}
+        {disaster && (
+          <div className="flex gap-2">
+            <span className="text-gray-500 shrink-0">種別</span>
+            <span className="font-medium text-gray-800">{disaster}</span>
+          </div>
+        )}
+        {year && (
+          <div className="flex gap-2">
+            <span className="text-gray-500 shrink-0">建立年</span>
+            <span className="font-medium text-gray-800">{year}年</span>
+          </div>
+        )}
+        {address && (
+          <div className="flex gap-2">
+            <span className="text-gray-500 shrink-0">所在地</span>
+            <span className="text-gray-700">{address}</span>
+          </div>
+        )}
+      </div>
+
+      {description && (
+        <div className="text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-lg p-3">
+          {description}
+        </div>
+      )}
+
+      <p className="text-xs text-gray-400">出典: 国土地理院 自然災害伝承碑</p>
+    </div>
+  );
+}
 
 function SidebarContent({
   onClose,
 }: {
   onClose: () => void;
 }) {
-  const { selectedArea } = useMapStore();
+  const { selectedArea, selectedMonument, setSelectedMonument, showHistory, activeLayer } = useMapStore();
+
+  // 過去の被害モード: 伝承碑選択時
+  if (activeLayer === "hazard" && showHistory) {
+    if (selectedMonument) {
+      return <MonumentCard monument={selectedMonument} onClose={() => setSelectedMonument(null)} />;
+    }
+    return (
+      <div className="flex flex-col items-center justify-center flex-1 text-center text-gray-400 gap-3 py-12">
+        <span className="text-5xl">📜</span>
+        <p className="font-medium text-gray-600">伝承碑をクリックしてください</p>
+        <p className="text-sm">地図上のオレンジ色のアイコンをクリックすると、過去の災害記録を表示します。</p>
+        <div className="mt-2 text-xs text-left bg-amber-50 rounded-lg p-3 w-full">
+          <p className="font-medium text-amber-700 mb-1">表示内容</p>
+          <ul className="space-y-1 text-amber-600">
+            <li>📜 <strong>自然災害伝承碑</strong> — 過去の災害を記録した石碑</li>
+            <li>🌊 <strong>浸水実績図</strong> — 過去に浸水した区域（年代不明・複数年の重ね合わせ）</li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
 
   if (!selectedArea) {
     return (

@@ -88,10 +88,19 @@ jobs:
       - name: Generate crime choropleth (市区町村別認知件数集計)
         run: node batch/gen_crime_choropleth.js
 
+      - name: Fetch disaster monuments (自然災害伝承碑 国土地理院)
+        run: |
+          echo "=== 自然災害伝承碑データ取得 ==="
+          curl -fsSL "https://www.gsi.go.jp/common/000250767.zip" -o /tmp/monuments.zip
+          mkdir -p /tmp/monuments_extracted
+          unzip -o /tmp/monuments.zip -d /tmp/monuments_extracted/
+          ls /tmp/monuments_extracted/
+          MONUMENTS_TMP_DIR=/tmp/monuments_extracted node batch/fetch_disaster_monuments.js
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/price_by_municipality.json public/choropleth.geojson public/crime_japan.geojson public/crime_mock.geojson public/crime_choropleth.geojson
-          git diff --staged --quiet || git commit -m "data: update price choropleth + nationwide crime data $(date +'%Y-%m-%d')"
+          git add public/price_by_municipality.json public/choropleth.geojson public/crime_japan.geojson public/crime_mock.geojson public/crime_choropleth.geojson public/disaster_monuments.geojson
+          git diff --staged --quiet || git commit -m "data: update price choropleth + nationwide crime data + disaster monuments $(date +'%Y-%m-%d')"
           git push

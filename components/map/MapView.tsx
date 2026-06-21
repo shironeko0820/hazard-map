@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useMapStore } from "@/lib/store";
-import type { MapFeatureProperties } from "@/types";
+import type { MapFeatureProperties, MonumentProperties } from "@/types";
 import type { HazardType } from "@/lib/store";
 
 // コロプレス（区ごと平均㎡単価）の色スケール: 青(低価格) → 赤(高価格)
@@ -29,11 +29,13 @@ export default function MapView() {
   const map = useRef<maplibregl.Map | null>(null);
   const popup = useRef<maplibregl.Popup | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const { activeLayer, showCrimeChoropleth, activeHazards, mapCenter } = useMapStore();
+  const { activeLayer, showCrimeChoropleth, activeHazards, showHistory, setSelectedMonument, mapCenter } = useMapStore();
   const activeLayerRef = useRef(activeLayer);
   const activeHazardsRef = useRef(activeHazards);
+  const showHistoryRef = useRef(showHistory);
   useEffect(() => { activeLayerRef.current = activeLayer; }, [activeLayer]);
   useEffect(() => { activeHazardsRef.current = activeHazards; }, [activeHazards]);
+  useEffect(() => { showHistoryRef.current = showHistory; }, [showHistory]);
 
   const updateLayerVisibility = useCallback((
     layer: string,
@@ -50,6 +52,8 @@ export default function MapView() {
       "hazard-flood",
       "hazard-landslide", "hazard-landslide-steep", "hazard-landslide-slide",
       "hazard-tsunami",
+      "history-flood",
+      "monuments-circle", "monuments-label",
     ];
 
     allLayers.forEach((id) => {
@@ -60,12 +64,17 @@ export default function MapView() {
         if ((id === "crime-choropleth-fill" || id === "crime-choropleth-line") && crimeChoropleth) visible = true;
       }
       if (layer === "hazard") {
-        if (id === "hazard-flood" && hazards.has("flood")) visible = true;
-        if (
-          (id === "hazard-landslide" || id === "hazard-landslide-steep" || id === "hazard-landslide-slide")
-          && hazards.has("landslide")
-        ) visible = true;
-        if (id === "hazard-tsunami" && hazards.has("tsunami")) visible = true;
+        const hist = showHistoryRef.current;
+        if (!hist) {
+          if (id === "hazard-flood" && hazards.has("flood")) visible = true;
+          if (
+            (id === "hazard-landslide" || id === "hazard-landslide-steep" || id === "hazard-landslide-slide")
+            && hazards.has("landslide")
+          ) visible = true;
+          if (id === "hazard-tsunami" && hazards.has("tsunami")) visible = true;
+        } else {
+          if (id === "history-flood" || id === "monuments-circle" || id === "monuments-label") visible = true;
+        }
       }
       m.setLayoutProperty(id, "visibility", visible ? "visible" : "none");
     });
@@ -220,6 +229,57 @@ export default function MapView() {
         layout: { visibility: "none" },
       });
 
+      // ---- 過去の被害レイヤー ----
+      // 浸水実績図（計画規模 L1 — 複数年実績の重ね合わせ、年代非表示）
+      m.addSource("history-flood-source", {
+        type: "raster",
+        tiles: ["https://disaportaldata.gsi.go.jp/raster/01_flood_l1_shinsuishin_data/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        attribution: "国土交通省 ハザードマップポータルサイト",
+        minzoom: 2, maxzoom: 17,
+      });
+      m.addLayer({
+        id: "history-flood",
+        type: "raster",
+        source: "history-flood-source",
+        paint: { "raster-opacity": 0.65 },
+        layout: { visibility: "none" },
+      });
+
+      // 自然災害伝承碑（国土地理院）
+      m.addSource("monuments-source", {
+        type: "geojson",
+        data: "/disaster_monuments.geojson",
+        cluster: true,
+        clusterMaxZoom: 12,
+        clusterRadius: 40,
+      });
+      m.addLayer({
+        id: "monuments-circle",
+        type: "circle",
+        source: "monuments-source",
+        paint: {
+          "circle-radius": ["case", ["has", "point_count"], ["interpolate", ["linear"], ["get", "point_count"], 1, 14, 50, 22], 10],
+          "circle-color": "#d97706",
+          "circle-stroke-width": 2,
+          "circle-stroke-color": "#fff",
+          "circle-opacity": 0.9,
+        },
+        layout: { visibility: "none" },
+      });
+      m.addLayer({
+        id: "monuments-label",
+        type: "symbol",
+        source: "monuments-source",
+        layout: {
+          "text-field": ["case", ["has", "point_count"], ["to-string", ["get", "point_count"]], "📜"],
+          "text-size": 11,
+          "text-font": ["NotoSansJP-Regular"],
+          visibility: "none",
+        },
+        paint: { "text-color": "#fff" },
+      });
+
       // mapLoaded を true にすることで上の useEffect が activeLayer で正しく実行される
       setMapLoaded(true);
 
@@ -304,6 +364,27 @@ export default function MapView() {
         popup.current!.remove();
       });
 
+      // ---- インタラクション: 伝承碑クリック ----
+      m.on("click", "monuments-circle", (e) => {
+        const feature = e.features?.[0];
+        if (!feature) return;
+        // クラスター展開
+        if (feature.properties?.cluster) {
+          const clusterId = feature.properties.cluster_id as number;
+          const src = m.getSource("monuments-source") as maplibregl.GeoJSONSource;
+          src.getClusterExpansionZoom(clusterId, (err, zoom) => {
+            if (err || zoom == null) return;
+            const coords = (feature.geometry as GeoJSON.Point).coordinates as [number, number];
+            m.easeTo({ center: coords, zoom });
+          });
+          return;
+        }
+        const props = feature.properties as MonumentProperties;
+        setSelectedMonument(props);
+      });
+      m.on("mouseenter", "monuments-circle", () => { m.getCanvas().style.cursor = "pointer"; });
+      m.on("mouseleave", "monuments-circle", () => { m.getCanvas().style.cursor = ""; });
+
       // ---- インタラクション: ハザードレイヤー ホバー（デバウンス200ms）----
       let hazardDebounce: ReturnType<typeof setTimeout> | null = null;
       m.on("mousemove", async (e) => {
@@ -371,7 +452,7 @@ export default function MapView() {
   useEffect(() => {
     if (!mapLoaded || !map.current) return;
     updateLayerVisibility(activeLayer, activeHazards, false, showCrimeChoropleth);
-  }, [mapLoaded, activeLayer, activeHazards, showCrimeChoropleth, updateLayerVisibility]);
+  }, [mapLoaded, activeLayer, activeHazards, showCrimeChoropleth, showHistory, updateLayerVisibility]);
 
   // 検索結果の座標へ地図を移動
   useEffect(() => {

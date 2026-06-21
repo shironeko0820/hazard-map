@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { LayerType, AreaScore } from "@/types";
+import type { LayerType, AreaScore, MonumentProperties } from "@/types";
 
 export type HazardType = "flood" | "landslide" | "tsunami";
 
@@ -20,6 +20,10 @@ interface MapStore {
   toggleCrimeChoropleth: () => void;
   activeHazards: Set<HazardType>;
   toggleHazard: (h: HazardType) => void;
+  showHistory: boolean;
+  setShowHistory: (v: boolean) => void;
+  selectedMonument: MonumentProperties | null;
+  setSelectedMonument: (m: MonumentProperties | null) => void;
   mapCenter: MapCenter | null;
   setMapCenter: (center: MapCenter) => void;
 }
@@ -38,8 +42,18 @@ export const useMapStore = create<MapStore>((set) => ({
     set((s) => {
       const next = new Set(s.activeHazards);
       next.has(h) ? next.delete(h) : next.add(h);
-      return { activeHazards: next };
+      // 将来リスクトグル時は過去の被害を解除
+      return { activeHazards: next, showHistory: false };
     }),
+  showHistory: false,
+  setShowHistory: (v) =>
+    set(() => ({
+      showHistory: v,
+      // 過去の被害ON時は将来リスクをデフォルト（洪水）に戻す
+      activeHazards: v ? new Set<HazardType>(["flood"]) : new Set<HazardType>(["flood"]),
+    })),
+  selectedMonument: null,
+  setSelectedMonument: (m) => set({ selectedMonument: m }),
   mapCenter: null,
   setMapCenter: (center) => set({ mapCenter: center }),
 }));

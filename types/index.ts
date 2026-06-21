@@ -32,6 +32,19 @@ export interface AreaScore {
   nearbyAreas?: { cityCode: string; cityName: string; overallScore: number }[];
 }
 
+export interface MonumentProperties {
+  // 国土地理院 自然災害伝承碑 プロパティ（実際のキー名はAPIレスポンス依存）
+  name?: string;
+  disasterType?: string;
+  year?: string | number;
+  description?: string;
+  address?: string;
+  pref?: string;
+  city?: string;
+  // 代替キー名パターン
+  [key: string]: string | number | boolean | undefined;
+}
+
 export interface MapFeatureProperties {
   // price layer (individual transactions)
   price_per_sqm?: number;

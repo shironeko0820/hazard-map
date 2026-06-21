@@ -21,6 +21,7 @@ export default function LayerControl() {
     activeLayer, setActiveLayer,
     showCrimeChoropleth, toggleCrimeChoropleth,
     activeHazards, toggleHazard,
+    showHistory, setShowHistory,
   } = useMapStore();
 
   return (
@@ -48,9 +49,9 @@ export default function LayerControl() {
           {HAZARD_TYPES.map((h) => (
             <button
               key={h.id}
-              onClick={() => toggleHazard(h.id)}
+              onClick={() => { setShowHistory(false); toggleHazard(h.id); }}
               className={`flex items-center gap-1 px-3 py-1.5 text-xs font-medium transition-colors ${
-                activeHazards.has(h.id)
+                !showHistory && activeHazards.has(h.id)
                   ? `${h.color} text-white`
                   : "text-gray-500 hover:bg-gray-50"
               }`}
@@ -58,6 +59,17 @@ export default function LayerControl() {
               {h.label}
             </button>
           ))}
+          <button
+            onClick={() => setShowHistory(!showHistory)}
+            className={`flex items-center gap-1 px-3 py-1.5 text-xs font-medium border-l border-gray-200 transition-colors ${
+              showHistory
+                ? "bg-amber-600 text-white"
+                : "text-gray-500 hover:bg-gray-50"
+            }`}
+          >
+            <span>📜</span>
+            <span>過去の被害</span>
+          </button>
         </div>
       )}
 
