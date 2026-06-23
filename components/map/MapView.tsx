@@ -389,9 +389,11 @@ export default function MapView() {
       let hazardDebounce: ReturnType<typeof setTimeout> | null = null;
       m.on("mousemove", async (e) => {
         if (activeLayerRef.current !== "hazard") return;
+        if (showHistoryRef.current) return;
         if (hazardDebounce) clearTimeout(hazardDebounce);
         hazardDebounce = setTimeout(async () => {
         if (!activeLayerRef.current || activeLayerRef.current !== "hazard") return;
+        if (showHistoryRef.current) return;
         const { lng, lat } = e.lngLat;
         const activeHaz = activeHazardsRef.current;
         const types: string[] = [];
