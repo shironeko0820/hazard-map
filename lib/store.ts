@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import type { LayerType, AreaScore, MonumentProperties } from "@/types";
 
-export type HazardType = "flood" | "landslide" | "tsunami";
+export type HazardType = "flood" | "landslide" | "tsunami" | "earthquake";
 
 export interface MapCenter {
   lat: number;

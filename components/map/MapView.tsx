@@ -52,6 +52,7 @@ export default function MapView() {
       "hazard-flood",
       "hazard-landslide", "hazard-landslide-steep", "hazard-landslide-slide",
       "hazard-tsunami",
+      "hazard-earthquake",
       "history-flood",
       "monuments-circle", "monuments-label",
     ];
@@ -72,6 +73,7 @@ export default function MapView() {
             && hazards.has("landslide")
           ) visible = true;
           if (id === "hazard-tsunami" && hazards.has("tsunami")) visible = true;
+          if (id === "hazard-earthquake" && hazards.has("earthquake")) visible = true;
         } else {
           if (id === "history-flood" || id === "monuments-circle" || id === "monuments-label") visible = true;
         }
@@ -225,6 +227,22 @@ export default function MapView() {
         id: "hazard-tsunami",
         type: "raster",
         source: "hazard-tsunami-source",
+        paint: { "raster-opacity": 0.7 },
+        layout: { visibility: "none" },
+      });
+
+      // 地震動予測地図（J-SHIS: 30年以内に震度6弱以上となる確率）
+      m.addSource("hazard-earthquake-source", {
+        type: "raster",
+        tiles: ["https://jshis.bosai.go.jp/map/xyz/pshm/V3/30-60/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        attribution: "防災科学技術研究所 J-SHIS 全国地震動予測地図",
+        minzoom: 2, maxzoom: 11,
+      });
+      m.addLayer({
+        id: "hazard-earthquake",
+        type: "raster",
+        source: "hazard-earthquake-source",
         paint: { "raster-opacity": 0.7 },
         layout: { visibility: "none" },
       });
@@ -400,6 +418,7 @@ export default function MapView() {
         if (activeHaz.has("flood")) types.push("flood");
         if (activeHaz.has("landslide")) types.push("landslide", "landslide-steep", "landslide-slide");
         if (activeHaz.has("tsunami")) types.push("tsunami");
+        if (activeHaz.has("earthquake")) types.push("earthquake");
         if (types.length === 0) return;
 
         popup.current!
@@ -418,6 +437,7 @@ export default function MapView() {
             "landslide-steep": "⛰️ 急傾斜地崩壊警戒区域",
             "landslide-slide": "⛰️ 地すべり警戒区域",
             tsunami: "🌊 津波浸水深",
+            earthquake: "🔴 地震確率（30年以内・震度6弱以上）",
           };
 
           const rows = Object.entries(data)

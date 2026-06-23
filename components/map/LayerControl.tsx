@@ -11,9 +11,10 @@ const LAYERS: { id: LayerType; label: string; icon: string }[] = [
 ];
 
 const HAZARD_TYPES: { id: HazardType; label: string; color: string }[] = [
-  { id: "flood",     label: "洪水",   color: "bg-blue-500" },
-  { id: "landslide", label: "土砂災害", color: "bg-orange-500" },
-  { id: "tsunami",   label: "津波",   color: "bg-purple-500" },
+  { id: "flood",      label: "洪水",    color: "bg-blue-500" },
+  { id: "landslide",  label: "土砂災害", color: "bg-orange-500" },
+  { id: "tsunami",    label: "津波",    color: "bg-purple-500" },
+  { id: "earthquake", label: "地震",    color: "bg-red-600" },
 ];
 
 export default function LayerControl() {

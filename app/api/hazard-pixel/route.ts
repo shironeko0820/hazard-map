@@ -7,7 +7,18 @@ const TILE_URLS: Record<string, string> = {
   "landslide-steep": "https://disaportaldata.gsi.go.jp/raster/05_kyukeishakeikaikuiki/{z}/{x}/{y}.png",
   "landslide-slide": "https://disaportaldata.gsi.go.jp/raster/05_jisuberikeikaikuiki/{z}/{x}/{y}.png",
   tsunami: "https://disaportaldata.gsi.go.jp/raster/04_tsunami_newlegend_data/{z}/{x}/{y}.png",
+  earthquake: "https://jshis.bosai.go.jp/map/xyz/pshm/V3/30-60/{z}/{x}/{y}.png",
 };
+
+// J-SHIS 地震動予測地図: 30年以内に震度6弱以上となる確率
+const EARTHQUAKE_LEGEND: Array<{ rgb: [number, number, number]; label: string }> = [
+  { rgb: [196,   0,   0], label: "60%以上（極めて高い）" },
+  { rgb: [220,  48,   0], label: "40〜60%（非常に高い）" },
+  { rgb: [220, 124,   0], label: "26〜40%（高い）" },
+  { rgb: [220, 220,   0], label: "6〜26%（やや高い）" },
+  { rgb: [160, 220,   0], label: "3〜6%（低い）" },
+  { rgb: [  0, 160,   0], label: "3%未満（非常に低い）" },
+];
 
 // 洪水浸水深の凡例色 (想定最大規模 L2)
 const FLOOD_LEGEND: Array<{ rgb: [number, number, number]; label: string }> = [
@@ -44,6 +55,7 @@ const LANDSLIDE_LEGEND: Array<{ rgb: [number, number, number]; label: string }> 
 function getLegend(type: string) {
   if (type === "flood") return FLOOD_LEGEND;
   if (type === "tsunami") return TSUNAMI_LEGEND;
+  if (type === "earthquake") return EARTHQUAKE_LEGEND;
   return LANDSLIDE_LEGEND;
 }
 
@@ -88,7 +100,7 @@ function pixelInTile(lng: number, lat: number, zoom: number, tx: number, ty: num
   };
 }
 
-async function queryTile(type: string, lng: number, lat: number, zoom: number): Promise<string | null> {
+async function queryTile(type: string, lng: number, lat: number, zoom = 14): Promise<string | null> {
   const urlTemplate = TILE_URLS[type];
   if (!urlTemplate) return null;
 
@@ -128,9 +140,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "invalid params" }, { status: 400 });
   }
 
-  const zoom = 14;
   const results = await Promise.all(
-    types.map(async (type) => ({ type, label: await queryTile(type, lng, lat, zoom) }))
+    types.map(async (type) => {
+      const zoom = type === "earthquake" ? 10 : 14;
+      return { type, label: await queryTile(type, lng, lat, zoom) };
+    })
   );
 
   return NextResponse.json(
