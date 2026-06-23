@@ -450,7 +450,7 @@ export default function MapView() {
           // 出典を種別ごとに出し分け（年度付き）
           const hitKeys = entries.map(([k]) => k);
           const attributions: string[] = [];
-          if (hitKeys.some(k => k !== "earthquake")) attributions.push("国土交通省 ハザードマップポータル（令和3年度）");
+          if (hitKeys.some(k => k !== "earthquake")) attributions.push("国土交通省 ハザードマップポータル（2021年度）");
           if (hitKeys.includes("earthquake"))        attributions.push("防災科研 J-SHIS 全国地震動予測地図（2024年版）");
           const attributionHtml = attributions.map(a => `<p style="margin:1px 0">${a}</p>`).join("");
 
