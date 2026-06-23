@@ -442,16 +442,23 @@ export default function MapView() {
             earthquake: "🔴 地震確率（30年以内・震度6弱以上）",
           };
 
-          const rows = Object.entries(data)
-            .filter(([, v]) => v !== null)
+          const entries = Object.entries(data).filter(([, v]) => v !== null);
+          const validRows = entries
             .map(([k, v]) => `<p style="margin:2px 0">${LABELS[k] ?? k}: <strong>${v}</strong></p>`)
             .join("");
+
+          // 出典を種別ごとに出し分け（年度付き）
+          const hitKeys = entries.map(([k]) => k);
+          const attributions: string[] = [];
+          if (hitKeys.some(k => k !== "earthquake")) attributions.push("国土交通省 ハザードマップポータル（令和3年度）");
+          if (hitKeys.includes("earthquake"))        attributions.push("防災科研 J-SHIS 全国地震動予測地図（2024年版）");
+          const attributionHtml = attributions.map(a => `<p style="margin:1px 0">${a}</p>`).join("");
 
           popup.current!
             .setLngLat(e.lngLat)
             .setHTML(
-              rows
-                ? `<div style="font-size:13px;line-height:1.7">${rows}<p style="margin:4px 0 0;color:#888;font-size:11px">出典: 国土交通省ハザードマップポータル</p></div>`
+              validRows
+                ? `<div style="font-size:13px;line-height:1.7">${validRows}<div style="margin-top:5px;padding-top:4px;border-top:1px solid #eee;color:#888;font-size:10px;line-height:1.6">${attributionHtml}</div></div>`
                 : `<div style="font-size:13px;color:#666">この地点はハザードエリア外です</div>`
             )
             .addTo(m);

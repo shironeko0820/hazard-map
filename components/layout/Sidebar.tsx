@@ -70,7 +70,7 @@ function MonumentCard({ monument, onClose }: { monument: MonumentProperties; onC
         </div>
       )}
 
-      <p className="text-xs text-gray-400">出典: 国土地理院 自然災害伝承碑</p>
+      <p className="text-xs text-gray-400">出典: 国土地理院 自然災害伝承碑（2026年5月更新）</p>
     </div>
   );
 }
