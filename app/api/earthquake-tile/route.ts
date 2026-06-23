@@ -23,16 +23,17 @@ export async function GET(req: NextRequest) {
   }
 
   const bbox = tileToBbox(z, x, y);
+  // 512×512で取得 → 同じ画面カバレッジをリクエスト数1/4で実現
   const wmsUrl =
     "https://www.j-shis.bosai.go.jp/map/wms/jmw" +
     "?map=P-Y2024-MAP-AVR-TTL_MTTL&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap" +
     "&LAYERS=P-Y2024-MAP-AVR-TTL_MTTL-T30_I60_PD2&FORMAT=image/png" +
-    `&TRANSPARENT=true&SRS=EPSG:4326&WIDTH=256&HEIGHT=256&BBOX=${bbox}`;
+    `&TRANSPARENT=true&SRS=EPSG:4326&WIDTH=512&HEIGHT=512&BBOX=${bbox}`;
 
   try {
     const res = await fetch(wmsUrl, {
       headers: { "User-Agent": "MachiScore/1.0" },
-      next: { revalidate: 86400 },
+      next: { revalidate: 604800 }, // 7日間サーバーキャッシュ
     });
     if (!res.ok) return new NextResponse(null, { status: res.status });
 
@@ -40,7 +41,10 @@ export async function GET(req: NextRequest) {
     return new NextResponse(buf, {
       headers: {
         "Content-Type": "image/png",
-        "Cache-Control": "public, max-age=86400",
+        // public: ブラウザ・CDN両方でキャッシュ
+        // s-maxage: Vercel Edge CDNに7日キャッシュ（地震データはほぼ不変）
+        // stale-while-revalidate: 期限切れ後も古いキャッシュを即返しつつバックグラウンド更新
+        "Cache-Control": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400",
       },
     });
   } catch {

@@ -236,7 +236,9 @@ export default function MapView() {
       m.addSource("hazard-earthquake-source", {
         type: "raster",
         tiles: ["/api/earthquake-tile?z={z}&x={x}&y={y}"],
-        tileSize: 256,
+        tileSize: 512,  // 256の4倍面積 → リクエスト数1/4
+        minzoom: 4,
+        maxzoom: 8,     // zoom8以上は同タイルを拡大表示（地震リスクは街区レベル不変）
         attribution: "防災科学技術研究所 J-SHIS 全国地震動予測地図 2024年版",
       });
       m.addLayer({
