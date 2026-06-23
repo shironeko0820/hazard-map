@@ -41,8 +41,19 @@ export const useMapStore = create<MapStore>((set) => ({
   toggleHazard: (h) =>
     set((s) => {
       const next = new Set(s.activeHazards);
-      next.has(h) ? next.delete(h) : next.add(h);
-      // 将来リスクトグル時は過去の被害を解除
+      if (h === "earthquake") {
+        // 地震は単独表示（洪水/土砂/津波と同時表示しない）
+        if (next.has("earthquake")) {
+          next.delete("earthquake");
+        } else {
+          next.clear();
+          next.add("earthquake");
+        }
+      } else {
+        // 洪水/土砂/津波 → 地震を解除してからトグル
+        next.delete("earthquake");
+        next.has(h) ? next.delete(h) : next.add(h);
+      }
       return { activeHazards: next, showHistory: false };
     }),
   showHistory: false,

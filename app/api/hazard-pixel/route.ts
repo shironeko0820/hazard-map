@@ -63,7 +63,21 @@ function colorDist(a: [number, number, number], b: [number, number, number]) {
   return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2;
 }
 
+function matchEarthquake(r: number, g: number, b: number, a: number): string | null {
+  if (a < 20) return null;
+  // J-SHIS V3 タイルは赤(高リスク)→黄(中)→緑(低リスク)のグラデーション
+  // 赤成分と緑成分の比率で確率帯を判定
+  if (r > 200 && g < 80)  return "60%以上（極めて高い）";
+  if (r > 180 && g < 140) return "40〜60%（非常に高い）";
+  if (r > 150 && g < 180) return "26〜40%（高い）";
+  if (r > 120 && g > 150) return "6〜26%（やや高い）";
+  if (g > 150 && r < 140) return "3〜6%（低い）";
+  if (g > 100 && r < 120) return "3%未満（非常に低い）";
+  return "3%未満（非常に低い）";
+}
+
 function matchLegend(r: number, g: number, b: number, a: number, type: string): string | null {
+  if (type === "earthquake") return matchEarthquake(r, g, b, a);
   if (a < 30) return null; // 透明 = ハザードなし
   const legend = getLegend(type);
   let best = legend[0];
