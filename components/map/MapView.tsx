@@ -231,13 +231,16 @@ export default function MapView() {
         layout: { visibility: "none" },
       });
 
-      // 地震動予測地図（J-SHIS: 30年以内に震度6弱以上となる確率）
+      // 地震動予測地図（J-SHIS WMS: 30年以内に震度6弱以上となる確率）
+      const JSHIS_WMS = "https://www.j-shis.bosai.go.jp/map/wms/jmw"
+        + "?map=P-Y2024-MAP-AVR-TTL_MTTL&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap"
+        + "&LAYERS=P-Y2024-MAP-AVR-TTL_MTTL-T30_I60_PD2&FORMAT=image/png"
+        + "&TRANSPARENT=true&SRS=EPSG:3857&WIDTH=256&HEIGHT=256&BBOX={bbox-epsg-3857}";
       m.addSource("hazard-earthquake-source", {
         type: "raster",
-        tiles: ["https://jshis.bosai.go.jp/map/xyz/pshm/V3/30-60/{z}/{x}/{y}.png"],
+        tiles: [JSHIS_WMS],
         tileSize: 256,
-        attribution: "防災科学技術研究所 J-SHIS 全国地震動予測地図",
-        minzoom: 2, maxzoom: 11,
+        attribution: "防災科学技術研究所 J-SHIS 全国地震動予測地図 2024年版",
       });
       m.addLayer({
         id: "hazard-earthquake",

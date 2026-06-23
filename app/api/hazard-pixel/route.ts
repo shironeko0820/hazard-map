@@ -7,7 +7,6 @@ const TILE_URLS: Record<string, string> = {
   "landslide-steep": "https://disaportaldata.gsi.go.jp/raster/05_kyukeishakeikaikuiki/{z}/{x}/{y}.png",
   "landslide-slide": "https://disaportaldata.gsi.go.jp/raster/05_jisuberikeikaikuiki/{z}/{x}/{y}.png",
   tsunami: "https://disaportaldata.gsi.go.jp/raster/04_tsunami_newlegend_data/{z}/{x}/{y}.png",
-  earthquake: "https://jshis.bosai.go.jp/map/xyz/pshm/V3/30-60/{z}/{x}/{y}.png",
 };
 
 // J-SHIS 地震動予測地図: 30年以内に震度6弱以上となる確率
@@ -114,6 +113,31 @@ function pixelInTile(lng: number, lat: number, zoom: number, tx: number, ty: num
   };
 }
 
+// J-SHIS WMS: 256x256画像を取得し中心ピクセルの色で確率帯を判定
+async function queryEarthquake(lng: number, lat: number): Promise<string | null> {
+  const d = 0.003;
+  const bbox = `${lng - d},${lat - d},${lng + d},${lat + d}`;
+  const url = "https://www.j-shis.bosai.go.jp/map/wms/jmw"
+    + "?map=P-Y2024-MAP-AVR-TTL_MTTL&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap"
+    + "&LAYERS=P-Y2024-MAP-AVR-TTL_MTTL-T30_I60_PD2&FORMAT=image/png"
+    + `&TRANSPARENT=true&SRS=EPSG:4326&WIDTH=256&HEIGHT=256&BBOX=${bbox}`;
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": "MachiScore/1.0" },
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+    const buf = Buffer.from(await res.arrayBuffer());
+    const { data } = await sharp(buf).raw().ensureAlpha().toBuffer({ resolveWithObject: true });
+    const cx = 128, cy = 128;
+    const idx = (cy * 256 + cx) * 4;
+    const r = data[idx], g = data[idx + 1], b = data[idx + 2], a = data[idx + 3];
+    return matchEarthquake(r, g, b, a);
+  } catch {
+    return null;
+  }
+}
+
 async function queryTile(type: string, lng: number, lat: number, zoom = 14): Promise<string | null> {
   const urlTemplate = TILE_URLS[type];
   if (!urlTemplate) return null;
@@ -156,8 +180,10 @@ export async function GET(req: NextRequest) {
 
   const results = await Promise.all(
     types.map(async (type) => {
-      const zoom = type === "earthquake" ? 10 : 14;
-      return { type, label: await queryTile(type, lng, lat, zoom) };
+      const label = type === "earthquake"
+        ? await queryEarthquake(lng, lat)
+        : await queryTile(type, lng, lat);
+      return { type, label };
     })
   );
 
