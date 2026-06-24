@@ -141,18 +141,24 @@ function SidebarContent({
 }
 
 export default function Sidebar() {
-  const { selectedArea, setSelectedArea } = useMapStore();
+  const { selectedArea, setSelectedArea, selectedMonument, setSelectedMonument } = useMapStore();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // エリア選択時にモバイルシートを自動オープン
+  // エリア選択 or 伝承碑選択時にモバイルシートを自動オープン
   useEffect(() => {
     if (selectedArea) setMobileOpen(true);
   }, [selectedArea]);
+
+  useEffect(() => {
+    if (selectedMonument) setMobileOpen(true);
+  }, [selectedMonument]);
 
   function handleClose() {
     setSelectedArea(null);
     setMobileOpen(false);
   }
+
+  const mobileSheetVisible = !!(selectedArea || selectedMonument);
 
   return (
     <>
@@ -164,7 +170,7 @@ export default function Sidebar() {
       </aside>
 
       {/* ── モバイル: 底部シート ── */}
-      {selectedArea && (
+      {mobileSheetVisible && (
         <>
           {/* 背景オーバーレイ */}
           <div

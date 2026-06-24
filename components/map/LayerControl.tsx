@@ -46,12 +46,13 @@ export default function LayerControl() {
 
       {/* ── 災害サブトグル ── */}
       {activeLayer === "hazard" && (
-        <div className="flex bg-white rounded-full shadow-lg border border-gray-200 overflow-hidden">
+        <div className="flex bg-white rounded-full shadow-lg border border-gray-200 overflow-x-auto max-w-[calc(100vw-2rem)]"
+             style={{ scrollbarWidth: "none" }}>
           {HAZARD_TYPES.map((h) => (
             <button
               key={h.id}
               onClick={() => { setShowHistory(false); toggleHazard(h.id); }}
-              className={`flex items-center gap-1 px-3 py-1.5 text-xs font-medium transition-colors ${
+              className={`flex-shrink-0 flex items-center gap-1 px-2.5 md:px-3 py-1.5 text-xs font-medium transition-colors ${
                 !showHistory && activeHazards.has(h.id)
                   ? `${h.color} text-white`
                   : "text-gray-500 hover:bg-gray-50"
@@ -62,14 +63,14 @@ export default function LayerControl() {
           ))}
           <button
             onClick={() => setShowHistory(!showHistory)}
-            className={`flex items-center gap-1 px-3 py-1.5 text-xs font-medium border-l border-gray-200 transition-colors ${
+            className={`flex-shrink-0 flex items-center gap-1 px-2.5 md:px-3 py-1.5 text-xs font-medium border-l border-gray-200 transition-colors ${
               showHistory
                 ? "bg-amber-600 text-white"
                 : "text-gray-500 hover:bg-gray-50"
             }`}
           >
             <span>📜</span>
-            <span>過去の被害</span>
+            <span className="whitespace-nowrap">過去の被害</span>
           </button>
         </div>
       )}
