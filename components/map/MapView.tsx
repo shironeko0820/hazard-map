@@ -357,7 +357,7 @@ export default function MapView() {
               }
               ${vacant != null ? `<p style="margin:0;color:#666">空き家数: ${vacant.toLocaleString()}戸</p>` : ""}
               ${total != null ? `<p style="margin:0;color:#666">総住宅数: ${total.toLocaleString()}戸</p>` : ""}
-              <p style="margin:4px 0 0;color:#aaa;font-size:10px">令和5年（2023年）住宅・土地統計調査</p>
+              <p style="margin:4px 0 0;color:#aaa;font-size:10px">総務省 2023年住宅・土地統計調査</p>
             </div>
           `)
           .addTo(m);
