@@ -8,6 +8,7 @@ const LAYERS: { id: LayerType; label: string; icon: string }[] = [
   { id: "price", label: "価格", icon: "💴" },
   { id: "crime", label: "治安", icon: "🚨" },
   { id: "hazard", label: "災害", icon: "🌊" },
+  { id: "akiya", label: "空き家", icon: "🏚️" },
 ];
 
 const HAZARD_TYPES: { id: HazardType; label: string; color: string }[] = [

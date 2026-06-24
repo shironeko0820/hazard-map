@@ -1,0 +1,6177 @@
+{
+  "01100": {
+    "akiya_rate": 13.81,
+    "total_housing": 1128200,
+    "vacant_housing": 155800
+  },
+  "01101": {
+    "akiya_rate": 18.44,
+    "total_housing": 174070,
+    "vacant_housing": 32100
+  },
+  "01102": {
+    "akiya_rate": 15.11,
+    "total_housing": 163690,
+    "vacant_housing": 24740
+  },
+  "01103": {
+    "akiya_rate": 14.41,
+    "total_housing": 151460,
+    "vacant_housing": 21830
+  },
+  "01104": {
+    "akiya_rate": 14.24,
+    "total_housing": 128110,
+    "vacant_housing": 18240
+  },
+  "01105": {
+    "akiya_rate": 13.55,
+    "total_housing": 140630,
+    "vacant_housing": 19050
+  },
+  "01106": {
+    "akiya_rate": 14.1,
+    "total_housing": 71620,
+    "vacant_housing": 10100
+  },
+  "01107": {
+    "akiya_rate": 11.38,
+    "total_housing": 119190,
+    "vacant_housing": 13560
+  },
+  "01108": {
+    "akiya_rate": 10.39,
+    "total_housing": 62740,
+    "vacant_housing": 6520
+  },
+  "01109": {
+    "akiya_rate": 8.93,
+    "total_housing": 67500,
+    "vacant_housing": 6030
+  },
+  "01110": {
+    "akiya_rate": 7.37,
+    "total_housing": 49150,
+    "vacant_housing": 3620
+  },
+  "01202": {
+    "akiya_rate": 19.25,
+    "total_housing": 146510,
+    "vacant_housing": 28210
+  },
+  "01203": {
+    "akiya_rate": 17.36,
+    "total_housing": 64160,
+    "vacant_housing": 11140
+  },
+  "01204": {
+    "akiya_rate": 14.15,
+    "total_housing": 181430,
+    "vacant_housing": 25670
+  },
+  "01205": {
+    "akiya_rate": 20.11,
+    "total_housing": 48690,
+    "vacant_housing": 9790
+  },
+  "01206": {
+    "akiya_rate": 19.09,
+    "total_housing": 95150,
+    "vacant_housing": 18160
+  },
+  "01207": {
+    "akiya_rate": 11.72,
+    "total_housing": 92200,
+    "vacant_housing": 10810
+  },
+  "01208": {
+    "akiya_rate": 14.12,
+    "total_housing": 62980,
+    "vacant_housing": 8890
+  },
+  "01209": {
+    "akiya_rate": 39.35,
+    "total_housing": 5540,
+    "vacant_housing": 2180
+  },
+  "01210": {
+    "akiya_rate": 15.19,
+    "total_housing": 39770,
+    "vacant_housing": 6040
+  },
+  "01211": {
+    "akiya_rate": 17.03,
+    "total_housing": 19140,
+    "vacant_housing": 3260
+  },
+  "01212": {
+    "akiya_rate": 19.26,
+    "total_housing": 11580,
+    "vacant_housing": 2230
+  },
+  "01213": {
+    "akiya_rate": 16.76,
+    "total_housing": 91300,
+    "vacant_housing": 15300
+  },
+  "01214": {
+    "akiya_rate": 15.03,
+    "total_housing": 17760,
+    "vacant_housing": 2670
+  },
+  "01215": {
+    "akiya_rate": 21.42,
+    "total_housing": 10970,
+    "vacant_housing": 2350
+  },
+  "01216": {
+    "akiya_rate": 28.11,
+    "total_housing": 7970,
+    "vacant_housing": 2240
+  },
+  "01217": {
+    "akiya_rate": 10.9,
+    "total_housing": 57540,
+    "vacant_housing": 6270
+  },
+  "01218": {
+    "akiya_rate": 30.56,
+    "total_housing": 6250,
+    "vacant_housing": 1910
+  },
+  "01219": {
+    "akiya_rate": 13.7,
+    "total_housing": 12630,
+    "vacant_housing": 1730
+  },
+  "01220": {
+    "akiya_rate": 17.02,
+    "total_housing": 9400,
+    "vacant_housing": 1600
+  },
+  "01221": {
+    "akiya_rate": 16.47,
+    "total_housing": 14330,
+    "vacant_housing": 2360
+  },
+  "01222": {
+    "akiya_rate": 39.29,
+    "total_housing": 5930,
+    "vacant_housing": 2330
+  },
+  "01223": {
+    "akiya_rate": 16.49,
+    "total_housing": 12070,
+    "vacant_housing": 1990
+  },
+  "01224": {
+    "akiya_rate": 13.38,
+    "total_housing": 51060,
+    "vacant_housing": 6830
+  },
+  "01225": {
+    "akiya_rate": 17.15,
+    "total_housing": 22100,
+    "vacant_housing": 3790
+  },
+  "01226": {
+    "akiya_rate": 18.0,
+    "total_housing": 9280,
+    "vacant_housing": 1670
+  },
+  "01227": {
+    "akiya_rate": 36.82,
+    "total_housing": 2010,
+    "vacant_housing": 740
+  },
+  "01228": {
+    "akiya_rate": 21.16,
+    "total_housing": 11250,
+    "vacant_housing": 2380
+  },
+  "01229": {
+    "akiya_rate": 16.36,
+    "total_housing": 11000,
+    "vacant_housing": 1800
+  },
+  "01230": {
+    "akiya_rate": 17.99,
+    "total_housing": 24240,
+    "vacant_housing": 4360
+  },
+  "01231": {
+    "akiya_rate": 11.74,
+    "total_housing": 34500,
+    "vacant_housing": 4050
+  },
+  "01233": {
+    "akiya_rate": 17.02,
+    "total_housing": 17390,
+    "vacant_housing": 2960
+  },
+  "01234": {
+    "akiya_rate": 7.78,
+    "total_housing": 26350,
+    "vacant_housing": 2050
+  },
+  "01235": {
+    "akiya_rate": 8.42,
+    "total_housing": 26260,
+    "vacant_housing": 2210
+  },
+  "01236": {
+    "akiya_rate": 14.46,
+    "total_housing": 21570,
+    "vacant_housing": 3120
+  },
+  "01303": {
+    "akiya_rate": 13.43,
+    "total_housing": 8340,
+    "vacant_housing": 1120
+  },
+  "01337": {
+    "akiya_rate": 17.83,
+    "total_housing": 15090,
+    "vacant_housing": 2690
+  },
+  "01346": {
+    "akiya_rate": 16.25,
+    "total_housing": 8060,
+    "vacant_housing": 1310
+  },
+  "01400": {
+    "akiya_rate": 18.91,
+    "total_housing": 9150,
+    "vacant_housing": 1730
+  },
+  "01408": {
+    "akiya_rate": 19.52,
+    "total_housing": 9580,
+    "vacant_housing": 1870
+  },
+  "01543": {
+    "akiya_rate": 14.81,
+    "total_housing": 9320,
+    "vacant_housing": 1380
+  },
+  "01555": {
+    "akiya_rate": 19.34,
+    "total_housing": 10910,
+    "vacant_housing": 2110
+  },
+  "01578": {
+    "akiya_rate": 31.24,
+    "total_housing": 11010,
+    "vacant_housing": 3440
+  },
+  "01610": {
+    "akiya_rate": 20.58,
+    "total_housing": 13070,
+    "vacant_housing": 2690
+  },
+  "01631": {
+    "akiya_rate": 10.67,
+    "total_housing": 20620,
+    "vacant_housing": 2200
+  },
+  "01637": {
+    "akiya_rate": 10.94,
+    "total_housing": 8500,
+    "vacant_housing": 930
+  },
+  "01643": {
+    "akiya_rate": 10.8,
+    "total_housing": 12220,
+    "vacant_housing": 1320
+  },
+  "01661": {
+    "akiya_rate": 17.34,
+    "total_housing": 10320,
+    "vacant_housing": 1790
+  },
+  "01692": {
+    "akiya_rate": 18.17,
+    "total_housing": 12490,
+    "vacant_housing": 2270
+  },
+  "02201": {
+    "akiya_rate": 15.09,
+    "total_housing": 134280,
+    "vacant_housing": 20260
+  },
+  "02202": {
+    "akiya_rate": 15.78,
+    "total_housing": 80440,
+    "vacant_housing": 12690
+  },
+  "02203": {
+    "akiya_rate": 17.94,
+    "total_housing": 113020,
+    "vacant_housing": 20280
+  },
+  "02204": {
+    "akiya_rate": 12.57,
+    "total_housing": 12970,
+    "vacant_housing": 1630
+  },
+  "02205": {
+    "akiya_rate": 17.76,
+    "total_housing": 24380,
+    "vacant_housing": 4330
+  },
+  "02206": {
+    "akiya_rate": 18.25,
+    "total_housing": 30410,
+    "vacant_housing": 5550
+  },
+  "02207": {
+    "akiya_rate": 18.12,
+    "total_housing": 20750,
+    "vacant_housing": 3760
+  },
+  "02208": {
+    "akiya_rate": 20.76,
+    "total_housing": 28850,
+    "vacant_housing": 5990
+  },
+  "02209": {
+    "akiya_rate": 17.43,
+    "total_housing": 12510,
+    "vacant_housing": 2180
+  },
+  "02210": {
+    "akiya_rate": 13.39,
+    "total_housing": 12020,
+    "vacant_housing": 1610
+  },
+  "02408": {
+    "akiya_rate": 11.98,
+    "total_housing": 6430,
+    "vacant_housing": 770
+  },
+  "02412": {
+    "akiya_rate": 10.53,
+    "total_housing": 9690,
+    "vacant_housing": 1020
+  },
+  "02442": {
+    "akiya_rate": 10.66,
+    "total_housing": 6660,
+    "vacant_housing": 710
+  },
+  "02445": {
+    "akiya_rate": 15.19,
+    "total_housing": 7110,
+    "vacant_housing": 1080
+  },
+  "03201": {
+    "akiya_rate": 15.62,
+    "total_housing": 155760,
+    "vacant_housing": 24330
+  },
+  "03202": {
+    "akiya_rate": 22.2,
+    "total_housing": 24640,
+    "vacant_housing": 5470
+  },
+  "03203": {
+    "akiya_rate": 20.38,
+    "total_housing": 16290,
+    "vacant_housing": 3320
+  },
+  "03205": {
+    "akiya_rate": 17.04,
+    "total_housing": 41780,
+    "vacant_housing": 7120
+  },
+  "03206": {
+    "akiya_rate": 13.46,
+    "total_housing": 46140,
+    "vacant_housing": 6210
+  },
+  "03207": {
+    "akiya_rate": 21.28,
+    "total_housing": 16400,
+    "vacant_housing": 3490
+  },
+  "03208": {
+    "akiya_rate": 22.83,
+    "total_housing": 11740,
+    "vacant_housing": 2680
+  },
+  "03209": {
+    "akiya_rate": 17.87,
+    "total_housing": 48620,
+    "vacant_housing": 8690
+  },
+  "03210": {
+    "akiya_rate": 14.34,
+    "total_housing": 8090,
+    "vacant_housing": 1160
+  },
+  "03211": {
+    "akiya_rate": 24.07,
+    "total_housing": 18740,
+    "vacant_housing": 4510
+  },
+  "03213": {
+    "akiya_rate": 18.85,
+    "total_housing": 12360,
+    "vacant_housing": 2330
+  },
+  "03214": {
+    "akiya_rate": 36.14,
+    "total_housing": 13170,
+    "vacant_housing": 4760
+  },
+  "03215": {
+    "akiya_rate": 16.58,
+    "total_housing": 50540,
+    "vacant_housing": 8380
+  },
+  "03216": {
+    "akiya_rate": 13.25,
+    "total_housing": 25130,
+    "vacant_housing": 3330
+  },
+  "03301": {
+    "akiya_rate": 16.75,
+    "total_housing": 6150,
+    "vacant_housing": 1030
+  },
+  "03321": {
+    "akiya_rate": 11.31,
+    "total_housing": 13260,
+    "vacant_housing": 1500
+  },
+  "03322": {
+    "akiya_rate": 8.35,
+    "total_housing": 11610,
+    "vacant_housing": 970
+  },
+  "03381": {
+    "akiya_rate": 10.7,
+    "total_housing": 6450,
+    "vacant_housing": 690
+  },
+  "03507": {
+    "akiya_rate": 19.67,
+    "total_housing": 6660,
+    "vacant_housing": 1310
+  },
+  "04100": {
+    "akiya_rate": 11.18,
+    "total_housing": 604700,
+    "vacant_housing": 67600
+  },
+  "04101": {
+    "akiya_rate": 13.44,
+    "total_housing": 191510,
+    "vacant_housing": 25740
+  },
+  "04102": {
+    "akiya_rate": 10.24,
+    "total_housing": 108030,
+    "vacant_housing": 11060
+  },
+  "04103": {
+    "akiya_rate": 9.38,
+    "total_housing": 77760,
+    "vacant_housing": 7290
+  },
+  "04104": {
+    "akiya_rate": 11.79,
+    "total_housing": 122980,
+    "vacant_housing": 14500
+  },
+  "04105": {
+    "akiya_rate": 8.6,
+    "total_housing": 104430,
+    "vacant_housing": 8980
+  },
+  "04202": {
+    "akiya_rate": 15.77,
+    "total_housing": 65950,
+    "vacant_housing": 10400
+  },
+  "04203": {
+    "akiya_rate": 14.31,
+    "total_housing": 24460,
+    "vacant_housing": 3500
+  },
+  "04205": {
+    "akiya_rate": 17.17,
+    "total_housing": 28250,
+    "vacant_housing": 4850
+  },
+  "04206": {
+    "akiya_rate": 17.82,
+    "total_housing": 14930,
+    "vacant_housing": 2660
+  },
+  "04207": {
+    "akiya_rate": 7.61,
+    "total_housing": 32470,
+    "vacant_housing": 2470
+  },
+  "04208": {
+    "akiya_rate": 17.59,
+    "total_housing": 12510,
+    "vacant_housing": 2200
+  },
+  "04209": {
+    "akiya_rate": 11.9,
+    "total_housing": 30750,
+    "vacant_housing": 3660
+  },
+  "04211": {
+    "akiya_rate": 10.12,
+    "total_housing": 19560,
+    "vacant_housing": 1980
+  },
+  "04212": {
+    "akiya_rate": 14.83,
+    "total_housing": 29810,
+    "vacant_housing": 4420
+  },
+  "04213": {
+    "akiya_rate": 17.53,
+    "total_housing": 26760,
+    "vacant_housing": 4690
+  },
+  "04214": {
+    "akiya_rate": 13.7,
+    "total_housing": 16280,
+    "vacant_housing": 2230
+  },
+  "04215": {
+    "akiya_rate": 15.95,
+    "total_housing": 57430,
+    "vacant_housing": 9160
+  },
+  "04216": {
+    "akiya_rate": 4.62,
+    "total_housing": 19680,
+    "vacant_housing": 910
+  },
+  "04321": {
+    "akiya_rate": 13.28,
+    "total_housing": 11370,
+    "vacant_housing": 1510
+  },
+  "04323": {
+    "akiya_rate": 15.15,
+    "total_housing": 18750,
+    "vacant_housing": 2840
+  },
+  "04361": {
+    "akiya_rate": 9.81,
+    "total_housing": 13760,
+    "vacant_housing": 1350
+  },
+  "04404": {
+    "akiya_rate": 9.8,
+    "total_housing": 7350,
+    "vacant_housing": 720
+  },
+  "04406": {
+    "akiya_rate": 7.74,
+    "total_housing": 13830,
+    "vacant_housing": 1070
+  },
+  "04421": {
+    "akiya_rate": 8.04,
+    "total_housing": 12190,
+    "vacant_housing": 980
+  },
+  "04445": {
+    "akiya_rate": 15.06,
+    "total_housing": 8900,
+    "vacant_housing": 1340
+  },
+  "04501": {
+    "akiya_rate": 13.41,
+    "total_housing": 6040,
+    "vacant_housing": 810
+  },
+  "04505": {
+    "akiya_rate": 12.91,
+    "total_housing": 9680,
+    "vacant_housing": 1250
+  },
+  "05201": {
+    "akiya_rate": 14.66,
+    "total_housing": 156990,
+    "vacant_housing": 23010
+  },
+  "05202": {
+    "akiya_rate": 20.13,
+    "total_housing": 25480,
+    "vacant_housing": 5130
+  },
+  "05203": {
+    "akiya_rate": 13.14,
+    "total_housing": 34940,
+    "vacant_housing": 4590
+  },
+  "05204": {
+    "akiya_rate": 16.99,
+    "total_housing": 32550,
+    "vacant_housing": 5530
+  },
+  "05206": {
+    "akiya_rate": 23.16,
+    "total_housing": 13170,
+    "vacant_housing": 3050
+  },
+  "05207": {
+    "akiya_rate": 14.08,
+    "total_housing": 16970,
+    "vacant_housing": 2390
+  },
+  "05209": {
+    "akiya_rate": 22.34,
+    "total_housing": 13830,
+    "vacant_housing": 3090
+  },
+  "05210": {
+    "akiya_rate": 16.26,
+    "total_housing": 33880,
+    "vacant_housing": 5510
+  },
+  "05211": {
+    "akiya_rate": 14.91,
+    "total_housing": 14550,
+    "vacant_housing": 2170
+  },
+  "05212": {
+    "akiya_rate": 12.61,
+    "total_housing": 32130,
+    "vacant_housing": 4050
+  },
+  "05213": {
+    "akiya_rate": 17.35,
+    "total_housing": 12910,
+    "vacant_housing": 2240
+  },
+  "05214": {
+    "akiya_rate": 16.4,
+    "total_housing": 9880,
+    "vacant_housing": 1620
+  },
+  "05215": {
+    "akiya_rate": 15.5,
+    "total_housing": 10000,
+    "vacant_housing": 1550
+  },
+  "05348": {
+    "akiya_rate": 21.3,
+    "total_housing": 7090,
+    "vacant_housing": 1510
+  },
+  "05434": {
+    "akiya_rate": 3.58,
+    "total_housing": 4750,
+    "vacant_housing": 170
+  },
+  "06201": {
+    "akiya_rate": 13.79,
+    "total_housing": 118870,
+    "vacant_housing": 16390
+  },
+  "06202": {
+    "akiya_rate": 16.35,
+    "total_housing": 38480,
+    "vacant_housing": 6290
+  },
+  "06203": {
+    "akiya_rate": 14.27,
+    "total_housing": 50940,
+    "vacant_housing": 7270
+  },
+  "06204": {
+    "akiya_rate": 14.64,
+    "total_housing": 45020,
+    "vacant_housing": 6590
+  },
+  "06205": {
+    "akiya_rate": 13.35,
+    "total_housing": 14830,
+    "vacant_housing": 1980
+  },
+  "06206": {
+    "akiya_rate": 12.64,
+    "total_housing": 15980,
+    "vacant_housing": 2020
+  },
+  "06207": {
+    "akiya_rate": 15.23,
+    "total_housing": 12280,
+    "vacant_housing": 1870
+  },
+  "06208": {
+    "akiya_rate": 12.2,
+    "total_housing": 8360,
+    "vacant_housing": 1020
+  },
+  "06209": {
+    "akiya_rate": 14.01,
+    "total_housing": 10990,
+    "vacant_housing": 1540
+  },
+  "06210": {
+    "akiya_rate": 11.84,
+    "total_housing": 25670,
+    "vacant_housing": 3040
+  },
+  "06211": {
+    "akiya_rate": 11.51,
+    "total_housing": 19630,
+    "vacant_housing": 2260
+  },
+  "06212": {
+    "akiya_rate": 12.88,
+    "total_housing": 5200,
+    "vacant_housing": 670
+  },
+  "06213": {
+    "akiya_rate": 13.37,
+    "total_housing": 12190,
+    "vacant_housing": 1630
+  },
+  "06321": {
+    "akiya_rate": 13.87,
+    "total_housing": 6560,
+    "vacant_housing": 910
+  },
+  "06381": {
+    "akiya_rate": 8.22,
+    "total_housing": 8030,
+    "vacant_housing": 660
+  },
+  "06428": {
+    "akiya_rate": 15.68,
+    "total_housing": 7590,
+    "vacant_housing": 1190
+  },
+  "07201": {
+    "akiya_rate": 12.95,
+    "total_housing": 139600,
+    "vacant_housing": 18080
+  },
+  "07202": {
+    "akiya_rate": 18.33,
+    "total_housing": 58850,
+    "vacant_housing": 10790
+  },
+  "07203": {
+    "akiya_rate": 13.95,
+    "total_housing": 163240,
+    "vacant_housing": 22770
+  },
+  "07204": {
+    "akiya_rate": 15.3,
+    "total_housing": 164530,
+    "vacant_housing": 25170
+  },
+  "07205": {
+    "akiya_rate": 15.98,
+    "total_housing": 27660,
+    "vacant_housing": 4420
+  },
+  "07207": {
+    "akiya_rate": 11.29,
+    "total_housing": 30910,
+    "vacant_housing": 3490
+  },
+  "07208": {
+    "akiya_rate": 19.91,
+    "total_housing": 19590,
+    "vacant_housing": 3900
+  },
+  "07209": {
+    "akiya_rate": 18.77,
+    "total_housing": 16200,
+    "vacant_housing": 3040
+  },
+  "07210": {
+    "akiya_rate": 14.03,
+    "total_housing": 22240,
+    "vacant_housing": 3120
+  },
+  "07211": {
+    "akiya_rate": 12.13,
+    "total_housing": 13350,
+    "vacant_housing": 1620
+  },
+  "07212": {
+    "akiya_rate": 22.03,
+    "total_housing": 30550,
+    "vacant_housing": 6730
+  },
+  "07213": {
+    "akiya_rate": 13.32,
+    "total_housing": 23870,
+    "vacant_housing": 3180
+  },
+  "07214": {
+    "akiya_rate": 12.21,
+    "total_housing": 12690,
+    "vacant_housing": 1550
+  },
+  "07421": {
+    "akiya_rate": 14.08,
+    "total_housing": 6180,
+    "vacant_housing": 870
+  },
+  "07447": {
+    "akiya_rate": 20.52,
+    "total_housing": 7750,
+    "vacant_housing": 1590
+  },
+  "07461": {
+    "akiya_rate": 12.63,
+    "total_housing": 9580,
+    "vacant_housing": 1210
+  },
+  "07466": {
+    "akiya_rate": 13.43,
+    "total_housing": 6850,
+    "vacant_housing": 920
+  },
+  "07521": {
+    "akiya_rate": 11.06,
+    "total_housing": 6780,
+    "vacant_housing": 750
+  },
+  "08201": {
+    "akiya_rate": 18.04,
+    "total_housing": 148990,
+    "vacant_housing": 26880
+  },
+  "08202": {
+    "akiya_rate": 16.68,
+    "total_housing": 91550,
+    "vacant_housing": 15270
+  },
+  "08203": {
+    "akiya_rate": 12.47,
+    "total_housing": 75970,
+    "vacant_housing": 9470
+  },
+  "08204": {
+    "akiya_rate": 14.43,
+    "total_housing": 66580,
+    "vacant_housing": 9610
+  },
+  "08205": {
+    "akiya_rate": 19.31,
+    "total_housing": 35120,
+    "vacant_housing": 6780
+  },
+  "08207": {
+    "akiya_rate": 16.75,
+    "total_housing": 22920,
+    "vacant_housing": 3840
+  },
+  "08208": {
+    "akiya_rate": 10.94,
+    "total_housing": 36640,
+    "vacant_housing": 4010
+  },
+  "08210": {
+    "akiya_rate": 14.43,
+    "total_housing": 18640,
+    "vacant_housing": 2690
+  },
+  "08211": {
+    "akiya_rate": 12.76,
+    "total_housing": 25620,
+    "vacant_housing": 3270
+  },
+  "08212": {
+    "akiya_rate": 15.0,
+    "total_housing": 22470,
+    "vacant_housing": 3370
+  },
+  "08214": {
+    "akiya_rate": 18.65,
+    "total_housing": 13890,
+    "vacant_housing": 2590
+  },
+  "08215": {
+    "akiya_rate": 20.39,
+    "total_housing": 20840,
+    "vacant_housing": 4250
+  },
+  "08216": {
+    "akiya_rate": 15.42,
+    "total_housing": 34560,
+    "vacant_housing": 5330
+  },
+  "08217": {
+    "akiya_rate": 12.96,
+    "total_housing": 53160,
+    "vacant_housing": 6890
+  },
+  "08219": {
+    "akiya_rate": 9.85,
+    "total_housing": 39380,
+    "vacant_housing": 3880
+  },
+  "08220": {
+    "akiya_rate": 8.14,
+    "total_housing": 131220,
+    "vacant_housing": 10680
+  },
+  "08221": {
+    "akiya_rate": 12.48,
+    "total_housing": 75630,
+    "vacant_housing": 9440
+  },
+  "08222": {
+    "akiya_rate": 20.64,
+    "total_housing": 35950,
+    "vacant_housing": 7420
+  },
+  "08223": {
+    "akiya_rate": 14.31,
+    "total_housing": 12440,
+    "vacant_housing": 1780
+  },
+  "08224": {
+    "akiya_rate": 6.37,
+    "total_housing": 30140,
+    "vacant_housing": 1920
+  },
+  "08225": {
+    "akiya_rate": 16.3,
+    "total_housing": 18340,
+    "vacant_housing": 2990
+  },
+  "08226": {
+    "akiya_rate": 9.93,
+    "total_housing": 23260,
+    "vacant_housing": 2310
+  },
+  "08227": {
+    "akiya_rate": 13.79,
+    "total_housing": 43570,
+    "vacant_housing": 6010
+  },
+  "08228": {
+    "akiya_rate": 12.36,
+    "total_housing": 20390,
+    "vacant_housing": 2520
+  },
+  "08229": {
+    "akiya_rate": 15.88,
+    "total_housing": 17130,
+    "vacant_housing": 2720
+  },
+  "08230": {
+    "akiya_rate": 13.37,
+    "total_housing": 17580,
+    "vacant_housing": 2350
+  },
+  "08231": {
+    "akiya_rate": 15.38,
+    "total_housing": 15280,
+    "vacant_housing": 2350
+  },
+  "08232": {
+    "akiya_rate": 15.77,
+    "total_housing": 48570,
+    "vacant_housing": 7660
+  },
+  "08233": {
+    "akiya_rate": 15.19,
+    "total_housing": 12380,
+    "vacant_housing": 1880
+  },
+  "08234": {
+    "akiya_rate": 20.24,
+    "total_housing": 20310,
+    "vacant_housing": 4110
+  },
+  "08235": {
+    "akiya_rate": 6.86,
+    "total_housing": 22870,
+    "vacant_housing": 1570
+  },
+  "08236": {
+    "akiya_rate": 16.52,
+    "total_housing": 21970,
+    "vacant_housing": 3630
+  },
+  "08302": {
+    "akiya_rate": 10.62,
+    "total_housing": 13370,
+    "vacant_housing": 1420
+  },
+  "08309": {
+    "akiya_rate": 18.52,
+    "total_housing": 7560,
+    "vacant_housing": 1400
+  },
+  "08310": {
+    "akiya_rate": 14.58,
+    "total_housing": 8230,
+    "vacant_housing": 1200
+  },
+  "08341": {
+    "akiya_rate": 10.15,
+    "total_housing": 16940,
+    "vacant_housing": 1720
+  },
+  "08364": {
+    "akiya_rate": 19.24,
+    "total_housing": 7380,
+    "vacant_housing": 1420
+  },
+  "08443": {
+    "akiya_rate": 16.98,
+    "total_housing": 25970,
+    "vacant_housing": 4410
+  },
+  "08521": {
+    "akiya_rate": 12.25,
+    "total_housing": 6940,
+    "vacant_housing": 850
+  },
+  "08546": {
+    "akiya_rate": 9.39,
+    "total_housing": 9580,
+    "vacant_housing": 900
+  },
+  "08564": {
+    "akiya_rate": 9.5,
+    "total_housing": 6950,
+    "vacant_housing": 660
+  },
+  "09201": {
+    "akiya_rate": 14.16,
+    "total_housing": 275020,
+    "vacant_housing": 38940
+  },
+  "09202": {
+    "akiya_rate": 20.31,
+    "total_housing": 74450,
+    "vacant_housing": 15120
+  },
+  "09203": {
+    "akiya_rate": 14.06,
+    "total_housing": 72130,
+    "vacant_housing": 10140
+  },
+  "09204": {
+    "akiya_rate": 18.11,
+    "total_housing": 58480,
+    "vacant_housing": 10590
+  },
+  "09205": {
+    "akiya_rate": 11.95,
+    "total_housing": 41420,
+    "vacant_housing": 4950
+  },
+  "09206": {
+    "akiya_rate": 26.63,
+    "total_housing": 43820,
+    "vacant_housing": 11670
+  },
+  "09208": {
+    "akiya_rate": 13.91,
+    "total_housing": 83550,
+    "vacant_housing": 11620
+  },
+  "09209": {
+    "akiya_rate": 14.09,
+    "total_housing": 35140,
+    "vacant_housing": 4950
+  },
+  "09210": {
+    "akiya_rate": 15.33,
+    "total_housing": 35750,
+    "vacant_housing": 5480
+  },
+  "09211": {
+    "akiya_rate": 20.81,
+    "total_housing": 14850,
+    "vacant_housing": 3090
+  },
+  "09213": {
+    "akiya_rate": 18.41,
+    "total_housing": 61870,
+    "vacant_housing": 11390
+  },
+  "09214": {
+    "akiya_rate": 10.64,
+    "total_housing": 18800,
+    "vacant_housing": 2000
+  },
+  "09215": {
+    "akiya_rate": 20.0,
+    "total_housing": 11100,
+    "vacant_housing": 2220
+  },
+  "09216": {
+    "akiya_rate": 12.36,
+    "total_housing": 28150,
+    "vacant_housing": 3480
+  },
+  "09301": {
+    "akiya_rate": 6.82,
+    "total_housing": 12030,
+    "vacant_housing": 820
+  },
+  "09342": {
+    "akiya_rate": 9.83,
+    "total_housing": 8240,
+    "vacant_housing": 810
+  },
+  "09361": {
+    "akiya_rate": 16.98,
+    "total_housing": 19080,
+    "vacant_housing": 3240
+  },
+  "09364": {
+    "akiya_rate": 14.43,
+    "total_housing": 11500,
+    "vacant_housing": 1660
+  },
+  "09386": {
+    "akiya_rate": 11.99,
+    "total_housing": 13340,
+    "vacant_housing": 1600
+  },
+  "09407": {
+    "akiya_rate": 61.73,
+    "total_housing": 24560,
+    "vacant_housing": 15160
+  },
+  "09411": {
+    "akiya_rate": 18.97,
+    "total_housing": 6380,
+    "vacant_housing": 1210
+  },
+  "10201": {
+    "akiya_rate": 15.16,
+    "total_housing": 169580,
+    "vacant_housing": 25700
+  },
+  "10202": {
+    "akiya_rate": 13.88,
+    "total_housing": 186260,
+    "vacant_housing": 25850
+  },
+  "10203": {
+    "akiya_rate": 21.94,
+    "total_housing": 54830,
+    "vacant_housing": 12030
+  },
+  "10204": {
+    "akiya_rate": 13.66,
+    "total_housing": 102150,
+    "vacant_housing": 13950
+  },
+  "10205": {
+    "akiya_rate": 13.92,
+    "total_housing": 108290,
+    "vacant_housing": 15070
+  },
+  "10206": {
+    "akiya_rate": 19.3,
+    "total_housing": 23370,
+    "vacant_housing": 4510
+  },
+  "10207": {
+    "akiya_rate": 17.12,
+    "total_housing": 37740,
+    "vacant_housing": 6460
+  },
+  "10208": {
+    "akiya_rate": 16.37,
+    "total_housing": 35180,
+    "vacant_housing": 5760
+  },
+  "10209": {
+    "akiya_rate": 16.26,
+    "total_housing": 29650,
+    "vacant_housing": 4820
+  },
+  "10210": {
+    "akiya_rate": 16.34,
+    "total_housing": 22210,
+    "vacant_housing": 3630
+  },
+  "10211": {
+    "akiya_rate": 18.66,
+    "total_housing": 27600,
+    "vacant_housing": 5150
+  },
+  "10212": {
+    "akiya_rate": 13.06,
+    "total_housing": 23660,
+    "vacant_housing": 3090
+  },
+  "10345": {
+    "akiya_rate": 9.18,
+    "total_housing": 9370,
+    "vacant_housing": 860
+  },
+  "10421": {
+    "akiya_rate": 23.01,
+    "total_housing": 8170,
+    "vacant_housing": 1880
+  },
+  "10449": {
+    "akiya_rate": 28.69,
+    "total_housing": 9340,
+    "vacant_housing": 2680
+  },
+  "10464": {
+    "akiya_rate": 10.81,
+    "total_housing": 17120,
+    "vacant_housing": 1850
+  },
+  "10524": {
+    "akiya_rate": 18.69,
+    "total_housing": 22690,
+    "vacant_housing": 4240
+  },
+  "10525": {
+    "akiya_rate": 13.43,
+    "total_housing": 11390,
+    "vacant_housing": 1530
+  },
+  "11100": {
+    "akiya_rate": 8.61,
+    "total_housing": 656300,
+    "vacant_housing": 56500
+  },
+  "11101": {
+    "akiya_rate": 7.7,
+    "total_housing": 42090,
+    "vacant_housing": 3240
+  },
+  "11102": {
+    "akiya_rate": 7.73,
+    "total_housing": 75840,
+    "vacant_housing": 5860
+  },
+  "11103": {
+    "akiya_rate": 12.47,
+    "total_housing": 64820,
+    "vacant_housing": 8080
+  },
+  "11104": {
+    "akiya_rate": 7.84,
+    "total_housing": 79510,
+    "vacant_housing": 6230
+  },
+  "11105": {
+    "akiya_rate": 7.15,
+    "total_housing": 52710,
+    "vacant_housing": 3770
+  },
+  "11106": {
+    "akiya_rate": 7.44,
+    "total_housing": 51180,
+    "vacant_housing": 3810
+  },
+  "11107": {
+    "akiya_rate": 7.25,
+    "total_housing": 83350,
+    "vacant_housing": 6040
+  },
+  "11108": {
+    "akiya_rate": 12.42,
+    "total_housing": 100120,
+    "vacant_housing": 12430
+  },
+  "11109": {
+    "akiya_rate": 4.19,
+    "total_housing": 55410,
+    "vacant_housing": 2320
+  },
+  "11110": {
+    "akiya_rate": 9.23,
+    "total_housing": 51220,
+    "vacant_housing": 4730
+  },
+  "11201": {
+    "akiya_rate": 9.21,
+    "total_housing": 171970,
+    "vacant_housing": 15840
+  },
+  "11202": {
+    "akiya_rate": 14.56,
+    "total_housing": 94320,
+    "vacant_housing": 13730
+  },
+  "11203": {
+    "akiya_rate": 8.24,
+    "total_housing": 296310,
+    "vacant_housing": 24410
+  },
+  "11206": {
+    "akiya_rate": 13.24,
+    "total_housing": 37080,
+    "vacant_housing": 4910
+  },
+  "11207": {
+    "akiya_rate": 20.24,
+    "total_housing": 29200,
+    "vacant_housing": 5910
+  },
+  "11208": {
+    "akiya_rate": 8.46,
+    "total_housing": 170530,
+    "vacant_housing": 14420
+  },
+  "11209": {
+    "akiya_rate": 11.93,
+    "total_housing": 39060,
+    "vacant_housing": 4660
+  },
+  "11210": {
+    "akiya_rate": 11.09,
+    "total_housing": 50320,
+    "vacant_housing": 5580
+  },
+  "11211": {
+    "akiya_rate": 10.33,
+    "total_housing": 37760,
+    "vacant_housing": 3900
+  },
+  "11212": {
+    "akiya_rate": 10.88,
+    "total_housing": 45690,
+    "vacant_housing": 4970
+  },
+  "11214": {
+    "akiya_rate": 6.28,
+    "total_housing": 106040,
+    "vacant_housing": 6660
+  },
+  "11215": {
+    "akiya_rate": 9.51,
+    "total_housing": 72790,
+    "vacant_housing": 6920
+  },
+  "11216": {
+    "akiya_rate": 11.78,
+    "total_housing": 25040,
+    "vacant_housing": 2950
+  },
+  "11217": {
+    "akiya_rate": 9.48,
+    "total_housing": 53800,
+    "vacant_housing": 5100
+  },
+  "11218": {
+    "akiya_rate": 11.63,
+    "total_housing": 63910,
+    "vacant_housing": 7430
+  },
+  "11219": {
+    "akiya_rate": 8.18,
+    "total_housing": 106770,
+    "vacant_housing": 8730
+  },
+  "11221": {
+    "akiya_rate": 11.51,
+    "total_housing": 129750,
+    "vacant_housing": 14940
+  },
+  "11222": {
+    "akiya_rate": 6.22,
+    "total_housing": 153770,
+    "vacant_housing": 9570
+  },
+  "11223": {
+    "akiya_rate": 10.12,
+    "total_housing": 42180,
+    "vacant_housing": 4270
+  },
+  "11224": {
+    "akiya_rate": 7.16,
+    "total_housing": 70140,
+    "vacant_housing": 5020
+  },
+  "11225": {
+    "akiya_rate": 8.09,
+    "total_housing": 66890,
+    "vacant_housing": 5410
+  },
+  "11227": {
+    "akiya_rate": 6.92,
+    "total_housing": 68180,
+    "vacant_housing": 4720
+  },
+  "11228": {
+    "akiya_rate": 5.22,
+    "total_housing": 35040,
+    "vacant_housing": 1830
+  },
+  "11229": {
+    "akiya_rate": 7.8,
+    "total_housing": 44210,
+    "vacant_housing": 3450
+  },
+  "11230": {
+    "akiya_rate": 7.51,
+    "total_housing": 81520,
+    "vacant_housing": 6120
+  },
+  "11231": {
+    "akiya_rate": 11.55,
+    "total_housing": 34810,
+    "vacant_housing": 4020
+  },
+  "11232": {
+    "akiya_rate": 9.68,
+    "total_housing": 70730,
+    "vacant_housing": 6850
+  },
+  "11233": {
+    "akiya_rate": 8.61,
+    "total_housing": 30440,
+    "vacant_housing": 2620
+  },
+  "11234": {
+    "akiya_rate": 5.32,
+    "total_housing": 46240,
+    "vacant_housing": 2460
+  },
+  "11235": {
+    "akiya_rate": 7.58,
+    "total_housing": 56360,
+    "vacant_housing": 4270
+  },
+  "11237": {
+    "akiya_rate": 9.9,
+    "total_housing": 69370,
+    "vacant_housing": 6870
+  },
+  "11238": {
+    "akiya_rate": 8.8,
+    "total_housing": 28420,
+    "vacant_housing": 2500
+  },
+  "11239": {
+    "akiya_rate": 14.0,
+    "total_housing": 52370,
+    "vacant_housing": 7330
+  },
+  "11240": {
+    "akiya_rate": 12.39,
+    "total_housing": 23720,
+    "vacant_housing": 2940
+  },
+  "11241": {
+    "akiya_rate": 6.81,
+    "total_housing": 34380,
+    "vacant_housing": 2340
+  },
+  "11242": {
+    "akiya_rate": 9.2,
+    "total_housing": 24350,
+    "vacant_housing": 2240
+  },
+  "11243": {
+    "akiya_rate": 8.62,
+    "total_housing": 30990,
+    "vacant_housing": 2670
+  },
+  "11245": {
+    "akiya_rate": 10.05,
+    "total_housing": 55520,
+    "vacant_housing": 5580
+  },
+  "11246": {
+    "akiya_rate": 7.38,
+    "total_housing": 22640,
+    "vacant_housing": 1670
+  },
+  "11301": {
+    "akiya_rate": 6.82,
+    "total_housing": 19930,
+    "vacant_housing": 1360
+  },
+  "11324": {
+    "akiya_rate": 8.66,
+    "total_housing": 16620,
+    "vacant_housing": 1440
+  },
+  "11326": {
+    "akiya_rate": 13.66,
+    "total_housing": 18820,
+    "vacant_housing": 2570
+  },
+  "11341": {
+    "akiya_rate": 10.87,
+    "total_housing": 9110,
+    "vacant_housing": 990
+  },
+  "11342": {
+    "akiya_rate": 13.33,
+    "total_housing": 8330,
+    "vacant_housing": 1110
+  },
+  "11343": {
+    "akiya_rate": 14.4,
+    "total_housing": 13540,
+    "vacant_housing": 1950
+  },
+  "11346": {
+    "akiya_rate": 12.86,
+    "total_housing": 8320,
+    "vacant_housing": 1070
+  },
+  "11347": {
+    "akiya_rate": 10.39,
+    "total_housing": 7510,
+    "vacant_housing": 780
+  },
+  "11385": {
+    "akiya_rate": 11.52,
+    "total_housing": 13720,
+    "vacant_housing": 1580
+  },
+  "11408": {
+    "akiya_rate": 14.88,
+    "total_housing": 16200,
+    "vacant_housing": 2410
+  },
+  "11442": {
+    "akiya_rate": 12.2,
+    "total_housing": 16880,
+    "vacant_housing": 2060
+  },
+  "11464": {
+    "akiya_rate": 10.67,
+    "total_housing": 20710,
+    "vacant_housing": 2210
+  },
+  "11465": {
+    "akiya_rate": 6.34,
+    "total_housing": 11680,
+    "vacant_housing": 740
+  },
+  "12100": {
+    "akiya_rate": 10.32,
+    "total_housing": 510700,
+    "vacant_housing": 52700
+  },
+  "12101": {
+    "akiya_rate": 11.86,
+    "total_housing": 133760,
+    "vacant_housing": 15860
+  },
+  "12102": {
+    "akiya_rate": 11.74,
+    "total_housing": 93280,
+    "vacant_housing": 10950
+  },
+  "12103": {
+    "akiya_rate": 10.64,
+    "total_housing": 83710,
+    "vacant_housing": 8910
+  },
+  "12104": {
+    "akiya_rate": 11.63,
+    "total_housing": 73020,
+    "vacant_housing": 8490
+  },
+  "12105": {
+    "akiya_rate": 7.33,
+    "total_housing": 53190,
+    "vacant_housing": 3900
+  },
+  "12106": {
+    "akiya_rate": 6.2,
+    "total_housing": 73720,
+    "vacant_housing": 4570
+  },
+  "12202": {
+    "akiya_rate": 19.85,
+    "total_housing": 29830,
+    "vacant_housing": 5920
+  },
+  "12203": {
+    "akiya_rate": 9.92,
+    "total_housing": 268490,
+    "vacant_housing": 26640
+  },
+  "12204": {
+    "akiya_rate": 10.26,
+    "total_housing": 328510,
+    "vacant_housing": 33700
+  },
+  "12205": {
+    "akiya_rate": 25.76,
+    "total_housing": 26710,
+    "vacant_housing": 6880
+  },
+  "12206": {
+    "akiya_rate": 15.11,
+    "total_housing": 67370,
+    "vacant_housing": 10180
+  },
+  "12207": {
+    "akiya_rate": 14.0,
+    "total_housing": 266840,
+    "vacant_housing": 37370
+  },
+  "12208": {
+    "akiya_rate": 14.4,
+    "total_housing": 76190,
+    "vacant_housing": 10970
+  },
+  "12210": {
+    "akiya_rate": 19.95,
+    "total_housing": 46320,
+    "vacant_housing": 9240
+  },
+  "12211": {
+    "akiya_rate": 11.37,
+    "total_housing": 65530,
+    "vacant_housing": 7450
+  },
+  "12212": {
+    "akiya_rate": 11.51,
+    "total_housing": 78990,
+    "vacant_housing": 9090
+  },
+  "12213": {
+    "akiya_rate": 18.52,
+    "total_housing": 31750,
+    "vacant_housing": 5880
+  },
+  "12215": {
+    "akiya_rate": 13.41,
+    "total_housing": 27660,
+    "vacant_housing": 3710
+  },
+  "12216": {
+    "akiya_rate": 9.69,
+    "total_housing": 90270,
+    "vacant_housing": 8750
+  },
+  "12217": {
+    "akiya_rate": 9.87,
+    "total_housing": 215820,
+    "vacant_housing": 21310
+  },
+  "12218": {
+    "akiya_rate": 41.04,
+    "total_housing": 13790,
+    "vacant_housing": 5660
+  },
+  "12219": {
+    "akiya_rate": 12.96,
+    "total_housing": 133410,
+    "vacant_housing": 17290
+  },
+  "12220": {
+    "akiya_rate": 9.6,
+    "total_housing": 96480,
+    "vacant_housing": 9260
+  },
+  "12221": {
+    "akiya_rate": 6.7,
+    "total_housing": 95380,
+    "vacant_housing": 6390
+  },
+  "12222": {
+    "akiya_rate": 9.34,
+    "total_housing": 62940,
+    "vacant_housing": 5880
+  },
+  "12223": {
+    "akiya_rate": 31.33,
+    "total_housing": 21100,
+    "vacant_housing": 6610
+  },
+  "12224": {
+    "akiya_rate": 8.44,
+    "total_housing": 52470,
+    "vacant_housing": 4430
+  },
+  "12225": {
+    "akiya_rate": 18.53,
+    "total_housing": 41340,
+    "vacant_housing": 7660
+  },
+  "12226": {
+    "akiya_rate": 21.47,
+    "total_housing": 21100,
+    "vacant_housing": 4530
+  },
+  "12227": {
+    "akiya_rate": 6.45,
+    "total_housing": 87150,
+    "vacant_housing": 5620
+  },
+  "12228": {
+    "akiya_rate": 10.83,
+    "total_housing": 44240,
+    "vacant_housing": 4790
+  },
+  "12229": {
+    "akiya_rate": 9.77,
+    "total_housing": 29180,
+    "vacant_housing": 2850
+  },
+  "12230": {
+    "akiya_rate": 13.97,
+    "total_housing": 33010,
+    "vacant_housing": 4610
+  },
+  "12231": {
+    "akiya_rate": 11.23,
+    "total_housing": 46470,
+    "vacant_housing": 5220
+  },
+  "12232": {
+    "akiya_rate": 7.64,
+    "total_housing": 25900,
+    "vacant_housing": 1980
+  },
+  "12233": {
+    "akiya_rate": 13.38,
+    "total_housing": 24360,
+    "vacant_housing": 3260
+  },
+  "12234": {
+    "akiya_rate": 29.52,
+    "total_housing": 20430,
+    "vacant_housing": 6030
+  },
+  "12235": {
+    "akiya_rate": 16.63,
+    "total_housing": 15330,
+    "vacant_housing": 2550
+  },
+  "12236": {
+    "akiya_rate": 16.89,
+    "total_housing": 32680,
+    "vacant_housing": 5520
+  },
+  "12237": {
+    "akiya_rate": 13.74,
+    "total_housing": 22340,
+    "vacant_housing": 3070
+  },
+  "12238": {
+    "akiya_rate": 27.89,
+    "total_housing": 19650,
+    "vacant_housing": 5480
+  },
+  "12239": {
+    "akiya_rate": 15.29,
+    "total_housing": 23420,
+    "vacant_housing": 3580
+  },
+  "12322": {
+    "akiya_rate": 9.58,
+    "total_housing": 10230,
+    "vacant_housing": 980
+  },
+  "12329": {
+    "akiya_rate": 11.66,
+    "total_housing": 9430,
+    "vacant_housing": 1100
+  },
+  "12410": {
+    "akiya_rate": 17.1,
+    "total_housing": 9650,
+    "vacant_housing": 1650
+  },
+  "13100": {
+    "akiya_rate": 10.92,
+    "total_housing": 5922100,
+    "vacant_housing": 646800
+  },
+  "13101": {
+    "akiya_rate": 12.56,
+    "total_housing": 42210,
+    "vacant_housing": 5300
+  },
+  "13102": {
+    "akiya_rate": 11.05,
+    "total_housing": 106070,
+    "vacant_housing": 11720
+  },
+  "13103": {
+    "akiya_rate": 13.69,
+    "total_housing": 177980,
+    "vacant_housing": 24360
+  },
+  "13104": {
+    "akiya_rate": 11.18,
+    "total_housing": 261030,
+    "vacant_housing": 29180
+  },
+  "13105": {
+    "akiya_rate": 10.47,
+    "total_housing": 149710,
+    "vacant_housing": 15670
+  },
+  "13106": {
+    "akiya_rate": 10.46,
+    "total_housing": 147140,
+    "vacant_housing": 15390
+  },
+  "13107": {
+    "akiya_rate": 11.75,
+    "total_housing": 174530,
+    "vacant_housing": 20500
+  },
+  "13108": {
+    "akiya_rate": 9.04,
+    "total_housing": 298230,
+    "vacant_housing": 26950
+  },
+  "13109": {
+    "akiya_rate": 10.08,
+    "total_housing": 264650,
+    "vacant_housing": 26680
+  },
+  "13110": {
+    "akiya_rate": 10.7,
+    "total_housing": 170580,
+    "vacant_housing": 18250
+  },
+  "13111": {
+    "akiya_rate": 10.83,
+    "total_housing": 451460,
+    "vacant_housing": 48880
+  },
+  "13112": {
+    "akiya_rate": 10.88,
+    "total_housing": 541000,
+    "vacant_housing": 58850
+  },
+  "13113": {
+    "akiya_rate": 11.24,
+    "total_housing": 174970,
+    "vacant_housing": 19670
+  },
+  "13114": {
+    "akiya_rate": 12.11,
+    "total_housing": 236250,
+    "vacant_housing": 28620
+  },
+  "13115": {
+    "akiya_rate": 9.54,
+    "total_housing": 365470,
+    "vacant_housing": 34870
+  },
+  "13116": {
+    "akiya_rate": 13.94,
+    "total_housing": 213800,
+    "vacant_housing": 29810
+  },
+  "13117": {
+    "akiya_rate": 11.9,
+    "total_housing": 213930,
+    "vacant_housing": 25460
+  },
+  "13118": {
+    "akiya_rate": 12.9,
+    "total_housing": 131160,
+    "vacant_housing": 16920
+  },
+  "13119": {
+    "akiya_rate": 11.69,
+    "total_housing": 363490,
+    "vacant_housing": 42490
+  },
+  "13120": {
+    "akiya_rate": 9.48,
+    "total_housing": 419650,
+    "vacant_housing": 39770
+  },
+  "13121": {
+    "akiya_rate": 10.89,
+    "total_housing": 402630,
+    "vacant_housing": 43850
+  },
+  "13122": {
+    "akiya_rate": 11.77,
+    "total_housing": 249950,
+    "vacant_housing": 29420
+  },
+  "13123": {
+    "akiya_rate": 9.32,
+    "total_housing": 366170,
+    "vacant_housing": 34130
+  },
+  "13201": {
+    "akiya_rate": 11.09,
+    "total_housing": 303470,
+    "vacant_housing": 33650
+  },
+  "13202": {
+    "akiya_rate": 12.04,
+    "total_housing": 102640,
+    "vacant_housing": 12360
+  },
+  "13203": {
+    "akiya_rate": 11.01,
+    "total_housing": 89370,
+    "vacant_housing": 9840
+  },
+  "13204": {
+    "akiya_rate": 10.76,
+    "total_housing": 108940,
+    "vacant_housing": 11720
+  },
+  "13205": {
+    "akiya_rate": 11.7,
+    "total_housing": 64280,
+    "vacant_housing": 7520
+  },
+  "13206": {
+    "akiya_rate": 12.97,
+    "total_housing": 142390,
+    "vacant_housing": 18470
+  },
+  "13207": {
+    "akiya_rate": 11.92,
+    "total_housing": 60820,
+    "vacant_housing": 7250
+  },
+  "13208": {
+    "akiya_rate": 9.66,
+    "total_housing": 135360,
+    "vacant_housing": 13080
+  },
+  "13209": {
+    "akiya_rate": 9.38,
+    "total_housing": 215630,
+    "vacant_housing": 20220
+  },
+  "13210": {
+    "akiya_rate": 10.41,
+    "total_housing": 71400,
+    "vacant_housing": 7430
+  },
+  "13211": {
+    "akiya_rate": 10.92,
+    "total_housing": 100600,
+    "vacant_housing": 10990
+  },
+  "13212": {
+    "akiya_rate": 10.72,
+    "total_housing": 102110,
+    "vacant_housing": 10950
+  },
+  "13213": {
+    "akiya_rate": 9.89,
+    "total_housing": 76940,
+    "vacant_housing": 7610
+  },
+  "13214": {
+    "akiya_rate": 9.43,
+    "total_housing": 72880,
+    "vacant_housing": 6870
+  },
+  "13215": {
+    "akiya_rate": 13.49,
+    "total_housing": 45680,
+    "vacant_housing": 6160
+  },
+  "13218": {
+    "akiya_rate": 10.66,
+    "total_housing": 31230,
+    "vacant_housing": 3330
+  },
+  "13219": {
+    "akiya_rate": 11.29,
+    "total_housing": 47200,
+    "vacant_housing": 5330
+  },
+  "13220": {
+    "akiya_rate": 11.06,
+    "total_housing": 41490,
+    "vacant_housing": 4590
+  },
+  "13221": {
+    "akiya_rate": 13.63,
+    "total_housing": 41530,
+    "vacant_housing": 5660
+  },
+  "13222": {
+    "akiya_rate": 10.19,
+    "total_housing": 57000,
+    "vacant_housing": 5810
+  },
+  "13223": {
+    "akiya_rate": 9.22,
+    "total_housing": 33300,
+    "vacant_housing": 3070
+  },
+  "13224": {
+    "akiya_rate": 11.7,
+    "total_housing": 79210,
+    "vacant_housing": 9270
+  },
+  "13225": {
+    "akiya_rate": 8.72,
+    "total_housing": 44270,
+    "vacant_housing": 3860
+  },
+  "13227": {
+    "akiya_rate": 10.67,
+    "total_housing": 27360,
+    "vacant_housing": 2920
+  },
+  "13228": {
+    "akiya_rate": 10.89,
+    "total_housing": 36280,
+    "vacant_housing": 3950
+  },
+  "13229": {
+    "akiya_rate": 9.31,
+    "total_housing": 107690,
+    "vacant_housing": 10030
+  },
+  "13303": {
+    "akiya_rate": 12.3,
+    "total_housing": 14070,
+    "vacant_housing": 1730
+  },
+  "13305": {
+    "akiya_rate": 6.94,
+    "total_housing": 6630,
+    "vacant_housing": 460
+  },
+  "14100": {
+    "akiya_rate": 8.68,
+    "total_housing": 1942700,
+    "vacant_housing": 168600
+  },
+  "14101": {
+    "akiya_rate": 9.19,
+    "total_housing": 160470,
+    "vacant_housing": 14750
+  },
+  "14102": {
+    "akiya_rate": 10.2,
+    "total_housing": 148260,
+    "vacant_housing": 15120
+  },
+  "14103": {
+    "akiya_rate": 11.14,
+    "total_housing": 64750,
+    "vacant_housing": 7210
+  },
+  "14104": {
+    "akiya_rate": 11.73,
+    "total_housing": 92100,
+    "vacant_housing": 10800
+  },
+  "14105": {
+    "akiya_rate": 10.71,
+    "total_housing": 120770,
+    "vacant_housing": 12930
+  },
+  "14106": {
+    "akiya_rate": 10.32,
+    "total_housing": 111010,
+    "vacant_housing": 11460
+  },
+  "14107": {
+    "akiya_rate": 9.44,
+    "total_housing": 88340,
+    "vacant_housing": 8340
+  },
+  "14108": {
+    "akiya_rate": 8.63,
+    "total_housing": 98270,
+    "vacant_housing": 8480
+  },
+  "14109": {
+    "akiya_rate": 6.29,
+    "total_housing": 191630,
+    "vacant_housing": 12060
+  },
+  "14110": {
+    "akiya_rate": 8.32,
+    "total_housing": 133130,
+    "vacant_housing": 11070
+  },
+  "14111": {
+    "akiya_rate": 9.86,
+    "total_housing": 107700,
+    "vacant_housing": 10620
+  },
+  "14112": {
+    "akiya_rate": 9.34,
+    "total_housing": 119080,
+    "vacant_housing": 11120
+  },
+  "14113": {
+    "akiya_rate": 8.07,
+    "total_housing": 88700,
+    "vacant_housing": 7160
+  },
+  "14114": {
+    "akiya_rate": 8.72,
+    "total_housing": 58800,
+    "vacant_housing": 5130
+  },
+  "14115": {
+    "akiya_rate": 9.0,
+    "total_housing": 58650,
+    "vacant_housing": 5280
+  },
+  "14116": {
+    "akiya_rate": 4.08,
+    "total_housing": 66470,
+    "vacant_housing": 2710
+  },
+  "14117": {
+    "akiya_rate": 6.19,
+    "total_housing": 142460,
+    "vacant_housing": 8820
+  },
+  "14118": {
+    "akiya_rate": 5.98,
+    "total_housing": 92110,
+    "vacant_housing": 5510
+  },
+  "14130": {
+    "akiya_rate": 8.97,
+    "total_housing": 836900,
+    "vacant_housing": 75100
+  },
+  "14131": {
+    "akiya_rate": 9.9,
+    "total_housing": 139160,
+    "vacant_housing": 13770
+  },
+  "14132": {
+    "akiya_rate": 10.59,
+    "total_housing": 90490,
+    "vacant_housing": 9580
+  },
+  "14133": {
+    "akiya_rate": 8.29,
+    "total_housing": 148620,
+    "vacant_housing": 12320
+  },
+  "14134": {
+    "akiya_rate": 7.41,
+    "total_housing": 124190,
+    "vacant_housing": 9200
+  },
+  "14135": {
+    "akiya_rate": 10.19,
+    "total_housing": 130860,
+    "vacant_housing": 13340
+  },
+  "14136": {
+    "akiya_rate": 8.4,
+    "total_housing": 115130,
+    "vacant_housing": 9670
+  },
+  "14137": {
+    "akiya_rate": 8.15,
+    "total_housing": 88500,
+    "vacant_housing": 7210
+  },
+  "14150": {
+    "akiya_rate": 8.18,
+    "total_housing": 369300,
+    "vacant_housing": 30200
+  },
+  "14151": {
+    "akiya_rate": 8.77,
+    "total_housing": 83570,
+    "vacant_housing": 7330
+  },
+  "14152": {
+    "akiya_rate": 8.4,
+    "total_housing": 139080,
+    "vacant_housing": 11680
+  },
+  "14153": {
+    "akiya_rate": 7.62,
+    "total_housing": 146670,
+    "vacant_housing": 11170
+  },
+  "14201": {
+    "akiya_rate": 15.55,
+    "total_housing": 194640,
+    "vacant_housing": 30270
+  },
+  "14203": {
+    "akiya_rate": 11.7,
+    "total_housing": 126960,
+    "vacant_housing": 14850
+  },
+  "14204": {
+    "akiya_rate": 10.8,
+    "total_housing": 86040,
+    "vacant_housing": 9290
+  },
+  "14205": {
+    "akiya_rate": 9.61,
+    "total_housing": 220170,
+    "vacant_housing": 21160
+  },
+  "14206": {
+    "akiya_rate": 12.37,
+    "total_housing": 95570,
+    "vacant_housing": 11820
+  },
+  "14207": {
+    "akiya_rate": 9.16,
+    "total_housing": 116650,
+    "vacant_housing": 10680
+  },
+  "14208": {
+    "akiya_rate": 17.13,
+    "total_housing": 30180,
+    "vacant_housing": 5170
+  },
+  "14210": {
+    "akiya_rate": 18.92,
+    "total_housing": 21410,
+    "vacant_housing": 4050
+  },
+  "14211": {
+    "akiya_rate": 14.71,
+    "total_housing": 83530,
+    "vacant_housing": 12290
+  },
+  "14212": {
+    "akiya_rate": 12.45,
+    "total_housing": 118190,
+    "vacant_housing": 14720
+  },
+  "14213": {
+    "akiya_rate": 9.45,
+    "total_housing": 127500,
+    "vacant_housing": 12050
+  },
+  "14214": {
+    "akiya_rate": 6.96,
+    "total_housing": 55710,
+    "vacant_housing": 3880
+  },
+  "14215": {
+    "akiya_rate": 9.18,
+    "total_housing": 67080,
+    "vacant_housing": 6160
+  },
+  "14216": {
+    "akiya_rate": 11.05,
+    "total_housing": 67250,
+    "vacant_housing": 7430
+  },
+  "14217": {
+    "akiya_rate": 11.34,
+    "total_housing": 18350,
+    "vacant_housing": 2080
+  },
+  "14218": {
+    "akiya_rate": 8.08,
+    "total_housing": 38240,
+    "vacant_housing": 3090
+  },
+  "14301": {
+    "akiya_rate": 14.33,
+    "total_housing": 15000,
+    "vacant_housing": 2150
+  },
+  "14321": {
+    "akiya_rate": 7.86,
+    "total_housing": 22380,
+    "vacant_housing": 1760
+  },
+  "14341": {
+    "akiya_rate": 13.62,
+    "total_housing": 15790,
+    "vacant_housing": 2150
+  },
+  "14342": {
+    "akiya_rate": 13.77,
+    "total_housing": 13290,
+    "vacant_housing": 1830
+  },
+  "14362": {
+    "akiya_rate": 8.74,
+    "total_housing": 7670,
+    "vacant_housing": 670
+  },
+  "14366": {
+    "akiya_rate": 8.42,
+    "total_housing": 8080,
+    "vacant_housing": 680
+  },
+  "14384": {
+    "akiya_rate": 34.15,
+    "total_housing": 16780,
+    "vacant_housing": 5730
+  },
+  "14401": {
+    "akiya_rate": 8.32,
+    "total_housing": 18880,
+    "vacant_housing": 1570
+  },
+  "15100": {
+    "akiya_rate": 13.12,
+    "total_housing": 381800,
+    "vacant_housing": 50100
+  },
+  "15101": {
+    "akiya_rate": 9.49,
+    "total_housing": 30980,
+    "vacant_housing": 2940
+  },
+  "15102": {
+    "akiya_rate": 12.61,
+    "total_housing": 65500,
+    "vacant_housing": 8260
+  },
+  "15103": {
+    "akiya_rate": 16.36,
+    "total_housing": 107510,
+    "vacant_housing": 17590
+  },
+  "15104": {
+    "akiya_rate": 9.22,
+    "total_housing": 28530,
+    "vacant_housing": 2630
+  },
+  "15105": {
+    "akiya_rate": 11.56,
+    "total_housing": 31480,
+    "vacant_housing": 3640
+  },
+  "15106": {
+    "akiya_rate": 9.64,
+    "total_housing": 16910,
+    "vacant_housing": 1630
+  },
+  "15107": {
+    "akiya_rate": 13.39,
+    "total_housing": 79110,
+    "vacant_housing": 10590
+  },
+  "15108": {
+    "akiya_rate": 12.8,
+    "total_housing": 21800,
+    "vacant_housing": 2790
+  },
+  "15202": {
+    "akiya_rate": 13.46,
+    "total_housing": 120650,
+    "vacant_housing": 16240
+  },
+  "15204": {
+    "akiya_rate": 11.95,
+    "total_housing": 38410,
+    "vacant_housing": 4590
+  },
+  "15205": {
+    "akiya_rate": 18.79,
+    "total_housing": 40280,
+    "vacant_housing": 7570
+  },
+  "15206": {
+    "akiya_rate": 12.52,
+    "total_housing": 40410,
+    "vacant_housing": 5060
+  },
+  "15208": {
+    "akiya_rate": 10.71,
+    "total_housing": 13440,
+    "vacant_housing": 1440
+  },
+  "15209": {
+    "akiya_rate": 18.93,
+    "total_housing": 11360,
+    "vacant_housing": 2150
+  },
+  "15210": {
+    "akiya_rate": 11.48,
+    "total_housing": 19250,
+    "vacant_housing": 2210
+  },
+  "15211": {
+    "akiya_rate": 10.06,
+    "total_housing": 15310,
+    "vacant_housing": 1540
+  },
+  "15212": {
+    "akiya_rate": 17.38,
+    "total_housing": 25770,
+    "vacant_housing": 4480
+  },
+  "15213": {
+    "akiya_rate": 12.99,
+    "total_housing": 33030,
+    "vacant_housing": 4290
+  },
+  "15216": {
+    "akiya_rate": 20.3,
+    "total_housing": 19560,
+    "vacant_housing": 3970
+  },
+  "15217": {
+    "akiya_rate": 15.2,
+    "total_housing": 12500,
+    "vacant_housing": 1900
+  },
+  "15218": {
+    "akiya_rate": 12.96,
+    "total_housing": 19450,
+    "vacant_housing": 2520
+  },
+  "15222": {
+    "akiya_rate": 13.4,
+    "total_housing": 82590,
+    "vacant_housing": 11070
+  },
+  "15223": {
+    "akiya_rate": 17.02,
+    "total_housing": 16220,
+    "vacant_housing": 2760
+  },
+  "15224": {
+    "akiya_rate": 28.03,
+    "total_housing": 27760,
+    "vacant_housing": 7780
+  },
+  "15225": {
+    "akiya_rate": 13.36,
+    "total_housing": 14220,
+    "vacant_housing": 1900
+  },
+  "15226": {
+    "akiya_rate": 8.7,
+    "total_housing": 24700,
+    "vacant_housing": 2150
+  },
+  "15227": {
+    "akiya_rate": 16.89,
+    "total_housing": 11900,
+    "vacant_housing": 2010
+  },
+  "16201": {
+    "akiya_rate": 14.6,
+    "total_housing": 203330,
+    "vacant_housing": 29690
+  },
+  "16202": {
+    "akiya_rate": 15.46,
+    "total_housing": 76320,
+    "vacant_housing": 11800
+  },
+  "16204": {
+    "akiya_rate": 17.82,
+    "total_housing": 19300,
+    "vacant_housing": 3440
+  },
+  "16205": {
+    "akiya_rate": 17.41,
+    "total_housing": 18840,
+    "vacant_housing": 3280
+  },
+  "16206": {
+    "akiya_rate": 15.42,
+    "total_housing": 14140,
+    "vacant_housing": 2180
+  },
+  "16207": {
+    "akiya_rate": 19.27,
+    "total_housing": 19460,
+    "vacant_housing": 3750
+  },
+  "16208": {
+    "akiya_rate": 10.04,
+    "total_housing": 18330,
+    "vacant_housing": 1840
+  },
+  "16209": {
+    "akiya_rate": 14.92,
+    "total_housing": 11460,
+    "vacant_housing": 1710
+  },
+  "16210": {
+    "akiya_rate": 14.26,
+    "total_housing": 19630,
+    "vacant_housing": 2800
+  },
+  "16211": {
+    "akiya_rate": 12.42,
+    "total_housing": 38970,
+    "vacant_housing": 4840
+  },
+  "16322": {
+    "akiya_rate": 13.92,
+    "total_housing": 8480,
+    "vacant_housing": 1180
+  },
+  "16323": {
+    "akiya_rate": 8.08,
+    "total_housing": 9410,
+    "vacant_housing": 760
+  },
+  "16342": {
+    "akiya_rate": 11.79,
+    "total_housing": 9920,
+    "vacant_housing": 1170
+  },
+  "17201": {
+    "akiya_rate": 14.79,
+    "total_housing": 244640,
+    "vacant_housing": 36190
+  },
+  "17202": {
+    "akiya_rate": 22.12,
+    "total_housing": 25910,
+    "vacant_housing": 5730
+  },
+  "17203": {
+    "akiya_rate": 13.09,
+    "total_housing": 46660,
+    "vacant_housing": 6110
+  },
+  "17204": {
+    "akiya_rate": 29.22,
+    "total_housing": 12870,
+    "vacant_housing": 3760
+  },
+  "17205": {
+    "akiya_rate": 24.53,
+    "total_housing": 6930,
+    "vacant_housing": 1700
+  },
+  "17206": {
+    "akiya_rate": 23.05,
+    "total_housing": 32060,
+    "vacant_housing": 7390
+  },
+  "17207": {
+    "akiya_rate": 19.78,
+    "total_housing": 9250,
+    "vacant_housing": 1830
+  },
+  "17209": {
+    "akiya_rate": 9.44,
+    "total_housing": 14520,
+    "vacant_housing": 1370
+  },
+  "17210": {
+    "akiya_rate": 8.06,
+    "total_housing": 44530,
+    "vacant_housing": 3590
+  },
+  "17211": {
+    "akiya_rate": 11.78,
+    "total_housing": 21130,
+    "vacant_housing": 2490
+  },
+  "17212": {
+    "akiya_rate": 9.73,
+    "total_housing": 30000,
+    "vacant_housing": 2920
+  },
+  "17361": {
+    "akiya_rate": 10.01,
+    "total_housing": 14990,
+    "vacant_housing": 1500
+  },
+  "17365": {
+    "akiya_rate": 18.64,
+    "total_housing": 13570,
+    "vacant_housing": 2530
+  },
+  "17384": {
+    "akiya_rate": 32.96,
+    "total_housing": 9920,
+    "vacant_housing": 3270
+  },
+  "17407": {
+    "akiya_rate": 20.1,
+    "total_housing": 7660,
+    "vacant_housing": 1540
+  },
+  "17463": {
+    "akiya_rate": 26.24,
+    "total_housing": 8040,
+    "vacant_housing": 2110
+  },
+  "18201": {
+    "akiya_rate": 16.08,
+    "total_housing": 124690,
+    "vacant_housing": 20050
+  },
+  "18202": {
+    "akiya_rate": 18.18,
+    "total_housing": 33060,
+    "vacant_housing": 6010
+  },
+  "18204": {
+    "akiya_rate": 20.81,
+    "total_housing": 15090,
+    "vacant_housing": 3140
+  },
+  "18205": {
+    "akiya_rate": 12.89,
+    "total_housing": 11170,
+    "vacant_housing": 1440
+  },
+  "18206": {
+    "akiya_rate": 13.76,
+    "total_housing": 8210,
+    "vacant_housing": 1130
+  },
+  "18207": {
+    "akiya_rate": 11.84,
+    "total_housing": 28130,
+    "vacant_housing": 3330
+  },
+  "18208": {
+    "akiya_rate": 15.97,
+    "total_housing": 11900,
+    "vacant_housing": 1900
+  },
+  "18209": {
+    "akiya_rate": 14.39,
+    "total_housing": 34040,
+    "vacant_housing": 4900
+  },
+  "18210": {
+    "akiya_rate": 12.24,
+    "total_housing": 35710,
+    "vacant_housing": 4370
+  },
+  "18322": {
+    "akiya_rate": 10.82,
+    "total_housing": 7760,
+    "vacant_housing": 840
+  },
+  "18423": {
+    "akiya_rate": 15.17,
+    "total_housing": 6920,
+    "vacant_housing": 1050
+  },
+  "19201": {
+    "akiya_rate": 18.14,
+    "total_housing": 106290,
+    "vacant_housing": 19280
+  },
+  "19202": {
+    "akiya_rate": 13.82,
+    "total_housing": 21280,
+    "vacant_housing": 2940
+  },
+  "19204": {
+    "akiya_rate": 14.57,
+    "total_housing": 16680,
+    "vacant_housing": 2430
+  },
+  "19205": {
+    "akiya_rate": 19.7,
+    "total_housing": 16190,
+    "vacant_housing": 3190
+  },
+  "19206": {
+    "akiya_rate": 22.05,
+    "total_housing": 11520,
+    "vacant_housing": 2540
+  },
+  "19207": {
+    "akiya_rate": 15.65,
+    "total_housing": 13930,
+    "vacant_housing": 2180
+  },
+  "19208": {
+    "akiya_rate": 13.98,
+    "total_housing": 30840,
+    "vacant_housing": 4310
+  },
+  "19209": {
+    "akiya_rate": 46.06,
+    "total_housing": 35890,
+    "vacant_housing": 16530
+  },
+  "19210": {
+    "akiya_rate": 12.2,
+    "total_housing": 35560,
+    "vacant_housing": 4340
+  },
+  "19211": {
+    "akiya_rate": 18.2,
+    "total_housing": 33630,
+    "vacant_housing": 6120
+  },
+  "19212": {
+    "akiya_rate": 21.19,
+    "total_housing": 12080,
+    "vacant_housing": 2560
+  },
+  "19213": {
+    "akiya_rate": 17.44,
+    "total_housing": 13190,
+    "vacant_housing": 2300
+  },
+  "19214": {
+    "akiya_rate": 13.81,
+    "total_housing": 15780,
+    "vacant_housing": 2180
+  },
+  "19384": {
+    "akiya_rate": 19.47,
+    "total_housing": 12070,
+    "vacant_housing": 2350
+  },
+  "19430": {
+    "akiya_rate": 16.09,
+    "total_housing": 13050,
+    "vacant_housing": 2100
+  },
+  "20201": {
+    "akiya_rate": 15.42,
+    "total_housing": 186130,
+    "vacant_housing": 28700
+  },
+  "20202": {
+    "akiya_rate": 13.92,
+    "total_housing": 122510,
+    "vacant_housing": 17050
+  },
+  "20203": {
+    "akiya_rate": 16.0,
+    "total_housing": 76120,
+    "vacant_housing": 12180
+  },
+  "20204": {
+    "akiya_rate": 18.68,
+    "total_housing": 23020,
+    "vacant_housing": 4300
+  },
+  "20205": {
+    "akiya_rate": 17.12,
+    "total_housing": 45920,
+    "vacant_housing": 7860
+  },
+  "20206": {
+    "akiya_rate": 19.84,
+    "total_housing": 26560,
+    "vacant_housing": 5270
+  },
+  "20207": {
+    "akiya_rate": 14.12,
+    "total_housing": 22240,
+    "vacant_housing": 3140
+  },
+  "20208": {
+    "akiya_rate": 24.26,
+    "total_housing": 23040,
+    "vacant_housing": 5590
+  },
+  "20209": {
+    "akiya_rate": 20.01,
+    "total_housing": 31740,
+    "vacant_housing": 6350
+  },
+  "20210": {
+    "akiya_rate": 17.18,
+    "total_housing": 15950,
+    "vacant_housing": 2740
+  },
+  "20211": {
+    "akiya_rate": 12.51,
+    "total_housing": 18220,
+    "vacant_housing": 2280
+  },
+  "20212": {
+    "akiya_rate": 20.26,
+    "total_housing": 13180,
+    "vacant_housing": 2670
+  },
+  "20213": {
+    "akiya_rate": 15.01,
+    "total_housing": 8460,
+    "vacant_housing": 1270
+  },
+  "20214": {
+    "akiya_rate": 41.5,
+    "total_housing": 40960,
+    "vacant_housing": 17000
+  },
+  "20215": {
+    "akiya_rate": 13.32,
+    "total_housing": 32360,
+    "vacant_housing": 4310
+  },
+  "20217": {
+    "akiya_rate": 21.3,
+    "total_housing": 52310,
+    "vacant_housing": 11140
+  },
+  "20218": {
+    "akiya_rate": 18.36,
+    "total_housing": 27010,
+    "vacant_housing": 4960
+  },
+  "20219": {
+    "akiya_rate": 17.07,
+    "total_housing": 13710,
+    "vacant_housing": 2340
+  },
+  "20220": {
+    "akiya_rate": 14.47,
+    "total_housing": 43760,
+    "vacant_housing": 6330
+  },
+  "20321": {
+    "akiya_rate": 70.38,
+    "total_housing": 28460,
+    "vacant_housing": 20030
+  },
+  "20323": {
+    "akiya_rate": 19.71,
+    "total_housing": 8320,
+    "vacant_housing": 1640
+  },
+  "20361": {
+    "akiya_rate": 22.32,
+    "total_housing": 10350,
+    "vacant_housing": 2310
+  },
+  "20382": {
+    "akiya_rate": 23.74,
+    "total_housing": 9310,
+    "vacant_housing": 2210
+  },
+  "20383": {
+    "akiya_rate": 10.56,
+    "total_housing": 11360,
+    "vacant_housing": 1200
+  },
+  "20385": {
+    "akiya_rate": 9.42,
+    "total_housing": 7540,
+    "vacant_housing": 710
+  },
+  "21201": {
+    "akiya_rate": 18.31,
+    "total_housing": 216380,
+    "vacant_housing": 39620
+  },
+  "21202": {
+    "akiya_rate": 16.57,
+    "total_housing": 74330,
+    "vacant_housing": 12320
+  },
+  "21203": {
+    "akiya_rate": 21.04,
+    "total_housing": 39070,
+    "vacant_housing": 8220
+  },
+  "21204": {
+    "akiya_rate": 10.85,
+    "total_housing": 47740,
+    "vacant_housing": 5180
+  },
+  "21205": {
+    "akiya_rate": 16.88,
+    "total_housing": 39760,
+    "vacant_housing": 6710
+  },
+  "21206": {
+    "akiya_rate": 22.49,
+    "total_housing": 38290,
+    "vacant_housing": 8610
+  },
+  "21207": {
+    "akiya_rate": 16.49,
+    "total_housing": 8610,
+    "vacant_housing": 1420
+  },
+  "21208": {
+    "akiya_rate": 17.56,
+    "total_housing": 16740,
+    "vacant_housing": 2940
+  },
+  "21209": {
+    "akiya_rate": 12.53,
+    "total_housing": 28720,
+    "vacant_housing": 3600
+  },
+  "21210": {
+    "akiya_rate": 18.65,
+    "total_housing": 21660,
+    "vacant_housing": 4040
+  },
+  "21211": {
+    "akiya_rate": 13.25,
+    "total_housing": 25510,
+    "vacant_housing": 3380
+  },
+  "21212": {
+    "akiya_rate": 15.84,
+    "total_housing": 25190,
+    "vacant_housing": 3990
+  },
+  "21213": {
+    "akiya_rate": 11.92,
+    "total_housing": 63440,
+    "vacant_housing": 7560
+  },
+  "21214": {
+    "akiya_rate": 10.78,
+    "total_housing": 45730,
+    "vacant_housing": 4930
+  },
+  "21215": {
+    "akiya_rate": 21.99,
+    "total_housing": 11230,
+    "vacant_housing": 2470
+  },
+  "21216": {
+    "akiya_rate": 12.63,
+    "total_housing": 26840,
+    "vacant_housing": 3390
+  },
+  "21217": {
+    "akiya_rate": 17.01,
+    "total_housing": 10110,
+    "vacant_housing": 1720
+  },
+  "21218": {
+    "akiya_rate": 11.07,
+    "total_housing": 13010,
+    "vacant_housing": 1440
+  },
+  "21219": {
+    "akiya_rate": 25.26,
+    "total_housing": 19280,
+    "vacant_housing": 4870
+  },
+  "21220": {
+    "akiya_rate": 19.7,
+    "total_housing": 13500,
+    "vacant_housing": 2660
+  },
+  "21221": {
+    "akiya_rate": 10.04,
+    "total_housing": 12650,
+    "vacant_housing": 1270
+  },
+  "21302": {
+    "akiya_rate": 13.93,
+    "total_housing": 12200,
+    "vacant_housing": 1700
+  },
+  "21303": {
+    "akiya_rate": 15.8,
+    "total_housing": 10190,
+    "vacant_housing": 1610
+  },
+  "21341": {
+    "akiya_rate": 13.04,
+    "total_housing": 9970,
+    "vacant_housing": 1300
+  },
+  "21361": {
+    "akiya_rate": 13.33,
+    "total_housing": 11030,
+    "vacant_housing": 1470
+  },
+  "21381": {
+    "akiya_rate": 13.31,
+    "total_housing": 7740,
+    "vacant_housing": 1030
+  },
+  "21401": {
+    "akiya_rate": 27.22,
+    "total_housing": 8670,
+    "vacant_housing": 2360
+  },
+  "21403": {
+    "akiya_rate": 10.21,
+    "total_housing": 8620,
+    "vacant_housing": 880
+  },
+  "21404": {
+    "akiya_rate": 10.98,
+    "total_housing": 9020,
+    "vacant_housing": 990
+  },
+  "21421": {
+    "akiya_rate": 14.56,
+    "total_housing": 8790,
+    "vacant_housing": 1280
+  },
+  "21521": {
+    "akiya_rate": 13.81,
+    "total_housing": 7820,
+    "vacant_housing": 1080
+  },
+  "22100": {
+    "akiya_rate": 15.23,
+    "total_housing": 346100,
+    "vacant_housing": 52700
+  },
+  "22101": {
+    "akiya_rate": 16.35,
+    "total_housing": 123230,
+    "vacant_housing": 20150
+  },
+  "22102": {
+    "akiya_rate": 14.23,
+    "total_housing": 112010,
+    "vacant_housing": 15940
+  },
+  "22103": {
+    "akiya_rate": 14.95,
+    "total_housing": 110910,
+    "vacant_housing": 16580
+  },
+  "22130": {
+    "akiya_rate": 12.76,
+    "total_housing": 371400,
+    "vacant_housing": 47400
+  },
+  "22131": {
+    "akiya_rate": 13.56,
+    "total_housing": 125850,
+    "vacant_housing": 17070
+  },
+  "22132": {
+    "akiya_rate": 10.31,
+    "total_housing": 58990,
+    "vacant_housing": 6080
+  },
+  "22133": {
+    "akiya_rate": 12.84,
+    "total_housing": 46510,
+    "vacant_housing": 5970
+  },
+  "22134": {
+    "akiya_rate": 11.95,
+    "total_housing": 46010,
+    "vacant_housing": 5500
+  },
+  "22135": {
+    "akiya_rate": 14.83,
+    "total_housing": 41060,
+    "vacant_housing": 6090
+  },
+  "22136": {
+    "akiya_rate": 7.49,
+    "total_housing": 39100,
+    "vacant_housing": 2930
+  },
+  "22137": {
+    "akiya_rate": 27.01,
+    "total_housing": 13920,
+    "vacant_housing": 3760
+  },
+  "22203": {
+    "akiya_rate": 17.2,
+    "total_housing": 100710,
+    "vacant_housing": 17320
+  },
+  "22205": {
+    "akiya_rate": 53.35,
+    "total_housing": 39510,
+    "vacant_housing": 21080
+  },
+  "22206": {
+    "akiya_rate": 12.58,
+    "total_housing": 51750,
+    "vacant_housing": 6510
+  },
+  "22207": {
+    "akiya_rate": 15.85,
+    "total_housing": 60520,
+    "vacant_housing": 9590
+  },
+  "22208": {
+    "akiya_rate": 39.52,
+    "total_housing": 51750,
+    "vacant_housing": 20450
+  },
+  "22209": {
+    "akiya_rate": 12.19,
+    "total_housing": 40540,
+    "vacant_housing": 4940
+  },
+  "22210": {
+    "akiya_rate": 14.03,
+    "total_housing": 113680,
+    "vacant_housing": 15950
+  },
+  "22211": {
+    "akiya_rate": 10.69,
+    "total_housing": 73360,
+    "vacant_housing": 7840
+  },
+  "22212": {
+    "akiya_rate": 12.61,
+    "total_housing": 60500,
+    "vacant_housing": 7630
+  },
+  "22213": {
+    "akiya_rate": 17.14,
+    "total_housing": 53030,
+    "vacant_housing": 9090
+  },
+  "22214": {
+    "akiya_rate": 9.94,
+    "total_housing": 60250,
+    "vacant_housing": 5990
+  },
+  "22215": {
+    "akiya_rate": 18.26,
+    "total_housing": 38830,
+    "vacant_housing": 7090
+  },
+  "22216": {
+    "akiya_rate": 13.93,
+    "total_housing": 39400,
+    "vacant_housing": 5490
+  },
+  "22219": {
+    "akiya_rate": 31.28,
+    "total_housing": 13330,
+    "vacant_housing": 4170
+  },
+  "22220": {
+    "akiya_rate": 21.41,
+    "total_housing": 24100,
+    "vacant_housing": 5160
+  },
+  "22221": {
+    "akiya_rate": 15.22,
+    "total_housing": 27330,
+    "vacant_housing": 4160
+  },
+  "22222": {
+    "akiya_rate": 32.95,
+    "total_housing": 17240,
+    "vacant_housing": 5680
+  },
+  "22223": {
+    "akiya_rate": 19.49,
+    "total_housing": 14210,
+    "vacant_housing": 2770
+  },
+  "22224": {
+    "akiya_rate": 15.05,
+    "total_housing": 21070,
+    "vacant_housing": 3170
+  },
+  "22225": {
+    "akiya_rate": 22.0,
+    "total_housing": 23590,
+    "vacant_housing": 5190
+  },
+  "22226": {
+    "akiya_rate": 16.04,
+    "total_housing": 19570,
+    "vacant_housing": 3140
+  },
+  "22325": {
+    "akiya_rate": 23.11,
+    "total_housing": 19560,
+    "vacant_housing": 4520
+  },
+  "22341": {
+    "akiya_rate": 12.45,
+    "total_housing": 13980,
+    "vacant_housing": 1740
+  },
+  "22342": {
+    "akiya_rate": 13.77,
+    "total_housing": 20340,
+    "vacant_housing": 2800
+  },
+  "22344": {
+    "akiya_rate": 19.26,
+    "total_housing": 7580,
+    "vacant_housing": 1460
+  },
+  "22424": {
+    "akiya_rate": 12.8,
+    "total_housing": 13050,
+    "vacant_housing": 1670
+  },
+  "22461": {
+    "akiya_rate": 13.22,
+    "total_housing": 6960,
+    "vacant_housing": 920
+  },
+  "23100": {
+    "akiya_rate": 13.2,
+    "total_housing": 1310600,
+    "vacant_housing": 173000
+  },
+  "23101": {
+    "akiya_rate": 14.48,
+    "total_housing": 101000,
+    "vacant_housing": 14620
+  },
+  "23102": {
+    "akiya_rate": 17.01,
+    "total_housing": 58080,
+    "vacant_housing": 9880
+  },
+  "23103": {
+    "akiya_rate": 13.81,
+    "total_housing": 92760,
+    "vacant_housing": 12810
+  },
+  "23104": {
+    "akiya_rate": 13.73,
+    "total_housing": 86860,
+    "vacant_housing": 11930
+  },
+  "23105": {
+    "akiya_rate": 15.48,
+    "total_housing": 95190,
+    "vacant_housing": 14740
+  },
+  "23106": {
+    "akiya_rate": 17.58,
+    "total_housing": 84490,
+    "vacant_housing": 14850
+  },
+  "23107": {
+    "akiya_rate": 13.91,
+    "total_housing": 63430,
+    "vacant_housing": 8820
+  },
+  "23108": {
+    "akiya_rate": 11.36,
+    "total_housing": 58450,
+    "vacant_housing": 6640
+  },
+  "23109": {
+    "akiya_rate": 10.71,
+    "total_housing": 38670,
+    "vacant_housing": 4140
+  },
+  "23110": {
+    "akiya_rate": 13.58,
+    "total_housing": 119000,
+    "vacant_housing": 16160
+  },
+  "23111": {
+    "akiya_rate": 12.66,
+    "total_housing": 73320,
+    "vacant_housing": 9280
+  },
+  "23112": {
+    "akiya_rate": 14.78,
+    "total_housing": 70450,
+    "vacant_housing": 10410
+  },
+  "23113": {
+    "akiya_rate": 10.07,
+    "total_housing": 83720,
+    "vacant_housing": 8430
+  },
+  "23114": {
+    "akiya_rate": 7.85,
+    "total_housing": 111190,
+    "vacant_housing": 8730
+  },
+  "23115": {
+    "akiya_rate": 12.89,
+    "total_housing": 83550,
+    "vacant_housing": 10770
+  },
+  "23116": {
+    "akiya_rate": 11.93,
+    "total_housing": 90410,
+    "vacant_housing": 10790
+  },
+  "23201": {
+    "akiya_rate": 13.53,
+    "total_housing": 175580,
+    "vacant_housing": 23760
+  },
+  "23202": {
+    "akiya_rate": 10.3,
+    "total_housing": 173550,
+    "vacant_housing": 17880
+  },
+  "23203": {
+    "akiya_rate": 9.88,
+    "total_housing": 169980,
+    "vacant_housing": 16800
+  },
+  "23204": {
+    "akiya_rate": 11.29,
+    "total_housing": 59530,
+    "vacant_housing": 6720
+  },
+  "23205": {
+    "akiya_rate": 12.3,
+    "total_housing": 55200,
+    "vacant_housing": 6790
+  },
+  "23206": {
+    "akiya_rate": 12.55,
+    "total_housing": 147170,
+    "vacant_housing": 18470
+  },
+  "23207": {
+    "akiya_rate": 10.62,
+    "total_housing": 81660,
+    "vacant_housing": 8670
+  },
+  "23208": {
+    "akiya_rate": 12.53,
+    "total_housing": 27460,
+    "vacant_housing": 3440
+  },
+  "23209": {
+    "akiya_rate": 9.78,
+    "total_housing": 30870,
+    "vacant_housing": 3020
+  },
+  "23210": {
+    "akiya_rate": 10.6,
+    "total_housing": 73500,
+    "vacant_housing": 7790
+  },
+  "23211": {
+    "akiya_rate": 8.7,
+    "total_housing": 182160,
+    "vacant_housing": 15840
+  },
+  "23212": {
+    "akiya_rate": 8.3,
+    "total_housing": 79370,
+    "vacant_housing": 6590
+  },
+  "23213": {
+    "akiya_rate": 12.53,
+    "total_housing": 70640,
+    "vacant_housing": 8850
+  },
+  "23214": {
+    "akiya_rate": 12.91,
+    "total_housing": 35330,
+    "vacant_housing": 4560
+  },
+  "23215": {
+    "akiya_rate": 13.84,
+    "total_housing": 32590,
+    "vacant_housing": 4510
+  },
+  "23216": {
+    "akiya_rate": 16.46,
+    "total_housing": 29770,
+    "vacant_housing": 4900
+  },
+  "23217": {
+    "akiya_rate": 10.53,
+    "total_housing": 43380,
+    "vacant_housing": 4570
+  },
+  "23219": {
+    "akiya_rate": 10.62,
+    "total_housing": 69700,
+    "vacant_housing": 7400
+  },
+  "23220": {
+    "akiya_rate": 11.48,
+    "total_housing": 57650,
+    "vacant_housing": 6620
+  },
+  "23221": {
+    "akiya_rate": 21.21,
+    "total_housing": 20600,
+    "vacant_housing": 4370
+  },
+  "23222": {
+    "akiya_rate": 12.82,
+    "total_housing": 53900,
+    "vacant_housing": 6910
+  },
+  "23223": {
+    "akiya_rate": 10.89,
+    "total_housing": 40580,
+    "vacant_housing": 4420
+  },
+  "23224": {
+    "akiya_rate": 9.24,
+    "total_housing": 38860,
+    "vacant_housing": 3590
+  },
+  "23225": {
+    "akiya_rate": 8.29,
+    "total_housing": 34270,
+    "vacant_housing": 2840
+  },
+  "23226": {
+    "akiya_rate": 9.55,
+    "total_housing": 37480,
+    "vacant_housing": 3580
+  },
+  "23227": {
+    "akiya_rate": 7.91,
+    "total_housing": 20100,
+    "vacant_housing": 1590
+  },
+  "23228": {
+    "akiya_rate": 9.6,
+    "total_housing": 23760,
+    "vacant_housing": 2280
+  },
+  "23229": {
+    "akiya_rate": 8.83,
+    "total_housing": 31470,
+    "vacant_housing": 2780
+  },
+  "23230": {
+    "akiya_rate": 8.56,
+    "total_housing": 41110,
+    "vacant_housing": 3520
+  },
+  "23231": {
+    "akiya_rate": 9.74,
+    "total_housing": 22790,
+    "vacant_housing": 2220
+  },
+  "23232": {
+    "akiya_rate": 9.79,
+    "total_housing": 23810,
+    "vacant_housing": 2330
+  },
+  "23233": {
+    "akiya_rate": 14.78,
+    "total_housing": 34370,
+    "vacant_housing": 5080
+  },
+  "23234": {
+    "akiya_rate": 10.41,
+    "total_housing": 40330,
+    "vacant_housing": 4200
+  },
+  "23235": {
+    "akiya_rate": 9.76,
+    "total_housing": 18540,
+    "vacant_housing": 1810
+  },
+  "23236": {
+    "akiya_rate": 8.77,
+    "total_housing": 26790,
+    "vacant_housing": 2350
+  },
+  "23237": {
+    "akiya_rate": 9.27,
+    "total_housing": 37850,
+    "vacant_housing": 3510
+  },
+  "23238": {
+    "akiya_rate": 10.47,
+    "total_housing": 29620,
+    "vacant_housing": 3100
+  },
+  "23302": {
+    "akiya_rate": 6.16,
+    "total_housing": 18660,
+    "vacant_housing": 1150
+  },
+  "23342": {
+    "akiya_rate": 17.23,
+    "total_housing": 8010,
+    "vacant_housing": 1380
+  },
+  "23361": {
+    "akiya_rate": 9.37,
+    "total_housing": 10670,
+    "vacant_housing": 1000
+  },
+  "23362": {
+    "akiya_rate": 8.36,
+    "total_housing": 14480,
+    "vacant_housing": 1210
+  },
+  "23424": {
+    "akiya_rate": 12.63,
+    "total_housing": 16070,
+    "vacant_housing": 2030
+  },
+  "23425": {
+    "akiya_rate": 11.64,
+    "total_housing": 18390,
+    "vacant_housing": 2140
+  },
+  "23441": {
+    "akiya_rate": 8.78,
+    "total_housing": 10930,
+    "vacant_housing": 960
+  },
+  "23442": {
+    "akiya_rate": 8.81,
+    "total_housing": 21340,
+    "vacant_housing": 1880
+  },
+  "23445": {
+    "akiya_rate": 22.68,
+    "total_housing": 8200,
+    "vacant_housing": 1860
+  },
+  "23446": {
+    "akiya_rate": 19.82,
+    "total_housing": 11300,
+    "vacant_housing": 2240
+  },
+  "23447": {
+    "akiya_rate": 15.16,
+    "total_housing": 20310,
+    "vacant_housing": 3080
+  },
+  "23501": {
+    "akiya_rate": 7.87,
+    "total_housing": 16780,
+    "vacant_housing": 1320
+  },
+  "24201": {
+    "akiya_rate": 17.19,
+    "total_housing": 141680,
+    "vacant_housing": 24360
+  },
+  "24202": {
+    "akiya_rate": 11.87,
+    "total_housing": 151780,
+    "vacant_housing": 18020
+  },
+  "24203": {
+    "akiya_rate": 16.96,
+    "total_housing": 61740,
+    "vacant_housing": 10470
+  },
+  "24204": {
+    "akiya_rate": 15.7,
+    "total_housing": 73490,
+    "vacant_housing": 11540
+  },
+  "24205": {
+    "akiya_rate": 13.09,
+    "total_housing": 63920,
+    "vacant_housing": 8370
+  },
+  "24207": {
+    "akiya_rate": 10.96,
+    "total_housing": 91230,
+    "vacant_housing": 10000
+  },
+  "24208": {
+    "akiya_rate": 14.34,
+    "total_housing": 36320,
+    "vacant_housing": 5210
+  },
+  "24209": {
+    "akiya_rate": 35.14,
+    "total_housing": 11640,
+    "vacant_housing": 4090
+  },
+  "24210": {
+    "akiya_rate": 13.98,
+    "total_housing": 24390,
+    "vacant_housing": 3410
+  },
+  "24211": {
+    "akiya_rate": 30.2,
+    "total_housing": 10530,
+    "vacant_housing": 3180
+  },
+  "24212": {
+    "akiya_rate": 32.44,
+    "total_housing": 10880,
+    "vacant_housing": 3530
+  },
+  "24214": {
+    "akiya_rate": 16.48,
+    "total_housing": 19540,
+    "vacant_housing": 3220
+  },
+  "24215": {
+    "akiya_rate": 31.03,
+    "total_housing": 27520,
+    "vacant_housing": 8540
+  },
+  "24216": {
+    "akiya_rate": 20.59,
+    "total_housing": 44830,
+    "vacant_housing": 9230
+  },
+  "24324": {
+    "akiya_rate": 7.39,
+    "total_housing": 10290,
+    "vacant_housing": 760
+  },
+  "24341": {
+    "akiya_rate": 14.42,
+    "total_housing": 17680,
+    "vacant_housing": 2550
+  },
+  "24344": {
+    "akiya_rate": 24.86,
+    "total_housing": 8730,
+    "vacant_housing": 2170
+  },
+  "24442": {
+    "akiya_rate": 6.87,
+    "total_housing": 9020,
+    "vacant_housing": 620
+  },
+  "24461": {
+    "akiya_rate": 13.39,
+    "total_housing": 6050,
+    "vacant_housing": 810
+  },
+  "25201": {
+    "akiya_rate": 10.86,
+    "total_housing": 169970,
+    "vacant_housing": 18460
+  },
+  "25202": {
+    "akiya_rate": 14.81,
+    "total_housing": 56530,
+    "vacant_housing": 8370
+  },
+  "25203": {
+    "akiya_rate": 18.49,
+    "total_housing": 52410,
+    "vacant_housing": 9690
+  },
+  "25204": {
+    "akiya_rate": 10.64,
+    "total_housing": 36460,
+    "vacant_housing": 3880
+  },
+  "25206": {
+    "akiya_rate": 6.67,
+    "total_housing": 74690,
+    "vacant_housing": 4980
+  },
+  "25207": {
+    "akiya_rate": 8.25,
+    "total_housing": 35740,
+    "vacant_housing": 2950
+  },
+  "25208": {
+    "akiya_rate": 7.17,
+    "total_housing": 29140,
+    "vacant_housing": 2090
+  },
+  "25209": {
+    "akiya_rate": 11.71,
+    "total_housing": 38850,
+    "vacant_housing": 4550
+  },
+  "25210": {
+    "akiya_rate": 8.64,
+    "total_housing": 21990,
+    "vacant_housing": 1900
+  },
+  "25211": {
+    "akiya_rate": 14.98,
+    "total_housing": 25960,
+    "vacant_housing": 3890
+  },
+  "25212": {
+    "akiya_rate": 23.05,
+    "total_housing": 23770,
+    "vacant_housing": 5480
+  },
+  "25213": {
+    "akiya_rate": 17.49,
+    "total_housing": 52490,
+    "vacant_housing": 9180
+  },
+  "25214": {
+    "akiya_rate": 14.63,
+    "total_housing": 15310,
+    "vacant_housing": 2240
+  },
+  "25383": {
+    "akiya_rate": 10.81,
+    "total_housing": 8970,
+    "vacant_housing": 970
+  },
+  "25425": {
+    "akiya_rate": 12.53,
+    "total_housing": 9260,
+    "vacant_housing": 1160
+  },
+  "26100": {
+    "akiya_rate": 12.5,
+    "total_housing": 842300,
+    "vacant_housing": 105300
+  },
+  "26101": {
+    "akiya_rate": 12.66,
+    "total_housing": 65470,
+    "vacant_housing": 8290
+  },
+  "26102": {
+    "akiya_rate": 13.15,
+    "total_housing": 56040,
+    "vacant_housing": 7370
+  },
+  "26103": {
+    "akiya_rate": 11.42,
+    "total_housing": 97780,
+    "vacant_housing": 11170
+  },
+  "26104": {
+    "akiya_rate": 10.82,
+    "total_housing": 69070,
+    "vacant_housing": 7470
+  },
+  "26105": {
+    "akiya_rate": 16.37,
+    "total_housing": 23770,
+    "vacant_housing": 3890
+  },
+  "26106": {
+    "akiya_rate": 15.7,
+    "total_housing": 57590,
+    "vacant_housing": 9040
+  },
+  "26107": {
+    "akiya_rate": 13.86,
+    "total_housing": 59760,
+    "vacant_housing": 8280
+  },
+  "26108": {
+    "akiya_rate": 10.21,
+    "total_housing": 110090,
+    "vacant_housing": 11240
+  },
+  "26109": {
+    "akiya_rate": 12.75,
+    "total_housing": 152710,
+    "vacant_housing": 19470
+  },
+  "26110": {
+    "akiya_rate": 13.67,
+    "total_housing": 76600,
+    "vacant_housing": 10470
+  },
+  "26111": {
+    "akiya_rate": 11.73,
+    "total_housing": 73380,
+    "vacant_housing": 8610
+  },
+  "26201": {
+    "akiya_rate": 21.77,
+    "total_housing": 40840,
+    "vacant_housing": 8890
+  },
+  "26202": {
+    "akiya_rate": 22.97,
+    "total_housing": 41350,
+    "vacant_housing": 9500
+  },
+  "26203": {
+    "akiya_rate": 19.9,
+    "total_housing": 17590,
+    "vacant_housing": 3500
+  },
+  "26204": {
+    "akiya_rate": 10.02,
+    "total_housing": 80630,
+    "vacant_housing": 8080
+  },
+  "26205": {
+    "akiya_rate": 34.48,
+    "total_housing": 10760,
+    "vacant_housing": 3710
+  },
+  "26206": {
+    "akiya_rate": 12.84,
+    "total_housing": 39730,
+    "vacant_housing": 5100
+  },
+  "26207": {
+    "akiya_rate": 9.61,
+    "total_housing": 33920,
+    "vacant_housing": 3260
+  },
+  "26208": {
+    "akiya_rate": 10.13,
+    "total_housing": 26150,
+    "vacant_housing": 2650
+  },
+  "26209": {
+    "akiya_rate": 8.63,
+    "total_housing": 36490,
+    "vacant_housing": 3150
+  },
+  "26210": {
+    "akiya_rate": 9.91,
+    "total_housing": 34300,
+    "vacant_housing": 3400
+  },
+  "26211": {
+    "akiya_rate": 9.21,
+    "total_housing": 35630,
+    "vacant_housing": 3280
+  },
+  "26212": {
+    "akiya_rate": 20.12,
+    "total_housing": 24750,
+    "vacant_housing": 4980
+  },
+  "26213": {
+    "akiya_rate": 20.64,
+    "total_housing": 14920,
+    "vacant_housing": 3080
+  },
+  "26214": {
+    "akiya_rate": 8.86,
+    "total_housing": 33290,
+    "vacant_housing": 2950
+  },
+  "26303": {
+    "akiya_rate": 13.71,
+    "total_housing": 7730,
+    "vacant_housing": 1060
+  },
+  "26322": {
+    "akiya_rate": 6.98,
+    "total_housing": 6880,
+    "vacant_housing": 480
+  },
+  "26366": {
+    "akiya_rate": 8.58,
+    "total_housing": 15030,
+    "vacant_housing": 1290
+  },
+  "26465": {
+    "akiya_rate": 14.33,
+    "total_housing": 9840,
+    "vacant_housing": 1410
+  },
+  "27100": {
+    "akiya_rate": 16.12,
+    "total_housing": 1827900,
+    "vacant_housing": 294600
+  },
+  "27102": {
+    "akiya_rate": 16.98,
+    "total_housing": 71540,
+    "vacant_housing": 12150
+  },
+  "27103": {
+    "akiya_rate": 12.98,
+    "total_housing": 52070,
+    "vacant_housing": 6760
+  },
+  "27104": {
+    "akiya_rate": 16.9,
+    "total_housing": 39290,
+    "vacant_housing": 6640
+  },
+  "27106": {
+    "akiya_rate": 11.54,
+    "total_housing": 78160,
+    "vacant_housing": 9020
+  },
+  "27107": {
+    "akiya_rate": 18.0,
+    "total_housing": 52490,
+    "vacant_housing": 9450
+  },
+  "27108": {
+    "akiya_rate": 17.72,
+    "total_housing": 35270,
+    "vacant_housing": 6250
+  },
+  "27109": {
+    "akiya_rate": 14.69,
+    "total_housing": 53500,
+    "vacant_housing": 7860
+  },
+  "27111": {
+    "akiya_rate": 17.94,
+    "total_housing": 71920,
+    "vacant_housing": 12900
+  },
+  "27113": {
+    "akiya_rate": 13.42,
+    "total_housing": 55650,
+    "vacant_housing": 7470
+  },
+  "27114": {
+    "akiya_rate": 16.45,
+    "total_housing": 123970,
+    "vacant_housing": 20390
+  },
+  "27115": {
+    "akiya_rate": 14.76,
+    "total_housing": 56990,
+    "vacant_housing": 8410
+  },
+  "27116": {
+    "akiya_rate": 22.8,
+    "total_housing": 91620,
+    "vacant_housing": 20890
+  },
+  "27117": {
+    "akiya_rate": 18.1,
+    "total_housing": 56800,
+    "vacant_housing": 10280
+  },
+  "27118": {
+    "akiya_rate": 12.65,
+    "total_housing": 97630,
+    "vacant_housing": 12350
+  },
+  "27119": {
+    "akiya_rate": 13.82,
+    "total_housing": 63910,
+    "vacant_housing": 8830
+  },
+  "27120": {
+    "akiya_rate": 16.95,
+    "total_housing": 99370,
+    "vacant_housing": 16840
+  },
+  "27121": {
+    "akiya_rate": 18.17,
+    "total_housing": 76790,
+    "vacant_housing": 13950
+  },
+  "27122": {
+    "akiya_rate": 25.92,
+    "total_housing": 88230,
+    "vacant_housing": 22870
+  },
+  "27123": {
+    "akiya_rate": 14.57,
+    "total_housing": 127760,
+    "vacant_housing": 18610
+  },
+  "27124": {
+    "akiya_rate": 11.31,
+    "total_housing": 56580,
+    "vacant_housing": 6400
+  },
+  "27125": {
+    "akiya_rate": 13.58,
+    "total_housing": 71510,
+    "vacant_housing": 9710
+  },
+  "27126": {
+    "akiya_rate": 16.36,
+    "total_housing": 110300,
+    "vacant_housing": 18040
+  },
+  "27127": {
+    "akiya_rate": 11.06,
+    "total_housing": 103050,
+    "vacant_housing": 11400
+  },
+  "27128": {
+    "akiya_rate": 18.36,
+    "total_housing": 93540,
+    "vacant_housing": 17170
+  },
+  "27140": {
+    "akiya_rate": 12.9,
+    "total_housing": 427800,
+    "vacant_housing": 55200
+  },
+  "27141": {
+    "akiya_rate": 16.68,
+    "total_housing": 91500,
+    "vacant_housing": 15260
+  },
+  "27142": {
+    "akiya_rate": 9.6,
+    "total_housing": 57110,
+    "vacant_housing": 5480
+  },
+  "27143": {
+    "akiya_rate": 11.31,
+    "total_housing": 42540,
+    "vacant_housing": 4810
+  },
+  "27144": {
+    "akiya_rate": 11.32,
+    "total_housing": 66610,
+    "vacant_housing": 7540
+  },
+  "27145": {
+    "akiya_rate": 14.19,
+    "total_housing": 68230,
+    "vacant_housing": 9680
+  },
+  "27146": {
+    "akiya_rate": 12.93,
+    "total_housing": 85180,
+    "vacant_housing": 11010
+  },
+  "27147": {
+    "akiya_rate": 8.38,
+    "total_housing": 16590,
+    "vacant_housing": 1390
+  },
+  "27202": {
+    "akiya_rate": 13.82,
+    "total_housing": 90830,
+    "vacant_housing": 12550
+  },
+  "27203": {
+    "akiya_rate": 13.7,
+    "total_housing": 207120,
+    "vacant_housing": 28370
+  },
+  "27204": {
+    "akiya_rate": 12.95,
+    "total_housing": 56380,
+    "vacant_housing": 7300
+  },
+  "27205": {
+    "akiya_rate": 12.03,
+    "total_housing": 211860,
+    "vacant_housing": 25490
+  },
+  "27206": {
+    "akiya_rate": 13.98,
+    "total_housing": 37900,
+    "vacant_housing": 5300
+  },
+  "27207": {
+    "akiya_rate": 9.63,
+    "total_housing": 168900,
+    "vacant_housing": 16270
+  },
+  "27208": {
+    "akiya_rate": 14.83,
+    "total_housing": 42830,
+    "vacant_housing": 6350
+  },
+  "27209": {
+    "akiya_rate": 17.07,
+    "total_housing": 80980,
+    "vacant_housing": 13820
+  },
+  "27210": {
+    "akiya_rate": 11.43,
+    "total_housing": 195260,
+    "vacant_housing": 22320
+  },
+  "27211": {
+    "akiya_rate": 9.12,
+    "total_housing": 140100,
+    "vacant_housing": 12780
+  },
+  "27212": {
+    "akiya_rate": 13.91,
+    "total_housing": 132670,
+    "vacant_housing": 18460
+  },
+  "27213": {
+    "akiya_rate": 12.28,
+    "total_housing": 51120,
+    "vacant_housing": 6280
+  },
+  "27214": {
+    "akiya_rate": 13.02,
+    "total_housing": 53220,
+    "vacant_housing": 6930
+  },
+  "27215": {
+    "akiya_rate": 13.31,
+    "total_housing": 116110,
+    "vacant_housing": 15450
+  },
+  "27216": {
+    "akiya_rate": 12.11,
+    "total_housing": 48070,
+    "vacant_housing": 5820
+  },
+  "27217": {
+    "akiya_rate": 13.42,
+    "total_housing": 60450,
+    "vacant_housing": 8110
+  },
+  "27218": {
+    "akiya_rate": 14.92,
+    "total_housing": 61730,
+    "vacant_housing": 9210
+  },
+  "27219": {
+    "akiya_rate": 11.42,
+    "total_housing": 83900,
+    "vacant_housing": 9580
+  },
+  "27220": {
+    "akiya_rate": 11.69,
+    "total_housing": 65930,
+    "vacant_housing": 7710
+  },
+  "27221": {
+    "akiya_rate": 20.79,
+    "total_housing": 39210,
+    "vacant_housing": 8150
+  },
+  "27222": {
+    "akiya_rate": 14.5,
+    "total_housing": 52260,
+    "vacant_housing": 7580
+  },
+  "27223": {
+    "akiya_rate": 16.99,
+    "total_housing": 68670,
+    "vacant_housing": 11670
+  },
+  "27224": {
+    "akiya_rate": 11.39,
+    "total_housing": 46360,
+    "vacant_housing": 5280
+  },
+  "27225": {
+    "akiya_rate": 12.04,
+    "total_housing": 26830,
+    "vacant_housing": 3230
+  },
+  "27226": {
+    "akiya_rate": 14.4,
+    "total_housing": 32780,
+    "vacant_housing": 4720
+  },
+  "27227": {
+    "akiya_rate": 16.25,
+    "total_housing": 281720,
+    "vacant_housing": 45790
+  },
+  "27228": {
+    "akiya_rate": 13.49,
+    "total_housing": 27050,
+    "vacant_housing": 3650
+  },
+  "27229": {
+    "akiya_rate": 15.54,
+    "total_housing": 27090,
+    "vacant_housing": 4210
+  },
+  "27230": {
+    "akiya_rate": 11.03,
+    "total_housing": 33460,
+    "vacant_housing": 3690
+  },
+  "27231": {
+    "akiya_rate": 11.96,
+    "total_housing": 27850,
+    "vacant_housing": 3330
+  },
+  "27232": {
+    "akiya_rate": 15.17,
+    "total_housing": 24260,
+    "vacant_housing": 3680
+  },
+  "27301": {
+    "akiya_rate": 6.29,
+    "total_housing": 13840,
+    "vacant_housing": 870
+  },
+  "27321": {
+    "akiya_rate": 8.92,
+    "total_housing": 8180,
+    "vacant_housing": 730
+  },
+  "27341": {
+    "akiya_rate": 15.74,
+    "total_housing": 7940,
+    "vacant_housing": 1250
+  },
+  "27361": {
+    "akiya_rate": 9.92,
+    "total_housing": 19560,
+    "vacant_housing": 1940
+  },
+  "27382": {
+    "akiya_rate": 15.07,
+    "total_housing": 7500,
+    "vacant_housing": 1130
+  },
+  "28100": {
+    "akiya_rate": 13.89,
+    "total_housing": 852400,
+    "vacant_housing": 118400
+  },
+  "28101": {
+    "akiya_rate": 10.58,
+    "total_housing": 112990,
+    "vacant_housing": 11950
+  },
+  "28102": {
+    "akiya_rate": 11.83,
+    "total_housing": 79780,
+    "vacant_housing": 9440
+  },
+  "28105": {
+    "akiya_rate": 24.71,
+    "total_housing": 82970,
+    "vacant_housing": 20500
+  },
+  "28106": {
+    "akiya_rate": 17.48,
+    "total_housing": 58940,
+    "vacant_housing": 10300
+  },
+  "28107": {
+    "akiya_rate": 11.02,
+    "total_housing": 82460,
+    "vacant_housing": 9090
+  },
+  "28108": {
+    "akiya_rate": 12.44,
+    "total_housing": 108310,
+    "vacant_housing": 13470
+  },
+  "28109": {
+    "akiya_rate": 13.53,
+    "total_housing": 103560,
+    "vacant_housing": 14010
+  },
+  "28110": {
+    "akiya_rate": 13.25,
+    "total_housing": 106370,
+    "vacant_housing": 14090
+  },
+  "28111": {
+    "akiya_rate": 13.26,
+    "total_housing": 117040,
+    "vacant_housing": 15520
+  },
+  "28201": {
+    "akiya_rate": 14.12,
+    "total_housing": 266000,
+    "vacant_housing": 37560
+  },
+  "28202": {
+    "akiya_rate": 14.46,
+    "total_housing": 261600,
+    "vacant_housing": 37830
+  },
+  "28203": {
+    "akiya_rate": 11.17,
+    "total_housing": 156550,
+    "vacant_housing": 17490
+  },
+  "28204": {
+    "akiya_rate": 10.98,
+    "total_housing": 243460,
+    "vacant_housing": 26740
+  },
+  "28205": {
+    "akiya_rate": 24.39,
+    "total_housing": 23490,
+    "vacant_housing": 5730
+  },
+  "28206": {
+    "akiya_rate": 14.22,
+    "total_housing": 50620,
+    "vacant_housing": 7200
+  },
+  "28207": {
+    "akiya_rate": 9.46,
+    "total_housing": 91220,
+    "vacant_housing": 8630
+  },
+  "28208": {
+    "akiya_rate": 27.2,
+    "total_housing": 15770,
+    "vacant_housing": 4290
+  },
+  "28209": {
+    "akiya_rate": 19.25,
+    "total_housing": 36320,
+    "vacant_housing": 6990
+  },
+  "28210": {
+    "akiya_rate": 11.65,
+    "total_housing": 121700,
+    "vacant_housing": 14180
+  },
+  "28212": {
+    "akiya_rate": 21.51,
+    "total_housing": 22780,
+    "vacant_housing": 4900
+  },
+  "28213": {
+    "akiya_rate": 17.45,
+    "total_housing": 17590,
+    "vacant_housing": 3070
+  },
+  "28214": {
+    "akiya_rate": 11.1,
+    "total_housing": 106250,
+    "vacant_housing": 11790
+  },
+  "28215": {
+    "akiya_rate": 14.01,
+    "total_housing": 36050,
+    "vacant_housing": 5050
+  },
+  "28216": {
+    "akiya_rate": 14.6,
+    "total_housing": 42130,
+    "vacant_housing": 6150
+  },
+  "28217": {
+    "akiya_rate": 11.82,
+    "total_housing": 72360,
+    "vacant_housing": 8550
+  },
+  "28218": {
+    "akiya_rate": 12.51,
+    "total_housing": 20620,
+    "vacant_housing": 2580
+  },
+  "28219": {
+    "akiya_rate": 9.29,
+    "total_housing": 47670,
+    "vacant_housing": 4430
+  },
+  "28220": {
+    "akiya_rate": 12.59,
+    "total_housing": 19860,
+    "vacant_housing": 2500
+  },
+  "28221": {
+    "akiya_rate": 19.18,
+    "total_housing": 19760,
+    "vacant_housing": 3790
+  },
+  "28222": {
+    "akiya_rate": 25.77,
+    "total_housing": 10710,
+    "vacant_housing": 2760
+  },
+  "28223": {
+    "akiya_rate": 17.87,
+    "total_housing": 28140,
+    "vacant_housing": 5030
+  },
+  "28224": {
+    "akiya_rate": 19.77,
+    "total_housing": 21240,
+    "vacant_housing": 4200
+  },
+  "28225": {
+    "akiya_rate": 20.23,
+    "total_housing": 13990,
+    "vacant_housing": 2830
+  },
+  "28226": {
+    "akiya_rate": 26.88,
+    "total_housing": 22210,
+    "vacant_housing": 5970
+  },
+  "28227": {
+    "akiya_rate": 18.4,
+    "total_housing": 15600,
+    "vacant_housing": 2870
+  },
+  "28228": {
+    "akiya_rate": 22.09,
+    "total_housing": 20010,
+    "vacant_housing": 4420
+  },
+  "28229": {
+    "akiya_rate": 12.77,
+    "total_housing": 31860,
+    "vacant_housing": 4070
+  },
+  "28301": {
+    "akiya_rate": 9.51,
+    "total_housing": 12200,
+    "vacant_housing": 1160
+  },
+  "28365": {
+    "akiya_rate": 13.53,
+    "total_housing": 6950,
+    "vacant_housing": 940
+  },
+  "28381": {
+    "akiya_rate": 5.67,
+    "total_housing": 12160,
+    "vacant_housing": 690
+  },
+  "28382": {
+    "akiya_rate": 8.0,
+    "total_housing": 15380,
+    "vacant_housing": 1230
+  },
+  "28443": {
+    "akiya_rate": 8.93,
+    "total_housing": 8620,
+    "vacant_housing": 770
+  },
+  "28464": {
+    "akiya_rate": 9.32,
+    "total_housing": 14480,
+    "vacant_housing": 1350
+  },
+  "28501": {
+    "akiya_rate": 31.42,
+    "total_housing": 8690,
+    "vacant_housing": 2730
+  },
+  "28585": {
+    "akiya_rate": 21.57,
+    "total_housing": 7280,
+    "vacant_housing": 1570
+  },
+  "29201": {
+    "akiya_rate": 16.97,
+    "total_housing": 189460,
+    "vacant_housing": 32160
+  },
+  "29202": {
+    "akiya_rate": 14.63,
+    "total_housing": 30890,
+    "vacant_housing": 4520
+  },
+  "29203": {
+    "akiya_rate": 12.08,
+    "total_housing": 39070,
+    "vacant_housing": 4720
+  },
+  "29204": {
+    "akiya_rate": 17.98,
+    "total_housing": 30310,
+    "vacant_housing": 5450
+  },
+  "29205": {
+    "akiya_rate": 10.81,
+    "total_housing": 57350,
+    "vacant_housing": 6200
+  },
+  "29206": {
+    "akiya_rate": 16.5,
+    "total_housing": 26600,
+    "vacant_housing": 4390
+  },
+  "29207": {
+    "akiya_rate": 28.65,
+    "total_housing": 14730,
+    "vacant_housing": 4220
+  },
+  "29208": {
+    "akiya_rate": 24.38,
+    "total_housing": 12430,
+    "vacant_housing": 3030
+  },
+  "29209": {
+    "akiya_rate": 8.27,
+    "total_housing": 50310,
+    "vacant_housing": 4160
+  },
+  "29210": {
+    "akiya_rate": 6.89,
+    "total_housing": 32360,
+    "vacant_housing": 2230
+  },
+  "29211": {
+    "akiya_rate": 12.29,
+    "total_housing": 15790,
+    "vacant_housing": 1940
+  },
+  "29212": {
+    "akiya_rate": 18.71,
+    "total_housing": 13150,
+    "vacant_housing": 2460
+  },
+  "29342": {
+    "akiya_rate": 4.27,
+    "total_housing": 7730,
+    "vacant_housing": 330
+  },
+  "29343": {
+    "akiya_rate": 18.34,
+    "total_housing": 12380,
+    "vacant_housing": 2270
+  },
+  "29344": {
+    "akiya_rate": 6.66,
+    "total_housing": 11860,
+    "vacant_housing": 790
+  },
+  "29363": {
+    "akiya_rate": 8.21,
+    "total_housing": 13040,
+    "vacant_housing": 1070
+  },
+  "29424": {
+    "akiya_rate": 12.61,
+    "total_housing": 10390,
+    "vacant_housing": 1310
+  },
+  "29425": {
+    "akiya_rate": 12.12,
+    "total_housing": 11630,
+    "vacant_housing": 1410
+  },
+  "29426": {
+    "akiya_rate": 8.85,
+    "total_housing": 13560,
+    "vacant_housing": 1200
+  },
+  "29427": {
+    "akiya_rate": 13.77,
+    "total_housing": 7190,
+    "vacant_housing": 990
+  },
+  "29442": {
+    "akiya_rate": 16.12,
+    "total_housing": 7570,
+    "vacant_housing": 1220
+  },
+  "30201": {
+    "akiya_rate": 19.87,
+    "total_housing": 195230,
+    "vacant_housing": 38800
+  },
+  "30202": {
+    "akiya_rate": 21.08,
+    "total_housing": 24910,
+    "vacant_housing": 5250
+  },
+  "30203": {
+    "akiya_rate": 18.83,
+    "total_housing": 29580,
+    "vacant_housing": 5570
+  },
+  "30204": {
+    "akiya_rate": 20.76,
+    "total_housing": 11320,
+    "vacant_housing": 2350
+  },
+  "30205": {
+    "akiya_rate": 20.33,
+    "total_housing": 12590,
+    "vacant_housing": 2560
+  },
+  "30206": {
+    "akiya_rate": 24.33,
+    "total_housing": 40980,
+    "vacant_housing": 9970
+  },
+  "30207": {
+    "akiya_rate": 23.83,
+    "total_housing": 16700,
+    "vacant_housing": 3980
+  },
+  "30208": {
+    "akiya_rate": 16.5,
+    "total_housing": 27750,
+    "vacant_housing": 4580
+  },
+  "30209": {
+    "akiya_rate": 10.99,
+    "total_housing": 25580,
+    "vacant_housing": 2810
+  },
+  "30341": {
+    "akiya_rate": 24.58,
+    "total_housing": 7770,
+    "vacant_housing": 1910
+  },
+  "30366": {
+    "akiya_rate": 20.54,
+    "total_housing": 12320,
+    "vacant_housing": 2530
+  },
+  "30401": {
+    "akiya_rate": 43.21,
+    "total_housing": 16640,
+    "vacant_housing": 7190
+  },
+  "30404": {
+    "akiya_rate": 14.32,
+    "total_housing": 7400,
+    "vacant_housing": 1060
+  },
+  "31201": {
+    "akiya_rate": 13.83,
+    "total_housing": 91180,
+    "vacant_housing": 12610
+  },
+  "31202": {
+    "akiya_rate": 16.29,
+    "total_housing": 74160,
+    "vacant_housing": 12080
+  },
+  "31203": {
+    "akiya_rate": 15.6,
+    "total_housing": 20770,
+    "vacant_housing": 3240
+  },
+  "31204": {
+    "akiya_rate": 16.49,
+    "total_housing": 15650,
+    "vacant_housing": 2580
+  },
+  "31329": {
+    "akiya_rate": 18.31,
+    "total_housing": 6390,
+    "vacant_housing": 1170
+  },
+  "31370": {
+    "akiya_rate": 16.12,
+    "total_housing": 6760,
+    "vacant_housing": 1090
+  },
+  "31371": {
+    "akiya_rate": 19.33,
+    "total_housing": 7190,
+    "vacant_housing": 1390
+  },
+  "31386": {
+    "akiya_rate": 19.89,
+    "total_housing": 7040,
+    "vacant_housing": 1400
+  },
+  "32201": {
+    "akiya_rate": 11.9,
+    "total_housing": 96690,
+    "vacant_housing": 11510
+  },
+  "32202": {
+    "akiya_rate": 22.85,
+    "total_housing": 30290,
+    "vacant_housing": 6920
+  },
+  "32203": {
+    "akiya_rate": 11.95,
+    "total_housing": 75140,
+    "vacant_housing": 8980
+  },
+  "32204": {
+    "akiya_rate": 18.51,
+    "total_housing": 22100,
+    "vacant_housing": 4090
+  },
+  "32205": {
+    "akiya_rate": 25.66,
+    "total_housing": 17730,
+    "vacant_housing": 4550
+  },
+  "32206": {
+    "akiya_rate": 16.44,
+    "total_housing": 15330,
+    "vacant_housing": 2520
+  },
+  "32207": {
+    "akiya_rate": 28.33,
+    "total_housing": 12850,
+    "vacant_housing": 3640
+  },
+  "32209": {
+    "akiya_rate": 15.44,
+    "total_housing": 14640,
+    "vacant_housing": 2260
+  },
+  "33100": {
+    "akiya_rate": 14.46,
+    "total_housing": 387900,
+    "vacant_housing": 56100
+  },
+  "33101": {
+    "akiya_rate": 15.32,
+    "total_housing": 186540,
+    "vacant_housing": 28580
+  },
+  "33102": {
+    "akiya_rate": 14.86,
+    "total_housing": 78670,
+    "vacant_housing": 11690
+  },
+  "33103": {
+    "akiya_rate": 15.04,
+    "total_housing": 44020,
+    "vacant_housing": 6620
+  },
+  "33104": {
+    "akiya_rate": 11.69,
+    "total_housing": 78690,
+    "vacant_housing": 9200
+  },
+  "33202": {
+    "akiya_rate": 13.57,
+    "total_housing": 232370,
+    "vacant_housing": 31540
+  },
+  "33203": {
+    "akiya_rate": 20.07,
+    "total_housing": 49280,
+    "vacant_housing": 9890
+  },
+  "33204": {
+    "akiya_rate": 18.64,
+    "total_housing": 28220,
+    "vacant_housing": 5260
+  },
+  "33205": {
+    "akiya_rate": 23.46,
+    "total_housing": 23960,
+    "vacant_housing": 5620
+  },
+  "33207": {
+    "akiya_rate": 19.29,
+    "total_housing": 17630,
+    "vacant_housing": 3400
+  },
+  "33208": {
+    "akiya_rate": 12.29,
+    "total_housing": 30990,
+    "vacant_housing": 3810
+  },
+  "33209": {
+    "akiya_rate": 34.41,
+    "total_housing": 18020,
+    "vacant_housing": 6200
+  },
+  "33210": {
+    "akiya_rate": 22.99,
+    "total_housing": 14530,
+    "vacant_housing": 3340
+  },
+  "33211": {
+    "akiya_rate": 29.04,
+    "total_housing": 18320,
+    "vacant_housing": 5320
+  },
+  "33212": {
+    "akiya_rate": 18.84,
+    "total_housing": 17360,
+    "vacant_housing": 3270
+  },
+  "33213": {
+    "akiya_rate": 16.36,
+    "total_housing": 19560,
+    "vacant_housing": 3200
+  },
+  "33214": {
+    "akiya_rate": 20.16,
+    "total_housing": 19350,
+    "vacant_housing": 3900
+  },
+  "33215": {
+    "akiya_rate": 32.61,
+    "total_housing": 15210,
+    "vacant_housing": 4960
+  },
+  "33216": {
+    "akiya_rate": 13.74,
+    "total_housing": 14260,
+    "vacant_housing": 1960
+  },
+  "34100": {
+    "akiya_rate": 11.72,
+    "total_housing": 628800,
+    "vacant_housing": 73700
+  },
+  "34101": {
+    "akiya_rate": 14.58,
+    "total_housing": 96480,
+    "vacant_housing": 14070
+  },
+  "34102": {
+    "akiya_rate": 14.49,
+    "total_housing": 62200,
+    "vacant_housing": 9010
+  },
+  "34103": {
+    "akiya_rate": 12.44,
+    "total_housing": 80840,
+    "vacant_housing": 10060
+  },
+  "34104": {
+    "akiya_rate": 11.94,
+    "total_housing": 106740,
+    "vacant_housing": 12750
+  },
+  "34105": {
+    "akiya_rate": 7.36,
+    "total_housing": 117060,
+    "vacant_housing": 8620
+  },
+  "34106": {
+    "akiya_rate": 14.25,
+    "total_housing": 67320,
+    "vacant_housing": 9590
+  },
+  "34107": {
+    "akiya_rate": 11.64,
+    "total_housing": 33580,
+    "vacant_housing": 3910
+  },
+  "34108": {
+    "akiya_rate": 8.84,
+    "total_housing": 64610,
+    "vacant_housing": 5710
+  },
+  "34202": {
+    "akiya_rate": 24.68,
+    "total_housing": 122990,
+    "vacant_housing": 30350
+  },
+  "34203": {
+    "akiya_rate": 31.15,
+    "total_housing": 14190,
+    "vacant_housing": 4420
+  },
+  "34204": {
+    "akiya_rate": 21.79,
+    "total_housing": 48050,
+    "vacant_housing": 10470
+  },
+  "34205": {
+    "akiya_rate": 21.91,
+    "total_housing": 69650,
+    "vacant_housing": 15260
+  },
+  "34207": {
+    "akiya_rate": 15.06,
+    "total_housing": 227320,
+    "vacant_housing": 34230
+  },
+  "34208": {
+    "akiya_rate": 22.25,
+    "total_housing": 17980,
+    "vacant_housing": 4000
+  },
+  "34209": {
+    "akiya_rate": 23.19,
+    "total_housing": 26170,
+    "vacant_housing": 6070
+  },
+  "34210": {
+    "akiya_rate": 27.97,
+    "total_housing": 18270,
+    "vacant_housing": 5110
+  },
+  "34211": {
+    "akiya_rate": 21.18,
+    "total_housing": 14540,
+    "vacant_housing": 3080
+  },
+  "34212": {
+    "akiya_rate": 13.09,
+    "total_housing": 106720,
+    "vacant_housing": 13970
+  },
+  "34213": {
+    "akiya_rate": 15.41,
+    "total_housing": 55280,
+    "vacant_housing": 8520
+  },
+  "34214": {
+    "akiya_rate": 22.06,
+    "total_housing": 13690,
+    "vacant_housing": 3020
+  },
+  "34215": {
+    "akiya_rate": 31.2,
+    "total_housing": 13720,
+    "vacant_housing": 4280
+  },
+  "34302": {
+    "akiya_rate": 11.56,
+    "total_housing": 25010,
+    "vacant_housing": 2890
+  },
+  "34304": {
+    "akiya_rate": 10.9,
+    "total_housing": 16510,
+    "vacant_housing": 1800
+  },
+  "34307": {
+    "akiya_rate": 13.81,
+    "total_housing": 11080,
+    "vacant_housing": 1530
+  },
+  "34369": {
+    "akiya_rate": 28.13,
+    "total_housing": 9740,
+    "vacant_housing": 2740
+  },
+  "34462": {
+    "akiya_rate": 17.87,
+    "total_housing": 7330,
+    "vacant_housing": 1310
+  },
+  "35201": {
+    "akiya_rate": 19.1,
+    "total_housing": 138660,
+    "vacant_housing": 26490
+  },
+  "35202": {
+    "akiya_rate": 19.79,
+    "total_housing": 86310,
+    "vacant_housing": 17080
+  },
+  "35203": {
+    "akiya_rate": 16.98,
+    "total_housing": 105450,
+    "vacant_housing": 17910
+  },
+  "35204": {
+    "akiya_rate": 24.63,
+    "total_housing": 25940,
+    "vacant_housing": 6390
+  },
+  "35206": {
+    "akiya_rate": 19.92,
+    "total_housing": 59600,
+    "vacant_housing": 11870
+  },
+  "35207": {
+    "akiya_rate": 14.14,
+    "total_housing": 28920,
+    "vacant_housing": 4090
+  },
+  "35208": {
+    "akiya_rate": 19.69,
+    "total_housing": 69830,
+    "vacant_housing": 13750
+  },
+  "35210": {
+    "akiya_rate": 13.08,
+    "total_housing": 24540,
+    "vacant_housing": 3210
+  },
+  "35211": {
+    "akiya_rate": 22.22,
+    "total_housing": 17910,
+    "vacant_housing": 3980
+  },
+  "35212": {
+    "akiya_rate": 26.62,
+    "total_housing": 17880,
+    "vacant_housing": 4760
+  },
+  "35213": {
+    "akiya_rate": 24.2,
+    "total_housing": 12440,
+    "vacant_housing": 3010
+  },
+  "35215": {
+    "akiya_rate": 16.87,
+    "total_housing": 76150,
+    "vacant_housing": 12850
+  },
+  "35216": {
+    "akiya_rate": 16.67,
+    "total_housing": 30360,
+    "vacant_housing": 5060
+  },
+  "36201": {
+    "akiya_rate": 18.11,
+    "total_housing": 145800,
+    "vacant_housing": 26400
+  },
+  "36202": {
+    "akiya_rate": 23.87,
+    "total_housing": 29160,
+    "vacant_housing": 6960
+  },
+  "36203": {
+    "akiya_rate": 23.07,
+    "total_housing": 19380,
+    "vacant_housing": 4470
+  },
+  "36204": {
+    "akiya_rate": 22.72,
+    "total_housing": 35160,
+    "vacant_housing": 7990
+  },
+  "36205": {
+    "akiya_rate": 20.33,
+    "total_housing": 18350,
+    "vacant_housing": 3730
+  },
+  "36206": {
+    "akiya_rate": 24.12,
+    "total_housing": 15630,
+    "vacant_housing": 3770
+  },
+  "36207": {
+    "akiya_rate": 26.68,
+    "total_housing": 14920,
+    "vacant_housing": 3980
+  },
+  "36208": {
+    "akiya_rate": 37.6,
+    "total_housing": 15000,
+    "vacant_housing": 5640
+  },
+  "36341": {
+    "akiya_rate": 12.58,
+    "total_housing": 10810,
+    "vacant_housing": 1360
+  },
+  "36402": {
+    "akiya_rate": 13.2,
+    "total_housing": 11210,
+    "vacant_housing": 1480
+  },
+  "36403": {
+    "akiya_rate": 10.64,
+    "total_housing": 16360,
+    "vacant_housing": 1740
+  },
+  "37201": {
+    "akiya_rate": 16.84,
+    "total_housing": 226370,
+    "vacant_housing": 38110
+  },
+  "37202": {
+    "akiya_rate": 17.28,
+    "total_housing": 54580,
+    "vacant_housing": 9430
+  },
+  "37203": {
+    "akiya_rate": 22.29,
+    "total_housing": 26380,
+    "vacant_housing": 5880
+  },
+  "37204": {
+    "akiya_rate": 22.89,
+    "total_housing": 16600,
+    "vacant_housing": 3800
+  },
+  "37205": {
+    "akiya_rate": 18.58,
+    "total_housing": 27550,
+    "vacant_housing": 5120
+  },
+  "37206": {
+    "akiya_rate": 21.52,
+    "total_housing": 24440,
+    "vacant_housing": 5260
+  },
+  "37207": {
+    "akiya_rate": 21.45,
+    "total_housing": 14360,
+    "vacant_housing": 3080
+  },
+  "37208": {
+    "akiya_rate": 14.44,
+    "total_housing": 26660,
+    "vacant_housing": 3850
+  },
+  "37341": {
+    "akiya_rate": 18.82,
+    "total_housing": 13550,
+    "vacant_housing": 2550
+  },
+  "37386": {
+    "akiya_rate": 16.93,
+    "total_housing": 10870,
+    "vacant_housing": 1840
+  },
+  "37387": {
+    "akiya_rate": 14.97,
+    "total_housing": 10220,
+    "vacant_housing": 1530
+  },
+  "37404": {
+    "akiya_rate": 22.89,
+    "total_housing": 10180,
+    "vacant_housing": 2330
+  },
+  "37406": {
+    "akiya_rate": 18.11,
+    "total_housing": 7620,
+    "vacant_housing": 1380
+  },
+  "38201": {
+    "akiya_rate": 14.97,
+    "total_housing": 284440,
+    "vacant_housing": 42570
+  },
+  "38202": {
+    "akiya_rate": 25.67,
+    "total_housing": 88560,
+    "vacant_housing": 22730
+  },
+  "38203": {
+    "akiya_rate": 27.28,
+    "total_housing": 40620,
+    "vacant_housing": 11080
+  },
+  "38204": {
+    "akiya_rate": 25.29,
+    "total_housing": 18030,
+    "vacant_housing": 4560
+  },
+  "38205": {
+    "akiya_rate": 22.48,
+    "total_housing": 65700,
+    "vacant_housing": 14770
+  },
+  "38206": {
+    "akiya_rate": 21.29,
+    "total_housing": 54540,
+    "vacant_housing": 11610
+  },
+  "38207": {
+    "akiya_rate": 20.8,
+    "total_housing": 21490,
+    "vacant_housing": 4470
+  },
+  "38210": {
+    "akiya_rate": 15.23,
+    "total_housing": 17070,
+    "vacant_housing": 2600
+  },
+  "38213": {
+    "akiya_rate": 18.38,
+    "total_housing": 43410,
+    "vacant_housing": 7980
+  },
+  "38214": {
+    "akiya_rate": 28.36,
+    "total_housing": 20240,
+    "vacant_housing": 5740
+  },
+  "38215": {
+    "akiya_rate": 17.27,
+    "total_housing": 17310,
+    "vacant_housing": 2990
+  },
+  "38401": {
+    "akiya_rate": 9.36,
+    "total_housing": 14100,
+    "vacant_housing": 1320
+  },
+  "38402": {
+    "akiya_rate": 14.01,
+    "total_housing": 9850,
+    "vacant_housing": 1380
+  },
+  "38422": {
+    "akiya_rate": 20.05,
+    "total_housing": 7280,
+    "vacant_housing": 1460
+  },
+  "38506": {
+    "akiya_rate": 24.61,
+    "total_housing": 11660,
+    "vacant_housing": 2870
+  },
+  "39201": {
+    "akiya_rate": 15.37,
+    "total_housing": 181970,
+    "vacant_housing": 27960
+  },
+  "39202": {
+    "akiya_rate": 32.14,
+    "total_housing": 8120,
+    "vacant_housing": 2610
+  },
+  "39203": {
+    "akiya_rate": 25.97,
+    "total_housing": 10280,
+    "vacant_housing": 2670
+  },
+  "39204": {
+    "akiya_rate": 16.18,
+    "total_housing": 24040,
+    "vacant_housing": 3890
+  },
+  "39205": {
+    "akiya_rate": 16.71,
+    "total_housing": 11550,
+    "vacant_housing": 1930
+  },
+  "39206": {
+    "akiya_rate": 27.27,
+    "total_housing": 12430,
+    "vacant_housing": 3390
+  },
+  "39208": {
+    "akiya_rate": 28.42,
+    "total_housing": 11540,
+    "vacant_housing": 3280
+  },
+  "39209": {
+    "akiya_rate": 39.45,
+    "total_housing": 9860,
+    "vacant_housing": 3890
+  },
+  "39210": {
+    "akiya_rate": 20.56,
+    "total_housing": 17850,
+    "vacant_housing": 3670
+  },
+  "39211": {
+    "akiya_rate": 20.02,
+    "total_housing": 17130,
+    "vacant_housing": 3430
+  },
+  "39212": {
+    "akiya_rate": 18.71,
+    "total_housing": 14380,
+    "vacant_housing": 2690
+  },
+  "39386": {
+    "akiya_rate": 25.64,
+    "total_housing": 11660,
+    "vacant_housing": 2990
+  },
+  "39412": {
+    "akiya_rate": 24.49,
+    "total_housing": 8860,
+    "vacant_housing": 2170
+  },
+  "40100": {
+    "akiya_rate": 15.97,
+    "total_housing": 517800,
+    "vacant_housing": 82700
+  },
+  "40101": {
+    "akiya_rate": 18.1,
+    "total_housing": 52770,
+    "vacant_housing": 9550
+  },
+  "40103": {
+    "akiya_rate": 15.33,
+    "total_housing": 40390,
+    "vacant_housing": 6190
+  },
+  "40105": {
+    "akiya_rate": 14.83,
+    "total_housing": 32630,
+    "vacant_housing": 4840
+  },
+  "40106": {
+    "akiya_rate": 18.21,
+    "total_housing": 114490,
+    "vacant_housing": 20850
+  },
+  "40107": {
+    "akiya_rate": 12.44,
+    "total_housing": 105130,
+    "vacant_housing": 13080
+  },
+  "40108": {
+    "akiya_rate": 21.26,
+    "total_housing": 38990,
+    "vacant_housing": 8290
+  },
+  "40109": {
+    "akiya_rate": 14.92,
+    "total_housing": 133440,
+    "vacant_housing": 19910
+  },
+  "40130": {
+    "akiya_rate": 8.44,
+    "total_housing": 944000,
+    "vacant_housing": 79700
+  },
+  "40131": {
+    "akiya_rate": 10.08,
+    "total_housing": 182170,
+    "vacant_housing": 18370
+  },
+  "40132": {
+    "akiya_rate": 8.77,
+    "total_housing": 174750,
+    "vacant_housing": 15330
+  },
+  "40133": {
+    "akiya_rate": 8.84,
+    "total_housing": 147580,
+    "vacant_housing": 13040
+  },
+  "40134": {
+    "akiya_rate": 8.39,
+    "total_housing": 145370,
+    "vacant_housing": 12190
+  },
+  "40135": {
+    "akiya_rate": 5.44,
+    "total_housing": 106230,
+    "vacant_housing": 5780
+  },
+  "40136": {
+    "akiya_rate": 9.52,
+    "total_housing": 75820,
+    "vacant_housing": 7220
+  },
+  "40137": {
+    "akiya_rate": 6.93,
+    "total_housing": 112090,
+    "vacant_housing": 7770
+  },
+  "40202": {
+    "akiya_rate": 21.29,
+    "total_housing": 59940,
+    "vacant_housing": 12760
+  },
+  "40203": {
+    "akiya_rate": 14.85,
+    "total_housing": 154180,
+    "vacant_housing": 22890
+  },
+  "40204": {
+    "akiya_rate": 18.62,
+    "total_housing": 28680,
+    "vacant_housing": 5340
+  },
+  "40205": {
+    "akiya_rate": 18.21,
+    "total_housing": 68870,
+    "vacant_housing": 12540
+  },
+  "40206": {
+    "akiya_rate": 20.98,
+    "total_housing": 25790,
+    "vacant_housing": 5410
+  },
+  "40207": {
+    "akiya_rate": 13.78,
+    "total_housing": 27360,
+    "vacant_housing": 3770
+  },
+  "40210": {
+    "akiya_rate": 18.32,
+    "total_housing": 27240,
+    "vacant_housing": 4990
+  },
+  "40211": {
+    "akiya_rate": 12.14,
+    "total_housing": 22160,
+    "vacant_housing": 2690
+  },
+  "40212": {
+    "akiya_rate": 15.94,
+    "total_housing": 15180,
+    "vacant_housing": 2420
+  },
+  "40213": {
+    "akiya_rate": 13.65,
+    "total_housing": 35170,
+    "vacant_housing": 4800
+  },
+  "40214": {
+    "akiya_rate": 19.44,
+    "total_housing": 12550,
+    "vacant_housing": 2440
+  },
+  "40215": {
+    "akiya_rate": 15.54,
+    "total_housing": 20270,
+    "vacant_housing": 3150
+  },
+  "40216": {
+    "akiya_rate": 7.73,
+    "total_housing": 28840,
+    "vacant_housing": 2230
+  },
+  "40217": {
+    "akiya_rate": 7.85,
+    "total_housing": 46770,
+    "vacant_housing": 3670
+  },
+  "40218": {
+    "akiya_rate": 11.77,
+    "total_housing": 53700,
+    "vacant_housing": 6320
+  },
+  "40219": {
+    "akiya_rate": 6.18,
+    "total_housing": 47070,
+    "vacant_housing": 2910
+  },
+  "40220": {
+    "akiya_rate": 10.7,
+    "total_housing": 47100,
+    "vacant_housing": 5040
+  },
+  "40221": {
+    "akiya_rate": 8.12,
+    "total_housing": 34360,
+    "vacant_housing": 2790
+  },
+  "40223": {
+    "akiya_rate": 11.49,
+    "total_housing": 26990,
+    "vacant_housing": 3100
+  },
+  "40224": {
+    "akiya_rate": 7.53,
+    "total_housing": 30030,
+    "vacant_housing": 2260
+  },
+  "40225": {
+    "akiya_rate": 19.24,
+    "total_housing": 12320,
+    "vacant_housing": 2370
+  },
+  "40226": {
+    "akiya_rate": 20.41,
+    "total_housing": 13080,
+    "vacant_housing": 2670
+  },
+  "40227": {
+    "akiya_rate": 22.89,
+    "total_housing": 17430,
+    "vacant_housing": 3990
+  },
+  "40228": {
+    "akiya_rate": 18.52,
+    "total_housing": 23810,
+    "vacant_housing": 4410
+  },
+  "40229": {
+    "akiya_rate": 15.53,
+    "total_housing": 15130,
+    "vacant_housing": 2350
+  },
+  "40230": {
+    "akiya_rate": 8.89,
+    "total_housing": 43410,
+    "vacant_housing": 3860
+  },
+  "40231": {
+    "akiya_rate": 9.08,
+    "total_housing": 21360,
+    "vacant_housing": 1940
+  },
+  "40341": {
+    "akiya_rate": 9.99,
+    "total_housing": 15410,
+    "vacant_housing": 1540
+  },
+  "40342": {
+    "akiya_rate": 8.52,
+    "total_housing": 14090,
+    "vacant_housing": 1200
+  },
+  "40343": {
+    "akiya_rate": 7.17,
+    "total_housing": 20930,
+    "vacant_housing": 1500
+  },
+  "40344": {
+    "akiya_rate": 5.63,
+    "total_housing": 11890,
+    "vacant_housing": 670
+  },
+  "40345": {
+    "akiya_rate": 8.44,
+    "total_housing": 13740,
+    "vacant_housing": 1160
+  },
+  "40349": {
+    "akiya_rate": 6.39,
+    "total_housing": 22050,
+    "vacant_housing": 1410
+  },
+  "40382": {
+    "akiya_rate": 17.74,
+    "total_housing": 16400,
+    "vacant_housing": 2910
+  },
+  "40383": {
+    "akiya_rate": 12.6,
+    "total_housing": 14360,
+    "vacant_housing": 1810
+  },
+  "40384": {
+    "akiya_rate": 8.25,
+    "total_housing": 7880,
+    "vacant_housing": 650
+  },
+  "40402": {
+    "akiya_rate": 21.66,
+    "total_housing": 7850,
+    "vacant_housing": 1700
+  },
+  "40447": {
+    "akiya_rate": 8.22,
+    "total_housing": 12040,
+    "vacant_housing": 990
+  },
+  "40503": {
+    "akiya_rate": 21.32,
+    "total_housing": 7270,
+    "vacant_housing": 1550
+  },
+  "40544": {
+    "akiya_rate": 15.04,
+    "total_housing": 9040,
+    "vacant_housing": 1360
+  },
+  "40605": {
+    "akiya_rate": 31.05,
+    "total_housing": 9470,
+    "vacant_housing": 2940
+  },
+  "40610": {
+    "akiya_rate": 11.75,
+    "total_housing": 9960,
+    "vacant_housing": 1170
+  },
+  "40621": {
+    "akiya_rate": 12.97,
+    "total_housing": 20590,
+    "vacant_housing": 2670
+  },
+  "40625": {
+    "akiya_rate": 19.16,
+    "total_housing": 9340,
+    "vacant_housing": 1790
+  },
+  "40647": {
+    "akiya_rate": 24.66,
+    "total_housing": 8920,
+    "vacant_housing": 2200
+  },
+  "41201": {
+    "akiya_rate": 15.64,
+    "total_housing": 116270,
+    "vacant_housing": 18190
+  },
+  "41202": {
+    "akiya_rate": 14.79,
+    "total_housing": 52130,
+    "vacant_housing": 7710
+  },
+  "41203": {
+    "akiya_rate": 12.05,
+    "total_housing": 34110,
+    "vacant_housing": 4110
+  },
+  "41204": {
+    "akiya_rate": 16.75,
+    "total_housing": 8000,
+    "vacant_housing": 1340
+  },
+  "41205": {
+    "akiya_rate": 12.58,
+    "total_housing": 22900,
+    "vacant_housing": 2880
+  },
+  "41206": {
+    "akiya_rate": 13.33,
+    "total_housing": 20410,
+    "vacant_housing": 2720
+  },
+  "41207": {
+    "akiya_rate": 12.71,
+    "total_housing": 11250,
+    "vacant_housing": 1430
+  },
+  "41208": {
+    "akiya_rate": 11.69,
+    "total_housing": 18650,
+    "vacant_housing": 2180
+  },
+  "41209": {
+    "akiya_rate": 14.43,
+    "total_housing": 10740,
+    "vacant_housing": 1550
+  },
+  "41210": {
+    "akiya_rate": 13.66,
+    "total_housing": 13320,
+    "vacant_housing": 1820
+  },
+  "41327": {
+    "akiya_rate": 19.74,
+    "total_housing": 7650,
+    "vacant_housing": 1510
+  },
+  "41341": {
+    "akiya_rate": 9.71,
+    "total_housing": 7930,
+    "vacant_housing": 770
+  },
+  "41346": {
+    "akiya_rate": 11.81,
+    "total_housing": 10920,
+    "vacant_housing": 1290
+  },
+  "41401": {
+    "akiya_rate": 10.93,
+    "total_housing": 8140,
+    "vacant_housing": 890
+  },
+  "41425": {
+    "akiya_rate": 15.82,
+    "total_housing": 8470,
+    "vacant_housing": 1340
+  },
+  "42201": {
+    "akiya_rate": 17.91,
+    "total_housing": 218050,
+    "vacant_housing": 39050
+  },
+  "42202": {
+    "akiya_rate": 18.13,
+    "total_housing": 123820,
+    "vacant_housing": 22450
+  },
+  "42203": {
+    "akiya_rate": 18.33,
+    "total_housing": 19860,
+    "vacant_housing": 3640
+  },
+  "42204": {
+    "akiya_rate": 12.7,
+    "total_housing": 61180,
+    "vacant_housing": 7770
+  },
+  "42205": {
+    "akiya_rate": 9.97,
+    "total_housing": 45040,
+    "vacant_housing": 4490
+  },
+  "42207": {
+    "akiya_rate": 22.05,
+    "total_housing": 14740,
+    "vacant_housing": 3250
+  },
+  "42208": {
+    "akiya_rate": 20.94,
+    "total_housing": 10600,
+    "vacant_housing": 2220
+  },
+  "42209": {
+    "akiya_rate": 21.63,
+    "total_housing": 15120,
+    "vacant_housing": 3270
+  },
+  "42210": {
+    "akiya_rate": 25.47,
+    "total_housing": 12760,
+    "vacant_housing": 3250
+  },
+  "42211": {
+    "akiya_rate": 24.91,
+    "total_housing": 21760,
+    "vacant_housing": 5420
+  },
+  "42212": {
+    "akiya_rate": 23.91,
+    "total_housing": 12670,
+    "vacant_housing": 3030
+  },
+  "42213": {
+    "akiya_rate": 13.3,
+    "total_housing": 17750,
+    "vacant_housing": 2360
+  },
+  "42214": {
+    "akiya_rate": 18.51,
+    "total_housing": 18480,
+    "vacant_housing": 3420
+  },
+  "42307": {
+    "akiya_rate": 10.08,
+    "total_housing": 17160,
+    "vacant_housing": 1730
+  },
+  "42308": {
+    "akiya_rate": 7.08,
+    "total_housing": 12720,
+    "vacant_housing": 900
+  },
+  "42411": {
+    "akiya_rate": 31.63,
+    "total_housing": 11350,
+    "vacant_housing": 3590
+  },
+  "43100": {
+    "akiya_rate": 13.24,
+    "total_housing": 385100,
+    "vacant_housing": 51000
+  },
+  "43101": {
+    "akiya_rate": 15.44,
+    "total_housing": 121230,
+    "vacant_housing": 18720
+  },
+  "43102": {
+    "akiya_rate": 11.27,
+    "total_housing": 91720,
+    "vacant_housing": 10340
+  },
+  "43103": {
+    "akiya_rate": 14.46,
+    "total_housing": 47780,
+    "vacant_housing": 6910
+  },
+  "43104": {
+    "akiya_rate": 11.7,
+    "total_housing": 58610,
+    "vacant_housing": 6860
+  },
+  "43105": {
+    "akiya_rate": 12.47,
+    "total_housing": 65750,
+    "vacant_housing": 8200
+  },
+  "43202": {
+    "akiya_rate": 16.18,
+    "total_housing": 58400,
+    "vacant_housing": 9450
+  },
+  "43203": {
+    "akiya_rate": 18.74,
+    "total_housing": 16010,
+    "vacant_housing": 3000
+  },
+  "43204": {
+    "akiya_rate": 17.85,
+    "total_housing": 24990,
+    "vacant_housing": 4460
+  },
+  "43205": {
+    "akiya_rate": 25.32,
+    "total_housing": 12560,
+    "vacant_housing": 3180
+  },
+  "43206": {
+    "akiya_rate": 17.17,
+    "total_housing": 30920,
+    "vacant_housing": 5310
+  },
+  "43208": {
+    "akiya_rate": 19.41,
+    "total_housing": 23900,
+    "vacant_housing": 4640
+  },
+  "43210": {
+    "akiya_rate": 13.49,
+    "total_housing": 21640,
+    "vacant_housing": 2920
+  },
+  "43211": {
+    "akiya_rate": 13.48,
+    "total_housing": 15950,
+    "vacant_housing": 2150
+  },
+  "43212": {
+    "akiya_rate": 26.38,
+    "total_housing": 13080,
+    "vacant_housing": 3450
+  },
+  "43213": {
+    "akiya_rate": 14.0,
+    "total_housing": 25350,
+    "vacant_housing": 3550
+  },
+  "43214": {
+    "akiya_rate": 18.94,
+    "total_housing": 12460,
+    "vacant_housing": 2360
+  },
+  "43215": {
+    "akiya_rate": 24.4,
+    "total_housing": 40120,
+    "vacant_housing": 9790
+  },
+  "43216": {
+    "akiya_rate": 7.59,
+    "total_housing": 25040,
+    "vacant_housing": 1900
+  },
+  "43368": {
+    "akiya_rate": 14.53,
+    "total_housing": 7090,
+    "vacant_housing": 1030
+  },
+  "43403": {
+    "akiya_rate": 8.0,
+    "total_housing": 16000,
+    "vacant_housing": 1280
+  },
+  "43404": {
+    "akiya_rate": 6.7,
+    "total_housing": 20460,
+    "vacant_housing": 1370
+  },
+  "43441": {
+    "akiya_rate": 10.61,
+    "total_housing": 7260,
+    "vacant_housing": 770
+  },
+  "43443": {
+    "akiya_rate": 7.31,
+    "total_housing": 13000,
+    "vacant_housing": 950
+  },
+  "43482": {
+    "akiya_rate": 17.91,
+    "total_housing": 6980,
+    "vacant_housing": 1250
+  },
+  "44201": {
+    "akiya_rate": 13.35,
+    "total_housing": 246960,
+    "vacant_housing": 32980
+  },
+  "44202": {
+    "akiya_rate": 21.72,
+    "total_housing": 68600,
+    "vacant_housing": 14900
+  },
+  "44203": {
+    "akiya_rate": 20.17,
+    "total_housing": 47840,
+    "vacant_housing": 9650
+  },
+  "44204": {
+    "akiya_rate": 18.86,
+    "total_housing": 30540,
+    "vacant_housing": 5760
+  },
+  "44205": {
+    "akiya_rate": 21.58,
+    "total_housing": 35680,
+    "vacant_housing": 7700
+  },
+  "44206": {
+    "akiya_rate": 21.26,
+    "total_housing": 18390,
+    "vacant_housing": 3910
+  },
+  "44207": {
+    "akiya_rate": 26.26,
+    "total_housing": 8720,
+    "vacant_housing": 2290
+  },
+  "44208": {
+    "akiya_rate": 30.43,
+    "total_housing": 10910,
+    "vacant_housing": 3320
+  },
+  "44209": {
+    "akiya_rate": 26.84,
+    "total_housing": 12110,
+    "vacant_housing": 3250
+  },
+  "44210": {
+    "akiya_rate": 29.67,
+    "total_housing": 15940,
+    "vacant_housing": 4730
+  },
+  "44211": {
+    "akiya_rate": 25.64,
+    "total_housing": 28700,
+    "vacant_housing": 7360
+  },
+  "44212": {
+    "akiya_rate": 19.7,
+    "total_housing": 16800,
+    "vacant_housing": 3310
+  },
+  "44213": {
+    "akiya_rate": 29.76,
+    "total_housing": 18580,
+    "vacant_housing": 5530
+  },
+  "44214": {
+    "akiya_rate": 24.98,
+    "total_housing": 16050,
+    "vacant_housing": 4010
+  },
+  "44341": {
+    "akiya_rate": 16.14,
+    "total_housing": 13510,
+    "vacant_housing": 2180
+  },
+  "45201": {
+    "akiya_rate": 12.63,
+    "total_housing": 212530,
+    "vacant_housing": 26850
+  },
+  "45202": {
+    "akiya_rate": 20.1,
+    "total_housing": 89220,
+    "vacant_housing": 17930
+  },
+  "45203": {
+    "akiya_rate": 15.25,
+    "total_housing": 60590,
+    "vacant_housing": 9240
+  },
+  "45204": {
+    "akiya_rate": 20.75,
+    "total_housing": 26220,
+    "vacant_housing": 5440
+  },
+  "45205": {
+    "akiya_rate": 18.65,
+    "total_housing": 22470,
+    "vacant_housing": 4190
+  },
+  "45206": {
+    "akiya_rate": 14.04,
+    "total_housing": 28640,
+    "vacant_housing": 4020
+  },
+  "45207": {
+    "akiya_rate": 28.74,
+    "total_housing": 9150,
+    "vacant_housing": 2630
+  },
+  "45208": {
+    "akiya_rate": 18.64,
+    "total_housing": 14430,
+    "vacant_housing": 2690
+  },
+  "45209": {
+    "akiya_rate": 27.65,
+    "total_housing": 10380,
+    "vacant_housing": 2870
+  },
+  "45341": {
+    "akiya_rate": 15.75,
+    "total_housing": 12130,
+    "vacant_housing": 1910
+  },
+  "45382": {
+    "akiya_rate": 17.52,
+    "total_housing": 8960,
+    "vacant_housing": 1570
+  },
+  "45401": {
+    "akiya_rate": 19.41,
+    "total_housing": 10820,
+    "vacant_housing": 2100
+  },
+  "45402": {
+    "akiya_rate": 15.75,
+    "total_housing": 7240,
+    "vacant_housing": 1140
+  },
+  "45405": {
+    "akiya_rate": 18.01,
+    "total_housing": 7050,
+    "vacant_housing": 1270
+  },
+  "45421": {
+    "akiya_rate": 9.69,
+    "total_housing": 7840,
+    "vacant_housing": 760
+  },
+  "46201": {
+    "akiya_rate": 15.28,
+    "total_housing": 334270,
+    "vacant_housing": 51080
+  },
+  "46203": {
+    "akiya_rate": 19.27,
+    "total_housing": 55480,
+    "vacant_housing": 10690
+  },
+  "46204": {
+    "akiya_rate": 23.84,
+    "total_housing": 12080,
+    "vacant_housing": 2880
+  },
+  "46206": {
+    "akiya_rate": 28.23,
+    "total_housing": 10380,
+    "vacant_housing": 2930
+  },
+  "46208": {
+    "akiya_rate": 18.48,
+    "total_housing": 27820,
+    "vacant_housing": 5140
+  },
+  "46210": {
+    "akiya_rate": 24.79,
+    "total_housing": 22390,
+    "vacant_housing": 5550
+  },
+  "46213": {
+    "akiya_rate": 17.11,
+    "total_housing": 8240,
+    "vacant_housing": 1410
+  },
+  "46214": {
+    "akiya_rate": 29.88,
+    "total_housing": 8500,
+    "vacant_housing": 2540
+  },
+  "46215": {
+    "akiya_rate": 26.43,
+    "total_housing": 55840,
+    "vacant_housing": 14760
+  },
+  "46216": {
+    "akiya_rate": 18.89,
+    "total_housing": 23560,
+    "vacant_housing": 4450
+  },
+  "46217": {
+    "akiya_rate": 22.3,
+    "total_housing": 17940,
+    "vacant_housing": 4000
+  },
+  "46218": {
+    "akiya_rate": 22.66,
+    "total_housing": 74040,
+    "vacant_housing": 16780
+  },
+  "46219": {
+    "akiya_rate": 22.17,
+    "total_housing": 13670,
+    "vacant_housing": 3030
+  },
+  "46220": {
+    "akiya_rate": 31.32,
+    "total_housing": 19190,
+    "vacant_housing": 6010
+  },
+  "46221": {
+    "akiya_rate": 25.15,
+    "total_housing": 16580,
+    "vacant_housing": 4170
+  },
+  "46222": {
+    "akiya_rate": 17.76,
+    "total_housing": 23530,
+    "vacant_housing": 4180
+  },
+  "46223": {
+    "akiya_rate": 25.64,
+    "total_housing": 17980,
+    "vacant_housing": 4610
+  },
+  "46224": {
+    "akiya_rate": 32.04,
+    "total_housing": 15450,
+    "vacant_housing": 4950
+  },
+  "46225": {
+    "akiya_rate": 18.41,
+    "total_housing": 40090,
+    "vacant_housing": 7380
+  },
+  "46392": {
+    "akiya_rate": 28.99,
+    "total_housing": 11830,
+    "vacant_housing": 3430
+  },
+  "47201": {
+    "akiya_rate": 9.7,
+    "total_housing": 163050,
+    "vacant_housing": 15810
+  },
+  "47205": {
+    "akiya_rate": 7.01,
+    "total_housing": 49370,
+    "vacant_housing": 3460
+  },
+  "47207": {
+    "akiya_rate": 7.39,
+    "total_housing": 24630,
+    "vacant_housing": 1820
+  },
+  "47208": {
+    "akiya_rate": 7.83,
+    "total_housing": 51720,
+    "vacant_housing": 4050
+  },
+  "47209": {
+    "akiya_rate": 9.63,
+    "total_housing": 32390,
+    "vacant_housing": 3120
+  },
+  "47210": {
+    "akiya_rate": 10.72,
+    "total_housing": 26590,
+    "vacant_housing": 2850
+  },
+  "47211": {
+    "akiya_rate": 6.82,
+    "total_housing": 68040,
+    "vacant_housing": 4640
+  },
+  "47212": {
+    "akiya_rate": 7.68,
+    "total_housing": 28130,
+    "vacant_housing": 2160
+  },
+  "47213": {
+    "akiya_rate": 6.8,
+    "total_housing": 54880,
+    "vacant_housing": 3730
+  },
+  "47214": {
+    "akiya_rate": 15.15,
+    "total_housing": 29960,
+    "vacant_housing": 4540
+  },
+  "47215": {
+    "akiya_rate": 10.85,
+    "total_housing": 18340,
+    "vacant_housing": 1990
+  },
+  "47324": {
+    "akiya_rate": 7.37,
+    "total_housing": 17770,
+    "vacant_housing": 1310
+  },
+  "47326": {
+    "akiya_rate": 11.3,
+    "total_housing": 15220,
+    "vacant_housing": 1720
+  },
+  "47327": {
+    "akiya_rate": 12.08,
+    "total_housing": 8110,
+    "vacant_housing": 980
+  },
+  "47328": {
+    "akiya_rate": 3.95,
+    "total_housing": 9370,
+    "vacant_housing": 370
+  },
+  "47329": {
+    "akiya_rate": 8.9,
+    "total_housing": 15620,
+    "vacant_housing": 1390
+  },
+  "47348": {
+    "akiya_rate": 13.13,
+    "total_housing": 8760,
+    "vacant_housing": 1150
+  },
+  "47350": {
+    "akiya_rate": 4.75,
+    "total_housing": 16010,
+    "vacant_housing": 760
+  },
+  "47362": {
+    "akiya_rate": 6.71,
+    "total_housing": 12370,
+    "vacant_housing": 830
+  }
+}

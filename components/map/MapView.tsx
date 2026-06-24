@@ -55,6 +55,7 @@ export default function MapView() {
       "hazard-earthquake",
       "history-flood",
       "monuments-circle", "monuments-label",
+      "akiya-fill", "akiya-line",
     ];
 
     allLayers.forEach((id) => {
@@ -64,6 +65,7 @@ export default function MapView() {
       if (layer === "crime") {
         if ((id === "crime-choropleth-fill" || id === "crime-choropleth-line") && crimeChoropleth) visible = true;
       }
+      if (layer === "akiya" && (id === "akiya-fill" || id === "akiya-line")) visible = true;
       if (layer === "hazard") {
         const hist = showHistoryRef.current;
         if (!hist) {
@@ -298,6 +300,71 @@ export default function MapView() {
           visibility: "none",
         },
         paint: { "text-color": "#fff" },
+      });
+
+      // ---- 空き家率コロプレス（令和5年住宅・土地統計調査）----
+      m.addSource("akiya-source", { type: "geojson", data: "/akiya_choropleth.geojson" });
+      m.addLayer({
+        id: "akiya-fill",
+        type: "fill",
+        source: "akiya-source",
+        paint: {
+          "fill-color": [
+            "case",
+            ["==", ["get", "akiya_rate"], null], "#e0e0e0",
+            [
+              "interpolate", ["linear"], ["get", "akiya_rate"],
+              0,   "#f0f9e8",
+              5,   "#bae4bc",
+              10,  "#7bccc4",
+              15,  "#43a2ca",
+              20,  "#0868ac",
+              25,  "#fcbf49",
+              30,  "#f77f00",
+              40,  "#d62828",
+            ],
+          ],
+          "fill-opacity": ["case", ["==", ["get", "akiya_rate"], null], 0.05, 0.75],
+        },
+        layout: { visibility: "none" },
+      });
+      m.addLayer({
+        id: "akiya-line",
+        type: "line",
+        source: "akiya-source",
+        paint: { "line-color": "#ffffff", "line-width": 0.8, "line-opacity": 0.5 },
+        layout: { visibility: "none" },
+      });
+
+      // ---- インタラクション: 空き家率ホバー ----
+      m.on("mousemove", "akiya-fill", (e) => {
+        m.getCanvas().style.cursor = "pointer";
+        const props = e.features?.[0]?.properties as MapFeatureProperties;
+        if (!props || !e.lngLat) return;
+        const rate = props.akiya_rate != null ? Number(props.akiya_rate) : null;
+        const total = props.total_housing != null ? Number(props.total_housing) : null;
+        const vacant = props.vacant_housing != null ? Number(props.vacant_housing) : null;
+        const pref = props.prefecture ?? "";
+        const muni = props.municipality ?? "";
+        popup.current!
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <div style="font-size:13px;line-height:1.7">
+              <p style="font-weight:bold;margin:0 0 4px">${pref}${muni}</p>
+              ${rate != null
+                ? `<p style="margin:0">空き家率: <strong>${rate.toFixed(1)}%</strong></p>`
+                : `<p style="margin:0;color:#888">データなし</p>`
+              }
+              ${vacant != null ? `<p style="margin:0;color:#666">空き家数: ${vacant.toLocaleString()}戸</p>` : ""}
+              ${total != null ? `<p style="margin:0;color:#666">総住宅数: ${total.toLocaleString()}戸</p>` : ""}
+              <p style="margin:4px 0 0;color:#aaa;font-size:10px">令和5年（2023年）住宅・土地統計調査</p>
+            </div>
+          `)
+          .addTo(m);
+      });
+      m.on("mouseleave", "akiya-fill", () => {
+        m.getCanvas().style.cursor = "";
+        popup.current!.remove();
       });
 
       // mapLoaded を true にすることで上の useEffect が activeLayer で正しく実行される

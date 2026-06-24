@@ -97,10 +97,18 @@ jobs:
           ls /tmp/monuments_extracted/
           MONUMENTS_TMP_DIR=/tmp/monuments_extracted node batch/fetch_disaster_monuments.js
 
+      - name: Fetch akiya (空き家率 e-Stat 令和5年住宅・土地統計調査)
+        run: python batch/fetch_akiya.py
+
+      - name: Generate akiya choropleth GeoJSON
+        run: python batch/generate_akiya_choropleth.py
+        env:
+          JAPAN_GEOJSON_LOCAL: /tmp/japan_boundary.geojson
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/price_by_municipality.json public/choropleth.geojson public/crime_japan.geojson public/crime_mock.geojson public/crime_choropleth.geojson public/disaster_monuments.geojson
-          git diff --staged --quiet || git commit -m "data: update price choropleth + nationwide crime data + disaster monuments $(date +'%Y-%m-%d')"
+          git add public/price_by_municipality.json public/choropleth.geojson public/crime_japan.geojson public/crime_mock.geojson public/crime_choropleth.geojson public/disaster_monuments.geojson public/akiya.json public/akiya_choropleth.geojson
+          git diff --staged --quiet || git commit -m "data: update price choropleth + nationwide crime data + disaster monuments + akiya rate $(date +'%Y-%m-%d')"
           git push

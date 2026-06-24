@@ -1,4 +1,4 @@
-export type LayerType = "price" | "crime" | "hazard";
+export type LayerType = "price" | "crime" | "hazard" | "akiya";
 
 export interface PriceData {
   avgPricePerSqm: number;
@@ -68,4 +68,8 @@ export interface MapFeatureProperties {
   flood_risk_level?: number;
   landslide_risk?: boolean;
   overall_score?: number;
+  // akiya layer
+  akiya_rate?: number | null;
+  total_housing?: number | null;
+  vacant_housing?: number | null;
 }

@@ -103,6 +103,35 @@ function SidebarContent({
     );
   }
 
+  if (activeLayer === "akiya") {
+    return (
+      <div className="flex flex-col items-center justify-center flex-1 text-center text-gray-400 gap-3 py-12">
+        <span className="text-5xl">🏚️</span>
+        <p className="font-medium text-gray-600">空き家率マップ</p>
+        <p className="text-sm">地図上の市区町村にカーソルを合わせると空き家率を確認できます。</p>
+        <div className="mt-2 text-xs text-left bg-gray-50 rounded-lg p-3 w-full">
+          <p className="font-medium text-gray-600 mb-2">色の凡例（空き家率）</p>
+          <div className="flex flex-col gap-1">
+            {[
+              { color: "#f0f9e8", label: "〜5%未満" },
+              { color: "#7bccc4", label: "10〜15%" },
+              { color: "#0868ac", label: "15〜20%" },
+              { color: "#fcbf49", label: "20〜25%" },
+              { color: "#f77f00", label: "25〜30%" },
+              { color: "#d62828", label: "30%以上" },
+            ].map(({ color, label }) => (
+              <div key={label} className="flex items-center gap-2">
+                <span className="w-4 h-3 rounded shrink-0 border border-gray-200" style={{ backgroundColor: color }} />
+                <span className="text-gray-600">{label}</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-gray-400">出典: 総務省 令和5年（2023年）住宅・土地統計調査</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!selectedArea) {
     return (
       <div className="flex flex-col items-center justify-center flex-1 text-center text-gray-400 gap-3 py-12">
@@ -117,6 +146,7 @@ function SidebarContent({
             <li>💴 <strong>価格</strong> — 不動産取引価格</li>
             <li>🚨 <strong>治安</strong> — 犯罪発生状況</li>
             <li>🌊 <strong>災害</strong> — ハザードマップ</li>
+            <li>🏚️ <strong>空き家</strong> — 空き家率（2023年）</li>
           </ul>
         </div>
       </div>
