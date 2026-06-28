@@ -76,6 +76,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install Node.js dependencies for batch scripts
+        run: npm install xlsx
+
       - name: Generate national crime mock data (警察庁R5年統計ベース 46都道府県)
         run: node batch/gen_crime_national.js
 

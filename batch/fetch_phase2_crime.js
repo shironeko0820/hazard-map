@@ -15,6 +15,7 @@ const fs   = require('fs');
 const path = require('path');
 const https = require('https');
 const zlib  = require('zlib');
+const XLSX  = require('xlsx');
 
 // ---- 対象府県の定義 ----
 const CRIME_TYPES = [
@@ -423,6 +424,27 @@ const PREFECTURES = [
     },
   },
 
+  // ---- Phase 8: 秋田県（xlsx形式）----
+  {
+    name: '秋田県',
+    isXlsx: true,
+    urlFn: (type) => {
+      const FILES = {
+        hittakuri:          '%E3%81%B2%E3%81%A3%E3%81%9F%E3%81%8F%E3%82%8A.xlsx',
+        syazyounerai:       '%E8%BB%8A%E4%B8%8A%E3%81%AD%E3%82%89%E3%81%84.xlsx',
+        buhinnerai:         '%E9%83%A8%E5%93%81%E3%81%AD%E3%82%89%E3%81%84.xlsx',
+        zidouhanbaikinerai: '%E8%87%AA%E5%8B%95%E8%B2%A9%E5%A3%B2%E6%A9%9F%E3%81%AD%E3%82%89%E3%81%84.xlsx',
+        zidousyatou:        '%E8%87%AA%E5%8B%95%E8%BB%8A%E7%9B%97.xlsx',
+        ootobaitou:         '%E3%82%AA%E3%83%BC%E3%83%88%E3%83%90%E3%82%A4%E7%9B%97.xlsx',
+        zitensyatou:        '%E8%87%AA%E8%BB%A2%E8%BB%8A%E7%9B%97.xlsx',
+      };
+      const file = FILES[type];
+      return file
+        ? `https://www.police.pref.akita.lg.jp/uploads/contents/pages_0000000000_305/${file}`
+        : null;
+    },
+  },
+
   // ---- Phase 4（続き）: 群馬・新潟（連番ID方式） ----
   {
     name: '群馬県',
@@ -504,6 +526,13 @@ function fetchCSV(url) {
     req.on('error', reject);
     req.on('timeout', () => { req.destroy(); reject(new Error(`タイムアウト: ${url}`)); });
   });
+}
+
+/** xlsx Buffer をCSVと同形式の行配列に変換する */
+function parseXlsx(buf) {
+  const wb = XLSX.read(buf, { type: 'buffer' });
+  const ws = wb.Sheets[wb.SheetNames[0]];
+  return XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
 }
 
 /** UTF-8を先に試し、失敗したらShift-JISで読む */
@@ -655,6 +684,10 @@ async function processPrefecture(prefDef, centroids) {
 
   for (const crimeType of CRIME_TYPES) {
     const url = urlFn(crimeType);
+    if (!url) {
+      console.log(`  ${crimeType} ... スキップ（URLなし）`);
+      continue;
+    }
     try {
       process.stdout.write(`  ${crimeType} ... `);
       let buf;
@@ -670,8 +703,9 @@ async function processPrefecture(prefDef, centroids) {
           throw e;
         }
       }
-      const text = detectAndDecode(buf);
-      const rows = parseCSV(text);
+      const rows = prefDef.isXlsx
+        ? parseXlsx(buf)
+        : parseCSV(detectAndDecode(buf));
       const counts = aggregateByMunicipality(rows);
       const typeTotal = Object.values(counts).reduce((a, b) => a + b, 0);
       for (const [muni, cnt] of Object.entries(counts)) {
