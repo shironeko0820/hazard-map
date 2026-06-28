@@ -97,7 +97,9 @@ jobs:
       - name: Fetch disaster monuments (自然災害伝承碑 国土地理院)
         run: |
           echo "=== 自然災害伝承碑データ取得 ==="
-          curl -fsSL "https://www.gsi.go.jp/common/000250767.zip" -o /tmp/monuments.zip
+          # 国土地理院サーバーは旧来のTLS renegotiationを使用するため OpenSSL 3.x で設定が必要
+          printf '[openssl_init]\nssl_conf=ssl_sect\n[ssl_sect]\nsystem_default=ssl_default_sect\n[ssl_default_sect]\nOptions=UnsafeLegacyRenegotiation\n' > /tmp/openssl_legacy.cnf
+          OPENSSL_CONF=/tmp/openssl_legacy.cnf curl -fsSL "https://www.gsi.go.jp/common/000250767.zip" -o /tmp/monuments.zip
           mkdir -p /tmp/monuments_extracted
           unzip -o /tmp/monuments.zip -d /tmp/monuments_extracted/
           ls /tmp/monuments_extracted/
