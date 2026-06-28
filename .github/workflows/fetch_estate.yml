@@ -97,9 +97,29 @@ jobs:
       - name: Fetch disaster monuments (自然災害伝承碑 国土地理院)
         run: |
           echo "=== 自然災害伝承碑データ取得 ==="
-          # 国土地理院サーバーは旧来のTLS renegotiationを使用するため OpenSSL 3.x で設定が必要
-          printf '[openssl_init]\nssl_conf=ssl_sect\n[ssl_sect]\nsystem_default=ssl_default_sect\n[ssl_default_sect]\nOptions=UnsafeLegacyRenegotiation\n' > /tmp/openssl_legacy.cnf
-          OPENSSL_CONF=/tmp/openssl_legacy.cnf curl -fsSL "https://www.gsi.go.jp/common/000250767.zip" -o /tmp/monuments.zip
+          # 国土地理院サーバーはlegacy TLS renegotiationを使用。Python requestsでSSL_OP_LEGACY_SERVER_CONNECTを有効化してダウンロード
+          python3 - <<'PYEOF'
+          import requests, ssl, urllib3, sys
+
+          class LegacySSLAdapter(requests.adapters.HTTPAdapter):
+              def init_poolmanager(self, *args, **kwargs):
+                  ctx = ssl.create_default_context()
+                  ctx.options |= 0x4  # OP_LEGACY_SERVER_CONNECT
+                  kwargs['ssl_context'] = ctx
+                  super().init_poolmanager(*args, **kwargs)
+
+          s = requests.Session()
+          s.mount('https://', LegacySSLAdapter())
+          urllib3.disable_warnings()
+
+          url = 'https://www.gsi.go.jp/common/000250767.zip'
+          print(f'Downloading: {url}')
+          resp = s.get(url, timeout=60, verify=False)
+          resp.raise_for_status()
+          with open('/tmp/monuments.zip', 'wb') as f:
+              f.write(resp.content)
+          print(f'Downloaded: {len(resp.content):,} bytes')
+          PYEOF
           mkdir -p /tmp/monuments_extracted
           unzip -o /tmp/monuments.zip -d /tmp/monuments_extracted/
           ls /tmp/monuments_extracted/
