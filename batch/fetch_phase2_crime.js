@@ -751,6 +751,58 @@ async function processPrefecture(prefDef, centroids) {
   return features;
 }
 
+/** 茨城県: fetch_ibaraki_crime.py が生成した JSON から点データを生成 */
+function processIbaraki(centroids, publicDir) {
+  const jsonPath = path.join(publicDir, 'ibaraki_crime.json');
+  if (!fs.existsSync(jsonPath)) {
+    console.log('  ibaraki_crime.json が見つかりません。スキップ。');
+    return null;
+  }
+
+  const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+  const features = [];
+  let matched = 0, unmatched = 0;
+
+  for (const [muniName, typeCounts] of Object.entries(data)) {
+    const found = findCentroid(centroids, '茨城県', muniName);
+    if (!found) { unmatched++; continue; }
+    const [lng, lat, radius] = found.centroid;
+    matched++;
+
+    for (const [crimeType, count] of Object.entries(typeCounts)) {
+      if (!count || count <= 0) continue;
+      const nPoints = Math.min(Math.floor(count / 5) + 1, 50);
+      const scaleFactor = count / Math.max(nPoints, 1);
+      for (let i = 0; i < nPoints; i++) {
+        const angle = rand() * 2 * Math.PI;
+        const r = Math.min(Math.abs(randn()) * radius / 2, radius);
+        features.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [
+              +((lng + r * Math.cos(angle)).toFixed(5)),
+              +((lat + r * Math.sin(angle)).toFixed(5)),
+            ],
+          },
+          properties: {
+            crime_type: crimeType,
+            occurred_date: randomDate(),
+            prefecture: '茨城県',
+            city: muniName,
+            crime_count: Math.round(scaleFactor),
+            data_source: '茨城県警察統計（R6年）',
+          },
+        });
+      }
+    }
+  }
+
+  const total = Object.values(data).reduce((s, t) => s + Object.values(t).reduce((a, b) => a + b, 0), 0);
+  console.log(`  茨城県: ${total.toLocaleString()}件, ${matched}市区町村マッチ/${matched + unmatched}件, ${features.length}ポイント生成`);
+  return features;
+}
+
 async function main() {
   console.log('=== Phase 2: 実犯罪データ取得（大阪・神奈川・愛知・千葉） ===\n');
 
@@ -775,8 +827,8 @@ async function main() {
     console.log(`既存モック: ${existingMock.features.length}ポイント`);
   }
 
-  // Phase 2 対象府県の名前セット
-  const phase2Prefs = new Set(PREFECTURES.map(p => p.name));
+  // Phase 2 対象府県の名前セット（茨城県はPDF処理のため別途追加）
+  const phase2Prefs = new Set([...PREFECTURES.map(p => p.name), '茨城県']);
 
   // Phase 2以外の既存モックデータを保持
   const otherFeatures = existingMock.features.filter(
@@ -798,6 +850,17 @@ async function main() {
       phase2Features.push(...fallback);
       console.log(`  ${prefDef.name}: モックデータ ${fallback.length}ポイントを維持`);
     }
+  }
+
+  // 茨城県: PDFから生成済みJSONを読み込んでポイント生成
+  console.log('\n=== 茨城県（PDF実データ） ===');
+  const ibarakiFeatures = processIbaraki(centroids, publicDir);
+  if (ibarakiFeatures) {
+    phase2Features.push(...ibarakiFeatures);
+  } else {
+    const fallback = existingMock.features.filter(f => f.properties?.prefecture === '茨城県');
+    phase2Features.push(...fallback);
+    console.log(`  茨城県: モックデータ ${fallback.length}ポイントを維持`);
   }
 
   // シャッフルして統合

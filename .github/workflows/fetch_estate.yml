@@ -82,6 +82,9 @@ jobs:
       - name: Generate national crime mock data (警察庁R5年統計ベース 46都道府県)
         run: node batch/gen_crime_national.js
 
+      - name: Fetch Ibaraki crime data from PDF (茨城県警察 令和6年 市町村別統計)
+        run: python batch/fetch_ibaraki_crime.py
+
       - name: Fetch Phase 2 real crime data (大阪・神奈川・愛知・千葉 警察庁CSV)
         run: node batch/fetch_phase2_crime.js
 
