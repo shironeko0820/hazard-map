@@ -85,6 +85,9 @@ jobs:
       - name: Fetch Ibaraki crime data from PDF (茨城県警察 令和6年 市町村別統計)
         run: python batch/fetch_ibaraki_crime.py
 
+      - name: Fetch Hiroshima crime data from PDF (広島県警察 令和6年 市区町村別統計)
+        run: python batch/fetch_hiroshima_crime.py
+
       - name: Fetch Phase 2 real crime data (大阪・神奈川・愛知・千葉 警察庁CSV)
         run: node batch/fetch_phase2_crime.js
 
@@ -139,6 +142,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/price_by_municipality.json public/choropleth.geojson public/crime_japan.geojson public/crime_mock.geojson public/crime_choropleth.geojson public/disaster_monuments.geojson public/akiya.json public/akiya_choropleth.geojson
+          git add public/price_by_municipality.json public/choropleth.geojson public/crime_japan.geojson public/crime_mock.geojson public/crime_choropleth.geojson public/disaster_monuments.geojson public/akiya.json public/akiya_choropleth.geojson public/ibaraki_crime.json public/hiroshima_crime.json
           git diff --staged --quiet || git commit -m "data: update price choropleth + nationwide crime data + disaster monuments + akiya rate $(date +'%Y-%m-%d')"
           git push
