@@ -99,22 +99,24 @@ jobs:
           echo "=== 自然災害伝承碑データ取得 ==="
           # 国土地理院サーバーはlegacy TLS renegotiationを使用。Python requestsでSSL_OP_LEGACY_SERVER_CONNECTを有効化してダウンロード
           python3 - <<'PYEOF'
-          import requests, ssl, urllib3, sys
+          import requests, ssl, urllib3
 
           class LegacySSLAdapter(requests.adapters.HTTPAdapter):
               def init_poolmanager(self, *args, **kwargs):
                   ctx = ssl.create_default_context()
+                  ctx.check_hostname = False
+                  ctx.verify_mode = ssl.CERT_NONE
                   ctx.options |= 0x4  # OP_LEGACY_SERVER_CONNECT
                   kwargs['ssl_context'] = ctx
                   super().init_poolmanager(*args, **kwargs)
 
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
           s = requests.Session()
           s.mount('https://', LegacySSLAdapter())
-          urllib3.disable_warnings()
 
           url = 'https://www.gsi.go.jp/common/000250767.zip'
           print(f'Downloading: {url}')
-          resp = s.get(url, timeout=60, verify=False)
+          resp = s.get(url, timeout=60)
           resp.raise_for_status()
           with open('/tmp/monuments.zip', 'wb') as f:
               f.write(resp.content)
