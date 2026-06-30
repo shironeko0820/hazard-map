@@ -73,6 +73,7 @@ def main():
         t = tables[0]
 
         in_gun = False
+        current_gun = ""
         in_hiroshima_city = False
 
         for row in t[3:]:  # 最初の3行はヘッダー
@@ -83,11 +84,13 @@ def main():
             # 集計行（c0に値あり）はスキップ
             if c0:
                 in_gun = False
+                current_gun = ""
                 in_hiroshima_city = False
                 continue
 
             if c1:
                 in_gun = c1.endswith("郡")
+                current_gun = c1 if in_gun else ""
                 in_hiroshima_city = (c1 == "広島市")
 
                 if not in_gun:
@@ -104,10 +107,10 @@ def main():
                     if crimes:
                         result[f"広島市{c2}"] = crimes
                 elif in_gun:
-                    # 郡内の個別の町
+                    # 郡内の個別の町: choropleth上の '安芸郡府中町' 形式で出力
                     crimes = extract_crimes(row)
                     if crimes:
-                        result[c2] = crimes
+                        result[f"{current_gun}{c2}"] = crimes
 
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
