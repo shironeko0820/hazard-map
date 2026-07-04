@@ -424,6 +424,23 @@ const PREFECTURES = [
     },
   },
 
+  // ---- Phase 8: 大分県 ----
+  {
+    name: '大分県',
+    urlFn: (type) => {
+      const IDS = {
+        ootobaitou:         '2243325',
+        hittakuri:          '2243326',
+        zitensyatou:        '2243327',
+        zidousyatou:        '2243328',
+        zidouhanbaikinerai: '2243329',
+        syazyounerai:       '2243330',
+        buhinnerai:         '2243331',
+      };
+      return `https://www.pref.oita.jp/uploaded/attachment/${IDS[type]}.csv`;
+    },
+  },
+
   // ---- Phase 8: 秋田県（xlsx形式）----
   {
     name: '秋田県',
